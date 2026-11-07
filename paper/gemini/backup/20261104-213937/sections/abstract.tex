@@ -1,0 +1,16 @@
+\section*{摘\quad 要}
+\addcontentsline{toc}{section}{摘要}
+
+携带卫星先验底图的自主水下航行器（AUV）在现场巡测时受机载算力、电池与作业时间制约。因卫星图存在数日滞后与小尺度平滑偏差，航行器需在每个控制周期权衡：开启高功耗图形处理器（GPU）深想、靠低功耗规划继续走并采样，或停下随水漂流复测。固定规则难以适应不同硬件，单步元推理则会因规划器在有限样本上的过拟合而高估计算价值。本文提出基于留出想象海洋的集合同化与出发前预演方法：利用八年东海卫星叶绿素数据标定底图误差，围绕旧图生成48个想象海洋并随采样同化更新，32个用于规划航线，16个留出用于评判；下水前由母船或岸上计算机以4个留出海洋为假想真值，按机载算力与功耗模拟五种用时策略的24小时任务并择优。在2018至2026年东海3197天数据构建的422个赤潮窗口上的实验表明：留出评判在64至200,000次推演下与真实价值之差不超过0.005；深想仅在基础算力过慢时有益，停下始终不划算；在四种硬件、148个测试任务上，预演遗憾为0.265至0.276，与调好策略之差的95\%置信区间均包含0，且比单步元推理低0.011至0.022；改用留出评判的单步元推理同样消除了大部分过度规划。这表明将海洋遥感大数据转化为留出想象海洋可抑制计算自评偏差，使航行器无需历史任务调参即可适配机载算力与观测约束。
+
+\vspace{1em}
+\noindent\textbf{关键词：}海洋大数据；自主水下航行器；元推理；数据同化；赤潮巡测；计算与行动权衡
+
+\clearpage
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+Autonomous underwater vehicles (AUVs) carrying satellite prior maps must trade off computation against movement under onboard processor, battery, and mission-time constraints. Because satellite maps are several days old and smooth out small-scale features, the vehicle must decide at every control interval whether to activate a high-power graphics processing unit (GPU) to plan deeply, continue cruising and sampling under low-power background planning, or stop propulsion to drift and resample locally. Fixed time-allocation rules do not generalise across hardware platforms, while classic one-step metareasoning overestimates the value of computation by trusting the planner's own search trace on finite ensemble members. We propose an ensemble data assimilation and pre-mission rehearsal method using held-out imagined oceans. Using eight years of satellite chlorophyll-a data over the East China Sea to calibrate stale-map uncertainty, the vehicle generates 48 imagined oceans around the stale map and updates them with in-situ fluorometer samples via a localised ensemble adjustment Kalman filter. Thirty-two members are searched by a cross-entropy route planner and 16 are held out for evaluation. Before launch, a shipboard or shore computer treats 4 held-out members as synthetic truths and simulates complete 24-hour missions for five time-allocation strategies under the vehicle's actual compute speed and battery budget, selecting the strategy with the lowest mean regret. Across 422 spring bloom windows from 3,197 daily maps (2018--2026), held-out evaluation stays within 0.005 of true route value from 64 to 200,000 rollouts, GPU planning helps only when baseline compute is too slow, and stopping never pays. Across four hardware configurations on 148 test missions, rehearsal achieves time-averaged regrets of 0.265--0.276, matching development-tuned strategies (all 95\% confidence intervals of differences include zero) and reducing regret by 0.011--0.022 relative to one-step metareasoning; evaluating computation on held-out oceans within one-step metareasoning similarly removes most over-planning. These findings show that converting historical satellite ocean data into uncertainty-calibrated held-out imagined oceans curbs planner self-assessment bias either before launch or online, allowing autonomous vehicles to adapt computation allocation to onboard hardware without prior mission tuning.
+
+\vspace{1em}
+\noindent\textbf{Keywords: }Ocean big data; Autonomous underwater vehicle; Metareasoning; Data assimilation; Harmful algal bloom survey; Thinking-acting trade-off

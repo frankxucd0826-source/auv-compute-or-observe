@@ -1,0 +1,58 @@
+700/728 268s
+720/728 275s
+done 278s
+620/648 240s
+640/648 248s
+done 251s
+params {'r': 2.0, 'eps': 11.224, 'p0': 0.1, 'surface_h': 1.0, 'tau_probe': 12.0, 'tau_surface': 12.0, 'tau_surface05': 12.0, 'tau_targeted': 1000000000.0, 'tau_robust': 0.0, 'tau_bayes': 1000000000.0} test coverage 0.937
+== dev: 697 missions on 364 days, mean best trip 38.5 h
+  地图+粗算            regret  6.43 [4.7  8.32]  vs map  -0.77 [-2.2   0.52]  median 0.00 p90 12.1
+  地图+标准            regret  6.40 [4.73 8.19]  vs map  -0.81 [-2.06  0.3 ]  median 0.00 p90 12.7
+  地图+精算            regret  7.20 [5.36 9.42]  vs map  +0.00 [0. 0.]  median 0.00 p90 12.8
+  按需精算             regret  7.21 [5.36 9.43]  vs map  +0.00 [0.   0.01]  median 0.00 p90 12.8
+  集合期望（贝叶斯）        regret  7.51 [5.54 9.66]  vs map  +0.31 [-1.12  1.7 ]  median 0.00 p90 13.4
+  保守（最坏后悔最小）       regret  6.71 [4.97 8.69]  vs map  -0.50 [-2.24  1.15]  median 0.00 p90 12.2
+  原地停留测            regret  6.86 [5.49 8.49]  vs map  -0.35 [-2.15  1.17]  median 2.00 p90 10.3
+  总是沿途测30km        regret  4.13 [2.59 5.82]  vs map  -3.08 [-5.08 -1.16]  median 0.00 p90 7.5
+  总是沿途测60km        regret  5.02 [3.35 6.98]  vs map  -2.18 [-4.08 -0.44]  median 0.00 p90 12.4
+  总是沿途测30km后保守     regret  4.84 [3.18 6.6 ]  vs map  -2.36 [-4.52 -0.34]  median 0.00 p90 8.9
+  总是绕行定点测          regret 18.83 [16.47 21.49]  vs map +11.62 [ 8.66 14.47]  median 5.26 p90 50.8
+  总是上浮取当天1°图       regret  5.33 [3.88 6.98]  vs map  -1.87 [-3.73 -0.09]  median 1.00 p90 6.3
+  总是上浮取当天0.5°图     regret  1.77 [1.29 2.36]  vs map  -5.43 [-7.68 -3.57]  median 1.00 p90 1.0
+  反例门控→沿途测         regret  4.07 [2.5  5.74]  vs map  -3.13 [-5.13 -1.24]  median 0.00 p90 6.9
+  反例门控→上浮取图        regret  5.27 [3.82 6.92]  vs map  -1.93 [-3.78 -0.15]  median 1.00 p90 6.2
+  反例门控→上浮取0.5°图    regret  1.73 [1.25 2.32]  vs map  -5.47 [-7.72 -3.62]  median 1.00 p90 1.0
+  反例门控→绕行定点测       regret  7.21 [5.36 9.43]  vs map  +0.00 [0.   0.01]  median 0.00 p90 12.8
+  反例门控→保守          regret  6.71 [4.97 8.69]  vs map  -0.50 [-2.24  1.15]  median 0.00 p90 12.2
+  反例门控→保守（差距超过容限才改选） regret  7.16 [5.43 9.12]  vs map  -0.05 [-1.44  1.23]  median 0.00 p90 12.7
+  反例门控→贝叶斯         regret  7.21 [5.36 9.43]  vs map  +0.00 [0.   0.01]  median 0.00 p90 12.8
+  集合门控→沿途测         regret  4.11 [2.57 5.8 ]  vs map  -3.09 [-5.08 -1.17]  median 0.00 p90 7.1
+  知道真相             regret  0.00 [0. 0.]  vs map  -7.20 [-9.42 -5.36]  median 0.00 p90 0.0
+  categories {"share_flip_possible_by_radius": {"0.25": 0.4246771879483501, "0.5": 0.6857962697274032, "1.0": 0.9727403156384505, "1.5": 0.9899569583931134, "2.0": 0.9971305595408895}, "share_num_ambiguous": 0.7159253945480631, "wrong_cheap": 0.266857962697274, "wrong_expensive": 0.27403156384505023, "regret_cheap": 6.432990561389455, "regret_expensive": 7.204744420706373, "cheap_errors_fixed_by_compute": 0.0967741935483871, "expensive_errors": 191, "costly_expensive_errors": 175, "share_regret_from_top10pct": 0.8859878770913097, "wrong_bayes": 0.30416068866571017, "wrong_robust": 0.27259684361549497}
+  detection {'n_costly': 175, 'n': 697, 'auc_margin': 0.65, 'auc_ensemble_32': 0.669, 'auc_ensemble_compute_matched': 0.654, 'n_match': 17, 'auc_counterexample': 0.622, 'auc_linear': 0.521}
+== test: 618 missions on 323 days, mean best trip 40.9 h
+  地图+粗算            regret  6.62 [5.07 8.18]  vs map  -0.25 [-1.14  0.54]  median 0.00 p90 15.7
+  地图+标准            regret  6.49 [4.83 8.19]  vs map  -0.39 [-1.17  0.11]  median 0.00 p90 14.4
+  地图+精算            regret  6.87 [5.17 8.69]  vs map  +0.00 [0. 0.]  median 0.00 p90 15.1
+  按需精算             regret  6.70 [5.03 8.47]  vs map  -0.17 [-0.52  0.  ]  median 0.00 p90 14.4
+  集合期望（贝叶斯）        regret  7.00 [5.29 8.93]  vs map  +0.13 [-1.46  1.71]  median 0.00 p90 15.1
+  保守（最坏后悔最小）       regret  6.24 [4.76 7.9 ]  vs map  -0.63 [-1.99  0.57]  median 0.00 p90 13.9
+  原地停留测            regret  7.87 [6.2 9.6]  vs map  +0.99 [-0.75  2.87]  median 2.00 p90 11.3
+  总是沿途测30km        regret  4.48 [2.8  6.28]  vs map  -2.39 [-4.43 -0.63]  median 0.00 p90 9.3
+  总是沿途测60km        regret  5.08 [3.4  6.88]  vs map  -1.79 [-3.63 -0.13]  median 0.00 p90 13.7
+  总是沿途测30km后保守     regret  4.69 [3.   6.55]  vs map  -2.18 [-4.22 -0.26]  median 0.00 p90 10.0
+  总是绕行定点测          regret 17.93 [15.69 20.4 ]  vs map +11.05 [ 8.84 13.41]  median 5.33 p90 48.9
+  总是上浮取当天1°图       regret  4.03 [3.04 5.3 ]  vs map  -2.84 [-4.73 -1.03]  median 1.00 p90 4.6
+  总是上浮取当天0.5°图     regret  1.98 [1.29 2.93]  vs map  -4.89 [-6.82 -3.04]  median 1.00 p90 1.0
+  反例门控→沿途测         regret  4.48 [2.8  6.28]  vs map  -2.39 [-4.43 -0.63]  median 0.00 p90 9.3
+  反例门控→上浮取图        regret  4.25 [3.16 5.62]  vs map  -2.62 [-4.42 -0.85]  median 1.00 p90 4.9
+  反例门控→上浮取0.5°图    regret  2.20 [1.39 3.32]  vs map  -4.67 [-6.47 -2.86]  median 1.00 p90 1.0
+  反例门控→绕行定点测       regret  6.70 [5.03 8.47]  vs map  -0.17 [-0.52  0.  ]  median 0.00 p90 14.4
+  反例门控→保守          regret  6.49 [4.96 8.24]  vs map  -0.38 [-1.5   0.76]  median 0.00 p90 13.9
+  反例门控→保守（差距超过容限才改选） regret  6.72 [5.09 8.48]  vs map  -0.16 [-0.82  0.39]  median 0.00 p90 13.9
+  反例门控→贝叶斯         regret  6.70 [5.03 8.47]  vs map  -0.17 [-0.52  0.  ]  median 0.00 p90 14.4
+  集合门控→沿途测         regret  4.48 [2.8  6.28]  vs map  -2.39 [-4.43 -0.63]  median 0.00 p90 9.3
+  知道真相             regret  0.00 [0. 0.]  vs map  -6.87 [-8.69 -5.17]  median 0.00 p90 0.0
+  categories {"share_flip_possible_by_radius": {"0.25": 0.441747572815534, "0.5": 0.7087378640776699, "1.0": 0.9579288025889967, "1.5": 0.9838187702265372, "2.0": 0.9919093851132686}, "share_num_ambiguous": 0.6909385113268608, "wrong_cheap": 0.2766990291262136, "wrong_expensive": 0.2766990291262136, "regret_cheap": 6.617823833454987, "regret_expensive": 6.8722363368841854, "cheap_errors_fixed_by_compute": 0.0935672514619883, "expensive_errors": 171, "costly_expensive_errors": 155, "share_regret_from_top10pct": 0.8624391036763206, "wrong_bayes": 0.28317152103559873, "wrong_robust": 0.2766990291262136}
+  detection {'n_costly': 155, 'n': 618, 'auc_margin': 0.625, 'auc_ensemble_32': 0.64, 'auc_ensemble_compute_matched': 0.631, 'n_match': 17, 'auc_counterexample': 0.573, 'auc_linear': 0.486}
+agulhas-done

@@ -1,0 +1,26 @@
+saved chl (1822, 385, 361) 2018-01-01 2026-06-30
+sst_on_chl (1822, 385, 361) ocean fraction 0.8280318019930208
+422 missions (274 development, 148 test)
+lag 1 d: sd 0.125 log10, bias +0.016, corr length 4.82 cells
+lag 2 d: sd 0.176 log10, bias +0.032, corr length 5.00 cells
+lag 3 d: sd 0.210 log10, bias +0.045, corr length 5.14 cells
+Traceback (most recent call last):
+  File "D:\海洋大数据\experiments\eval_worldmodel.py", line 71, in <module>
+    main()
+  File "D:\海洋大数据\experiments\eval_worldmodel.py", line 39, in main
+    fr, tg, ld = cube.batch(rng, set(a.years), 32, dev)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\海洋大数据\experiments\train_worldmodel.py", line 65, in batch
+    ex = [self.example(rng, years) for _ in range(B)]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\海洋大数据\experiments\train_worldmodel.py", line 65, in <listcomp>
+    ex = [self.example(rng, years) for _ in range(B)]
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\海洋大数据\experiments\train_worldmodel.py", line 62, in example
+    raise RuntimeError("no example found")
+RuntimeError: no example found
+wm_jepa_v0 lead 1 d: rmse 0.1229 vs persistence 0.1226 (skill -0.002), spread/error 0.70
+wm_jepa_v0 lead 2 d: rmse 0.1439 vs persistence 0.1439 (skill -0.000), spread/error 0.81
+wm_jepa_v0 lead 3 d: rmse 0.1487 vs persistence 0.1474 (skill -0.009), spread/error 0.93
+saved 422 missions; fallback cells 11200
+after_wm done

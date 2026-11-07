@@ -1,0 +1,13 @@
+{
+ "date": "2022-01-18",
+ "map_side": "L",
+ "true_side": "R",
+ "radius": 1.5,
+ "z_norm": 1.5000000000000002,
+ "map_time_L": 37.71,
+ "map_time_R": 38.02,
+ "counter_time_L": 55.69,
+ "counter_time_R": 44.07,
+ "truth_time_L": 53.44,
+ "truth_time_R": 41.72
+}

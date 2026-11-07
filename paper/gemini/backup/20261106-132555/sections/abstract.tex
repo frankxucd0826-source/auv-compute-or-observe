@@ -1,0 +1,18 @@
+\noindent{\heiti 摘要：}自主水下航行器开展赤潮巡测时受通信、电池与时间约束，面对滞后卫星底图，需在开启高功耗芯片深想、维持后台规划巡航与停船复测间权衡。固定策略依赖历史任务调参，而经典单步元推理用搜索样本自评得分评估计算，会因优化器诅咒过度规划。本文利用八年东海卫星叶绿素数据标定底图误差，围绕3天前旧图生成48个随采样同化更新的想象海洋，划分为32个搜索用海洋与16个留出海洋。下水前以4个留出海洋为假想真值，按机载算力与功耗模拟五种策略的24小时任务并择优执行；或在线用留出海洋评估单步收益并配以两倍标准误判据。在422个赤潮窗口、四种硬件与两种真值模型上的实验表明：留出评判在64至200,000次推演下与真实价值偏差不超过0.005；在148个测试任务上，出发前预演无需历史任务即匹配调好策略与学习型选择器，主设置下比单步元推理降低遗憾0.011至0.022，在线留出估值亦将深想占比从80\%--97\%降至30\%--44\%并达预演水平。上述结果表明，以数据标定的留出想象海洋解耦搜索与评判可消除自评偏差，实现算力与观测的自适应权衡。
+
+\vspace{4pt}
+\noindent{\heiti 关键词：}海洋大数据；自主水下航行器；元推理；集合数据同化；赤潮巡测；优化器诅咒
+
+\vspace{10pt}
+\begin{center}
+  {\zihao{4}\bfseries Balancing Computation and Observation for Autonomous Underwater Vehicles via Data-Calibrated Held-Out Imagined Oceans and Pre-Launch Rehearsal\par}
+  \vspace{4pt}
+  {\zihao{5} XU Chendong\par}
+  {\zihao{-5}\itshape (Ocean College, Zhejiang University, Zhoushan 316021, China)\par}
+\end{center}
+\vspace{4pt}
+
+\noindent{\bfseries Abstract:} During harmful algal bloom surveys without underwater communication, an autonomous underwater vehicle guided by a multi-day-old satellite map must trade off activating a high-power chip for deep route planning against cruising under low-power background planning or stopping to resample. Fixed time-allocation rules require tuning on past missions from the same hardware, whereas classic online one-step metareasoning evaluates computation using the planner's score on the searched ensemble members, which is inflated by the optimizer's curse and causes over-planning. We propose using uncertainty-calibrated held-out imagined oceans derived from satellite big data as an independent yardstick for the value of computation, via pre-launch rehearsal or online held-out valuation. Using eight years of East China Sea satellite chlorophyll-a data to calibrate stale-map error, the vehicle generates 48 imagined oceans around a 3-day-old map, updates them via a localised ensemble adjustment Kalman filter, and splits them into 32 searched and 16 held-out oceans. Before launch, a support computer treats 4 held-out oceans as imagined truths and simulates 24-hour missions for five strategies under the vehicle's processor speed and battery budget; the online variant evaluates single-step gains on the 16 held-out oceans with a two-standard-error switching threshold. Across 422 bloom windows, four hardware configurations, and two truth models, held-out evaluation stays within 0.005 of true route value up to 200,000 rollouts. Across 148 test missions, rehearsal matches historically tuned and learned selectors without prior missions, lowers regret by 0.011--0.022 over classic one-step metareasoning under the main truth model, and online held-out valuation cuts high-power chip usage from 80\%--97\% to 30\%--44\% while matching rehearsal.
+
+\vspace{4pt}
+\noindent{\bfseries Keywords:} ocean big data; autonomous underwater vehicle; metareasoning; ensemble data assimilation; harmful algal bloom survey; optimizer's curse

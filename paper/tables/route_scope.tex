@@ -1,0 +1,13 @@
+\begin{tabular}{@{}p{0.19\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}>{\centering\arraybackslash}p{0.088\linewidth}@{}}
+\toprule
+设置 & 测试任务 & 存在合理反例 & 基线选错率 & 基线额外航时 & 超阈值时保守改选 & 超阈值时上浮取图 & 最大后悔值前20\%所占额外航时 \\
+\midrule
+黑潮主设置 & 623 & 99.7\% & 19.7\% & 0.98 & 0.70 & 0.78 & 67\% \\
+粗图换成当天0.5°图 & 349 & 64.5\% & 8.0\% & 0.17 & 0.17 & 0.16 & 60\% \\
+航速降至0.75米/秒 & 347 & 99.1\% & 18.4\% & 2.43 & 1.80 & 1.32 & 74\% \\
+消融：合理集合改用相似日差值 & 349 & 99.4\% & 19.5\% & 0.99 & 0.95 & 0.77 & 64\% \\
+湾流 & 643 & 98.8\% & 19.4\% & 3.56 & 4.00 & 1.31 & 71\% \\
+阿古拉斯回流区 & 618 & 99.2\% & 27.7\% & 6.87 & 6.49 & 2.20 & 53\% \\
+改带卫星测高地转流图 & 648 & 81.0\% & 19.6\% & 0.79 & 0.71 & 0.64 & 67\% \\
+\bottomrule
+\end{tabular}

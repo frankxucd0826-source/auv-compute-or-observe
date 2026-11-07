@@ -1,0 +1,45 @@
+{
+ "split": "dev",
+ "per_snap": 2,
+ "limit": 0,
+ "workers": 4,
+ "tag": "gulf",
+ "deg": 1.0,
+ "V": 1.0,
+ "K": 40,
+ "M": 32,
+ "seed": 0,
+ "min_speed": 0.3,
+ "lag": 1,
+ "basis": "gp",
+ "ell_scale": 1.0,
+ "sigma": 0.15,
+ "cfg": {
+  "V": 1.0,
+  "deg": 1.0,
+  "K": 40,
+  "M": 32,
+  "seed": 0,
+  "radii": [
+   1.0,
+   2.0
+  ],
+  "iters": 6,
+  "noise": 0.05,
+  "sigma": 0.15,
+  "reach_km": 40.0,
+  "probe_km": [
+   30.0,
+   60.0
+  ],
+  "hover_h": 2.0,
+  "exclude_days": 15,
+  "min_speed": 0.3,
+  "lag": 1,
+  "basis": "gp",
+  "ell_scale": 1.0,
+  "r_post": 1.5
+ },
+ "n_specs": 728,
+ "started": "2026-11-06 14:25:29"
+}

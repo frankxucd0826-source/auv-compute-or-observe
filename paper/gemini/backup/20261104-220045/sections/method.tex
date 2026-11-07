@@ -1,0 +1,107 @@
+\section{方法}
+
+本文方法利用八年卫星数据标定的留出想象海洋作为独立标尺，将航线搜索与价值评判解耦，从而在出发前预演或在线元推理中无偏权衡计算与观测（图\ref{fig:overview}）。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{fig_overview}
+  \caption{基于数据标定留出想象海洋的自主水下航行器计算与观测权衡方法总览。（A）海洋大数据：利用2018至2026年东海3197天逐日$2\text{ km}$卫星叶绿素与海表温度数据切出422个赤潮窗口（开发集274个、测试集148个），标定1至3天滞后底图误差（0.125、0.176、0.210）与四季演变图谱，而550万参数的深度时空预测模型并不优于直接沿用最新底图，表明小尺度结构必须靠现场观测获取。（B）出发前：围绕3天前旧图生成48个经数据标定不确定性的想象海洋，划分为32个搜索用海洋与16个留出海洋；下水前以4个留出海洋为假想真值完整预演五种用时策略（柱状图为2025年4月4日测试任务在中等计算机上的假想遗憾，“一直走”以0.715入选），选出平均假想遗憾最低的策略$s^*$投入实海。（C）任务执行：每20分钟在走、深想与停下之间行动并随时响应最浓处查询，插图显示随规划预算增加规划器自评得分持续攀升，而留出海洋评判与真实航线价值一同趋于平缓。}
+  \label{fig:overview}
+\end{figure}
+
+\subsection{数据标定的想象海洋与局地化集合同化}
+
+航行器唯有使内部环境集合的先验离散度如实匹配旧卫星图与真实海洋之间的实际误差分布，才能在航行途中正确权衡先验底图指引与现场荧光计观测。常规做法通常将旧卫星图直接当作确定性背景场，或凭经验人为指定一个固定的先验方差，这不仅忽略了卫星图滞后天数与遥感小尺度平滑带来的真实误差幅值，还会导致数据同化过度轻信旧图或过度迎合单点测量噪声。为此，本文直接从2018至2022年开发集卫星序列中提取滞后$k$天底图的实测误差标准差$s_k$与空间相关长度$\ell$，结合同日卫星图相对于现场水体的未分辨小尺度标准差$s_{\text{sat}}$，构造合成先验标准差：
+\begin{equation}
+  \sigma_k = \sqrt{s_k^2 + s_{\text{sat}}^2}
+  \label{eq:sigma_k}
+\end{equation}
+在$k=3$天的主设置下，由开发集标定的滞后误差为$s_3 = 0.210$，叠加小尺度偏差$s_{\text{sat}} = 0.15$后得到$\sigma_3 \approx 0.26$，而在“当天卫星图”真值模型下$s_{\text{sat}} = 0$，对应$\sigma_3 = 0.210$。航行器在下水前围绕3天前旧卫星图$c_{\text{map}}(\mathbf{x})$生成$N=48$个想象海洋：
+\begin{equation}
+  c^{(i)}(\mathbf{x}) = c_{\text{map}}(\mathbf{x}) + \sigma_k\, z^{(i)}(\mathbf{x}), \quad i = 1, 2, \dots, 48
+  \label{eq:prior_ensemble}
+\end{equation}
+其中$z^{(i)}(\mathbf{x})$为相互独立的零均值单位方差高斯随机场，具有与实测滞后误差一致的平方指数空间相关函数$C(\mathbf{x}, \mathbf{x}') = \exp\!\big(-\|\mathbf{x}-\mathbf{x}'\|_2^2 / (2\ell^2)\big)$，相关长度取开发集标定值$\ell = 5$个网格（$10\text{ km}$）。
+
+在24小时巡测过程中，每当机载荧光计在位置$\mathbf{x}_{\text{obs}}$采集到一个观测样本$y$，航行器立即对全部48个想象海洋执行同化更新，将单点观测信息传播至周围相关水域。若采用标准卡尔曼滤波或无局地化的集合滤波，48个样本的有限集合会在相距数十千米的网格间产生虚假样本相关，导致一次局部采样错误篡改远方未访水域的叶绿素估计。因此，本文采用序列集合调整卡尔曼滤波\cite{anderson2001eakf}，并在状态协方差更新中乘以半宽为$2\ell = 10$个网格（$20\text{ km}$）的五阶分段有理局地化相关函数$\rho\!\big(\|\mathbf{x}-\mathbf{x}_{\text{obs}}\|_2 / (2\ell)\big)$\cite{gaspari1999correlation}。记同化前在观测点处的集合均值为$\bar{c}(\mathbf{x}_{\text{obs}}) = \frac{1}{48}\sum_{i=1}^{48} c^{(i)}(\mathbf{x}_{\text{obs}})$，集合方差为$\sigma_{\text{ens}}^2(\mathbf{x}_{\text{obs}})$，传感器测量方差为$\sigma_{\varepsilon}^2 = 0.1^2$，则观测点处的后验集合均值$\bar{c}^a(\mathbf{x}_{\text{obs}})$与后验成员$c^{a,(i)}(\mathbf{x}_{\text{obs}})$按线性收缩关系更新：
+\begin{equation}
+  \bar{c}^a(\mathbf{x}_{\text{obs}}) = \frac{\sigma_{\varepsilon}^2\,\bar{c}(\mathbf{x}_{\text{obs}}) + \sigma_{\text{ens}}^2(\mathbf{x}_{\text{obs}})\,y}{\sigma_{\varepsilon}^2 + \sigma_{\text{ens}}^2(\mathbf{x}_{\text{obs}})}, \quad
+  c^{a,(i)}(\mathbf{x}_{\text{obs}}) = \bar{c}^a(\mathbf{x}_{\text{obs}}) + \sqrt{\frac{\sigma_{\varepsilon}^2}{\sigma_{\varepsilon}^2 + \sigma_{\text{ens}}^2(\mathbf{x}_{\text{obs}})}}\,\Big(c^{(i)}(\mathbf{x}_{\text{obs}}) - \bar{c}(\mathbf{x}_{\text{obs}})\Big)
+  \label{eq:eakf_obs}
+\end{equation}
+记第$i$个想象海洋在观测点处的增量为$\Delta y^{(i)} = c^{a,(i)}(\mathbf{x}_{\text{obs}}) - c^{(i)}(\mathbf{x}_{\text{obs}})$，则窗口内任意可航行网格$\mathbf{x}$处的叶绿素估计同步更新为：
+\begin{equation}
+  c^{a,(i)}(\mathbf{x}) = c^{(i)}(\mathbf{x}) + \rho\!\left(\frac{\|\mathbf{x}-\mathbf{x}_{\text{obs}}\|_2}{2\ell}\right)\frac{\operatorname{Cov}\!\big(c(\mathbf{x}), c(\mathbf{x}_{\text{obs}})\big)}{\sigma_{\text{ens}}^2(\mathbf{x}_{\text{obs}})}\,\Delta y^{(i)}
+  \label{eq:eakf_state}
+\end{equation}
+通过式\eqref{eq:eakf_obs}与式\eqref{eq:eakf_state}的递推更新，已造访航迹周围$20\text{ km}$内的想象海洋迅速向实测浓度靠拢且集合离散度显著收缩，而远离航迹的水域则保持先验不确定性以待后续探索。
+
+\subsection{航线搜索与价值评判的集合分离}
+
+为消除航线优化过程对有限想象海洋的过拟合偏差，必须将供规划器搜索航线的样本集合与用于评判航线及计算价值的样本集合严格分离开来。现有基于集合的规划与元推理方法通常将全部48个想象海洋一并输入规划器，既用全体样本的平均得分挑选最优航线，又直接将该内部最高得分作为航线的真实预期收益\cite{russell1991right, lin2015metareasoning}。这种做法忽视了有限样本下的优化器诅咒\cite{smith2006curse}：当高功耗芯片将推演预算提升数十倍时，规划器有充足的机会微调航路点坐标，使折线恰好擦过这批特定样本中偶然重叠的随机高值斑块，从而制造出得分随算力持续上涨的假象，实则并未提升在真实海洋中的寻优表现。
+
+为此，本文借鉴双估计思想\cite{vanhasselt2010double}，在任务开始前将48个想象海洋固定划分为两个互不相交的子集（图\ref{fig:overview}B）：前32个成员组成搜索用海洋$\mathcal{I}_{\text{search}} = \{1, 2, \dots, 32\}$，后16个成员组成留出海洋$\mathcal{I}_{\text{hold}} = \{33, 34, \dots, 48\}$。在巡测过程中，两个子集完全平等地接受式\eqref{eq:eakf_obs}与式\eqref{eq:eakf_state}的现场观测同化更新，因此它们蕴含相同的先验统计与实测信息，但交叉熵航线规划器在搜索过程中仅被允许访问32个搜索用海洋$\mathcal{I}_{\text{search}}$，而16个留出海洋$\mathcal{I}_{\text{hold}}$对搜索优化器完全不可见。
+
+在每个20分钟周期内，规划器搜索一条以当前周期结束时刻航行器预计位置$\mathbf{x}_0$为起点、依次连接两个中间航路点$\bm{\theta} = (\mathbf{w}_1, \mathbf{w}_2)$的折线航线。将一条候选航线$\bm{\theta}$在单个想象海洋$c^{(i)}$上模拟走完剩余任务时长$T_{\text{left}}$或直至剩余可用巡航电池时间$T_{\text{batt}}$耗尽的过程称为一次推演。记模拟航行至剩余窗口时刻$\tau \in [0, T_{\text{left}}]$时，航行器沿折线已遇最高浓度与当前已访最高估计浓度$\max_{\mathbf{x}\in\mathcal{V}(t)} \bar{c}_t(\mathbf{x})$中的较大值为$m_i(\tau; \bm{\theta})$（当$\tau > T_{\text{batt}}$即电量耗尽后，$m_i(\tau; \bm{\theta})$保持耗尽时刻的值不变），则该航线在第$i$个想象海洋上的推演价值定义为：
+\begin{equation}
+  V_i(\bm{\theta}) = \frac{1}{T_{\text{left}}}\int_0^{T_{\text{left}}} m_i(\tau; \bm{\theta})\, d\tau
+  \label{eq:route_value}
+\end{equation}
+式\eqref{eq:route_value}与式\eqref{eq:regret}的时间平均遗憾目标严格对应，能够同时惩罚路线绕远造成的到达延迟与电量透支造成的提前停机。规划器采用跨周期热启动的交叉熵方法\cite{deboer2005cem}在搜索用海洋$\mathcal{I}_{\text{search}}$上迭代优化航路点分布，选出搜索集平均价值最高的航线$\bm{\theta}^*$，而该航线的无偏价值评判$\hat{V}_{\text{hold}}(\bm{\theta}^*)$则由未参与搜索的16个留出海洋给出：
+\begin{equation}
+  \bm{\theta}^* = \arg\max_{\bm{\theta}} \frac{1}{|\mathcal{I}_{\text{search}}|}\sum_{i\in\mathcal{I}_{\text{search}}} V_i(\bm{\theta}), \quad
+  \hat{V}_{\text{hold}}(\bm{\theta}^*) = \frac{1}{|\mathcal{I}_{\text{hold}}|}\sum_{j\in\mathcal{I}_{\text{hold}}} V_j(\bm{\theta}^*)
+  \label{eq:split_eval}
+\end{equation}
+由于$\bm{\theta}^*$的选取过程从未利用$\mathcal{I}_{\text{hold}}$中的样本涨落，只要先验不确定性$\sigma_k$经历史卫星数据如实标定，$\hat{V}_{\text{hold}}(\bm{\theta}^*)$便不会随推演次数增加而产生乐观偏移。
+
+\subsection{基于留出海洋的出发前全任务预演}
+
+由于开启高功耗芯片导致的电量消耗以及停下复测造成的航程损失会在24小时全程内累积放大，时间分配策略的优劣必须在完整任务尺度上根据最终取得的遗憾结果来评判。常规方法要么依靠该型航行器在过往大量任务中的表现事先调好一条固定策略，要么在航行途中仅凭单步边际收益作短视切换，前者在缺乏历史任务记录时无法实施，后者则难以把握当前耗电对任务后期续航的非线性制约。为此，本文提出在下水前利用母船或岸基计算机，以留出海洋作为假想真值开展全任务出发前预演。
+
+本文构造了五种覆盖不同计算与采样配比的候选时间分配策略（使用统一命名）：
+\begin{enumerate}
+  \item \textbf{一直走：}全程72个周期均开启推进器巡航采样，且仅使用低功耗处理器开展后台航线规划，不开启高功耗芯片，此时$1\text{ kWh}$电池可支撑约22.2小时连续航行。
+  \item \textbf{一直深想：}全程开启推进器巡航采样，同时每个周期均开启高功耗芯片将推演次数提升至50倍，在$+20\text{ W}$芯片功耗下总功率升至$65\text{ W}$，电池续航缩短至约15.4小时（在$+5\text{ W}$省电加速器下续航约20.0小时）。
+  \item \textbf{三段深想一段：}全程开启推进器巡航采样，每连续3个周期中开启1个周期高功耗芯片深想、其余2个周期仅用后台规划，兼顾周期性全局重规划与约19.4小时的巡航续航。
+  \item \textbf{三段停下深想一段：}每连续3个周期中有1个周期关停推进器原位漂流复测5次并开启高功耗芯片深想，其余2个周期巡航采样并使用后台规划，试图以推进电能换取高算力与局部低噪观测。
+  \item \textbf{三段停下复测一段：}每连续3个周期中有1个周期关停推进器原位漂流复测5次且仅用后台规划，其余2个周期巡航采样并使用后台规划，专门检验不增加算力时原位降噪的净效应。
+\end{enumerate}
+
+\begin{algorithm}[htbp]
+  \caption{基于数据标定留出想象海洋的出发前全任务预演}
+  \label{alg:rehearsal}
+  \begin{algorithmic}[1]
+    \Require 滞后$k$天旧卫星图$c_{\text{map}}(\mathbf{x})$，数据标定先验标准差$\sigma_k$与相关长度$\ell$，入水起点$\mathbf{x}_{\text{start}}$，机载低功耗处理器速度$v_{\text{cpu}}$、高功耗芯片倍率$50\times$与功率$P_{\text{gpu}}$，电池容量$E_{\text{batt}}=1\text{ kWh}$，候选策略集合$\mathcal{S}=\{\text{一直走}, \text{一直深想}, \text{三段深想一段}, \text{三段停下深想一段}, \text{三段停下复测一段}\}$
+    \Ensure 选定的本次任务执行策略$s^*$
+    \State 围绕$c_{\text{map}}(\mathbf{x})$按式\eqref{eq:prior_ensemble}生成48个想象海洋，划分为搜索用海洋$\mathcal{I}_{\text{search}}=\{1,\dots,32\}$与留出海洋$\mathcal{I}_{\text{hold}}=\{33,\dots,48\}$
+    \State 从留出海洋$\mathcal{I}_{\text{hold}}$中抽取$M=4$个样本$\{c_{\text{truth}}^{(j)}\}_{j=1}^4$作为假想真值，并固定观测噪声随机数种子
+    \For{每种候选策略 $s \in \mathcal{S}$}
+      \For{$j = 1, 2, \dots, M$}
+        \State 初始化航行器内部48个想象海洋、位置$\mathbf{x} \leftarrow \mathbf{x}_{\text{start}}$、剩余电量$E \leftarrow E_{\text{batt}}$及已访集合$\mathcal{V} \leftarrow \{\mathbf{x}_{\text{start}}\}$
+        \For{决策周期 $t_{\text{step}} = 1, 2, \dots, 72$（每周期$\Delta t = 20\text{ min}$）}
+          \State 若$E > 0$，按策略$s$确定本周期机体动作（走或停下）与规划模式（后台规划或开启高功耗芯片深想）
+          \State 在搜索用海洋$\mathcal{I}_{\text{search}}$上按对应推演预算（$v_{\text{cpu}}\Delta t$或$50 v_{\text{cpu}}\Delta t$）运行交叉熵方法更新航线$\bm{\theta}^*$
+          \State 在假想真值$c_{\text{truth}}^{(j)}$上执行机体动作并按式\eqref{eq:obs}采集荧光计样本，用式\eqref{eq:eakf_obs}与式\eqref{eq:eakf_state}更新内部海洋集合并扣除本周期耗电量
+          \State 按式\eqref{eq:answer}记录已访集合$\mathcal{V}$中当前内部均值最高的位置$\hat{\mathbf{x}}(t_{\text{step}})$
+        \EndFor
+        \State 在假想真值$c_{\text{truth}}^{(j)}$上按式\eqref{eq:regret}计算24小时假想时间平均遗憾$R_{s,j}$
+      \EndFor
+      \State 计算策略$s$在4个假想真值上的平均假想遗憾$\bar{R}_s = \frac{1}{4}\sum_{j=1}^4 R_{s,j}$
+    \EndFor
+    \State \Return $s^* = \arg\min_{s\in\mathcal{S}} \bar{R}_s$
+  \end{algorithmic}
+\end{algorithm}
+
+出发前预演的完整流程如算法\ref{alg:rehearsal}所示。当航行器在母船甲板或岸基实验室准备就绪并装入旧卫星图与入水起点后，母船或岸基计算机从16个留出海洋$\mathcal{I}_{\text{hold}}$中取出$M=4$个样本作为假想的“真实海洋”。对于每一个假想真值$c_{\text{truth}}^{(j)}$（$j=1,2,3,4$）和五种候选策略中的每一种策略$s$，预演程序严格按照该台航行器自身的交叉熵规划器、低功耗处理器推演速度、高功耗芯片功耗以及$1\text{ kWh}$电池模型，完整模拟一遍24小时（72个周期）的巡测全过程，并按式\eqref{eq:regret}记录策略$s$在假想真值$c_{\text{truth}}^{(j)}$上取得的真实时间平均遗憾$R_{s,j}$。为降低方差，五种策略在同一个假想真值上共享完全相同的初始想象海洋与荧光计观测噪声序列，最终选出4个假想真值上平均遗憾最低的策略$s^*$写入航行器下水执行：
+\begin{equation}
+  s^* = \arg\min_{s\in\mathcal{S}} \frac{1}{4}\sum_{j=1}^4 R_{s,j}
+  \label{eq:rehearsal_select}
+\end{equation}
+值得强调的是，预演在比较五种策略时依据的是各策略在假想真值$c_{\text{truth}}^{(j)}$上实际达到的巡测遗憾$R_{s,j}$，而非规划器内部的自评得分，因此从根本上绕开了规划器的自评泡沫。在计算开销方面，以慢计算机配置为例，单次任务预演（4个假想真值$\times 5$种策略）共需执行约190万次航线推演，若由航行器机载高功耗芯片自算需耗时约125小时，因此预演必须也完全可以在下水前由母船或岸基计算机完成：在普通台式计算机单核上，慢计算机、中等计算机与快计算机配置完成单次任务预演的实测耗时分别仅为$4.6\text{ s}$、$7.8\text{ s}$与约$25\text{ s}$，完全满足应急出航前的快速装订需求。
+
+\subsection{在线单步元推理中的留出估值}
+
+当任务要求航行器不依赖出发前预演而在航行途中逐周期在线决定计算与采样动作时，将第4.2节的留出评判准则引入单步元推理即可消除经典方法的过度规划。经典单步元推理\cite{russell1991right}在每个20分钟周期先运行后台低功耗规划获得基准航线$\bm{\theta}_{\text{base}}$，再根据搜索用海洋$\mathcal{I}_{\text{search}}$上交叉熵迭代的得分爬升曲线外推开启高功耗芯片深想后的预期航线得分增量，并通过在$\mathcal{I}_{\text{search}}$上模拟原位采样5次的预后验均值变化来估计停下复测的信息价值。由于这两个价值估计均建立在已被规划器反复迎合的搜索用海洋$\mathcal{I}_{\text{search}}$之上，优化器诅咒会使控制器持续看到虚高的计算收益与复测收益，进而几乎每步都开启高功耗芯片并频繁停船。
+
+本文提出的“单步元推理（留出估值）”保持单步元推理的全部决策逻辑与代价项不变，仅将价值评估的数据源从32个搜索用海洋$\mathcal{I}_{\text{search}}$替换为16个留出海洋$\mathcal{I}_{\text{hold}}$。具体而言，记后台规划选出的航线为$\bm{\theta}_{\text{base}}$，若开启高功耗芯片深想选出的航线为$\bm{\theta}_{\text{deep}}$，两者均在$\mathcal{I}_{\text{search}}$上由交叉熵方法搜索产生，但开启高功耗芯片的计算净收益改由留出海洋上的平均价值差$\hat{V}_{\text{hold}}(\bm{\theta}_{\text{deep}}) - \hat{V}_{\text{hold}}(\bm{\theta}_{\text{base}})$减去高功耗芯片额外耗电缩短续航造成的边际损失来度量，原位复测5次的预后验信息收益同样在16个留出海洋$\mathcal{I}_{\text{hold}}$上计算。这一改动以极小的代码与计算代价实现了在线元推理中动作搜索与价值评判的彻底分离。

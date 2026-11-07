@@ -1,0 +1,18 @@
+\section*{附录}
+
+\subsection*{附录 A：代码与数据开源说明}
+本研究的全部源代码、数据处理脚本、实验配置、统计汇总程序以及论文图表生成脚本均已开源于代码仓库：\url{https://github.com/frankxucd0826-source/auv-compute-or-observe}。
+
+\begin{enumerate}
+    \item \textbf{数据集来源：}主实验海流数据取自HYCOM全球海洋再分析公开服务（产品GLBy0.08，实验93.0，10米水深水平流速，区域23°--31°N、121°--129°E，2019--2024年）；第3节前期赤潮巡测研究的数据取自美国国家海洋和大气管理局海岸观测网公开的多星融合叶绿素产品与喷气推进实验室多尺度融合海表温度产品。
+    \item \textbf{主要程序结构：}数据下载与预处理由 \texttt{scripts/download\_hycom.py} 完成；核心航路规划与反例检验软件包位于 \texttt{src/oceanroute/} 目录下，包含多精度网格最短路与包络定理梯度求解器（\texttt{solver.py}）、海流快照读取与粗图生成（\texttt{fields.py}）、旧粗图误差的多年数据标定与无散误差模态（\texttt{errormodel.py}）以及任务生成、反例搜索与测量更新（\texttt{mission.py}）；批量评估、统计重抽样汇总、事实清单生成与典型任务提取分别由 \texttt{experiments/route\_eval.py}、\texttt{experiments/route\_summary.py}、\texttt{experiments/route\_facts.py} 与 \texttt{experiments/route\_example.py} 执行；正文全部插图由 \texttt{paper/figures/fig\_route\_*.py} 系列脚本一键复现；前期赤潮巡测研究的对应脚本清单详见代码仓库根目录下的 \texttt{README} 文档。
+\end{enumerate}
+
+\subsection*{附录 B：人工智能工具使用说明}
+根据课程论文规范，现将本论文研究与撰写过程中人工智能工具的使用情况如实说明如下：
+\begin{enumerate}
+    \item \textbf{作者：}提出了机载计算与现场观测如何权衡的初始问题；对第一版结果提出用真实卫星数据检验、补充对照与消融、按学术论文格式写作等要求；在前期研究结果出来后指出其提升小、新意不足，并提出“粗分辨率海流图下两条航路的合理反例”这一新问题，决定转向本文研究；对全文负责。
+    \item \textbf{Claude（Anthropic）：}在作者授权下完成文献检索与核对、数据下载与全部代码、实验与统计、论文插图，整理写作提纲与由实验程序生成的事实清单，并逐项核对正文中的数字与引用。
+    \item \textbf{Gemini（Google）：}根据Claude整理的提纲、术语表与事实清单撰写论文文字，再由Claude核对与修改。
+    \item \textbf{可追溯性记录：}整个研究过程中作者与人工智能工具交互的完整对话记录、问题演进记录与多轮修改日志均保存在上述开源代码仓库中备查。
+\end{enumerate}

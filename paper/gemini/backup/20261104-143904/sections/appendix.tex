@@ -1,0 +1,19 @@
+\section{代码与数据说明}
+
+本研究的数据处理、集合同化、航线规划器、时空预测模型与出发前预演的完整代码及实验配置开源于：\TBD{GitHub 仓库地址}。
+
+实验使用的两套卫星遥感数据集均下载自美国国家海洋和大气管理局海岸观测网（NOAA CoastWatch）的ERDDAP服务器：
+\begin{enumerate}
+  \item \textbf{东海多源融合叶绿素a逐日数据集（2018—2026年）：} 融合了S-NPP与NOAA-20卫星上的VIIRS传感器以及Sentinel-3A卫星上的OLCI传感器观测，并经DINEOF方法填补云区盲区，空间分辨率2千米，时间分辨率逐日，遵循CC0开放许可，数据集标识为\texttt{noaacwNPPN20S3ASCIDINEOF2kmDaily}。
+  \item \textbf{多尺度超分辨率海表温度数据集（2018—2026年）：} 由美国国家航空航天局喷气推进实验室（NASA JPL）制作（MUR v4.1），原始空间分辨率$0.01^\circ$，时间分辨率逐日，数据集标识为\texttt{jplMURSST41}。
+\end{enumerate}
+
+\section{人工智能工具使用说明}
+
+在本课程论文的研究与写作过程中，人工智能工具的使用情况与各环节分工如下：
+\begin{enumerate}
+  \item 学生提出了本文的研究问题（海洋航行器在巡测过程中何时应当继续计算、何时应当继续观测），设定了研究方向与各项要求，并对提交的论文承担全部责任。
+  \item Claude（Anthropic）完成了文献调研，与学生讨论细化了选题，编写了实验代码，运行了全部数值实验并绘制了论文图表。
+  \item Gemini（Google）根据Claude整理的实验事实清单撰写了论文初稿与修改稿的文字。
+  \item Claude对照实验结果与原始文献逐一核查了文中的全部数值与文献引用。
+\end{enumerate}

@@ -1,0 +1,22 @@
+# large or regenerable data
+data/raw/
+data/processed/
+*.part
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.xdv
+paper/*.synctex.gz
+paper/figures/renders/*.png
+private/
+
+# local Claude Code runtime state
+.claude/

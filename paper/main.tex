@@ -1,0 +1,125 @@
+% 浙江大学《海洋大数据技术原理与应用》课程论文。编译：bash build.sh
+\documentclass[zihao=5, a4paper, oneside]{ctexart}
+
+% ---------- 版面 ----------
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.0cm, right=2.6cm, headheight=15pt]{geometry}
+\usepackage{setspace}
+\setstretch{1.3}
+\setmainfont{Times New Roman}
+\setCJKmainfont[BoldFont=SimHei, ItalicFont=KaiTi]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKfamilyfont{hei}{SimHei}
+\setCJKfamilyfont{kai}{KaiTi}
+\usepackage{amsmath, amssymb, bm}
+\usepackage{graphicx, subcaption, booktabs, multirow, array}
+\usepackage[table]{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[sort&compress, square, comma, numbers]{natbib}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{1.5pt}
+\usepackage{caption}
+\usepackage{placeins}
+% at most one float at the top of a page, so figures alternate with the text that discusses them
+\setcounter{topnumber}{1}
+\setcounter{bottomnumber}{1}
+\setcounter{totalnumber}{2}
+\renewcommand{\topfraction}{0.75}
+\renewcommand{\bottomfraction}{0.45}
+\renewcommand{\textfraction}{0.2}
+\renewcommand{\floatpagefraction}{0.75}
+
+\captionsetup{font=small, labelsep=quad, labelfont=bf}
+\captionsetup[figure]{name=图}
+\captionsetup[table]{name=表}
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{输入：}}
+\renewcommand{\algorithmicensure}{\textbf{输出：}}
+\graphicspath{{figures/}}
+
+% 标题样式：1 绪论 / 1.1 研究背景 / 1.1.1
+\ctexset{
+  section = {format=\zihao{4}\heiti, beforeskip=14pt, afterskip=8pt, name={,}, number=\arabic{section}},
+  subsection = {format=\zihao{-4}\heiti, beforeskip=10pt, afterskip=5pt},
+  subsubsection = {format=\zihao{5}\heiti, beforeskip=6pt, afterskip=3pt},
+}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\zihao{5}\songti 海洋大数据技术原理与应用\quad 课程论文}
+\fancyfoot[C]{\zihao{5}\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newcommand{\coverline}[2]{{\heiti\makebox[5.4em][s]{#1}}：\ \underline{\makebox[15em][c]{#2}}}
+\newcommand{\TBD}[1]{\textcolor{red}{[待补：#1]}}
+
+\begin{document}
+
+% ---------- 封面（浙江大学课程论文样式：校名题字、课程名、校徽、信息栏） ----------
+\begin{titlepage}
+  \centering
+  \singlespacing
+  \vspace*{0.6cm}
+  \includegraphics[width=0.40\textwidth]{logo/zjuchar}\par
+  \vspace{0.8cm}
+  {\zihao{-1}\heiti 《海洋大数据技术原理与应用》课程论文\par}
+  \vspace{1.0cm}
+  \includegraphics[width=0.27\textwidth]{logo/zju}\par
+  \vspace{1.0cm}
+  {\zihao{-2}\heiti \input{sections/title}\par}
+  \vspace{1.1cm}
+  {\zihao{4}
+  \begin{tabular}{@{}l@{}}
+    \coverline{学年学期}{2026--2027 学年秋学期}\\[10pt]
+    \coverline{姓名与学号}{徐陈栋\quad 3240100538}\\[10pt]
+    \coverline{年级与专业}{24 级海洋工程与技术}\\[10pt]
+    \coverline{任课教师}{张帆\quad 研究员}\\[10pt]
+    \coverline{开课学院}{海洋学院}
+  \end{tabular}\par}
+  \vspace{0.9cm}
+  {\zihao{5}\heiti 代码、数据与人机对话记录\par}
+  \vspace{2pt}
+  {\zihao{5}\url{https://github.com/frankxucd0826-source/auv-compute-or-observe}\par}
+  \vfill
+  {\zihao{4}\heiti 2026 年 11 月\par}
+  \vspace{0.8cm}
+\end{titlepage}
+
+% ---------- 题目、作者与摘要（期刊论文版式） ----------
+\pagenumbering{arabic}
+\begin{center}
+  {\zihao{-2}\heiti \input{sections/title}\par}
+  \vspace{6pt}
+  {\zihao{4}\kaishu 徐陈栋\par}
+  {\zihao{5}\songti （浙江大学\ 海洋学院，浙江\ 舟山\ 316021）\par}
+\end{center}
+\vspace{4pt}
+\input{sections/abstract}
+
+\vspace{4pt}
+\noindent{\heiti 代码与对话记录：}全部代码、数据获取脚本、实验结果与作者和人工智能工具的对话记录公开于
+\url{https://github.com/frankxucd0826-source/auv-compute-or-observe}。
+\vspace{6pt}
+
+% ---------- 正文 ----------
+\input{sections/intro}
+\input{sections/related}
+\input{sections/problem}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/innovation}
+\input{sections/conclusion}
+
+% ---------- 参考文献 ----------
+\phantomsection
+\bibliographystyle{gbt7714-numerical}
+\bibliography{refs}
+
+% ---------- 附录 ----------
+\appendix
+{\sloppy\input{sections/appendix}\par}
+
+\end{document}

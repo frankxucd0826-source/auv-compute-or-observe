@@ -1,0 +1,8 @@
+{
+ "out": "curse0_2018",
+ "split": "dev",
+ "n": 29,
+ "lag": 3,
+ "sat_err": 0.15,
+ "workers": 6
+}

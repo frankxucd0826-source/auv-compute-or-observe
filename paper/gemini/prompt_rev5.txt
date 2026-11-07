@@ -1,0 +1,408 @@
+
+
+########## ATTACHED FILE: brief_rev5.md ##########
+
+# Revision 5: a new paper on route decisions under a coarse current map (in Chinese)
+
+## Why a new paper
+This is a Zhejiang University course paper for 《海洋大数据技术原理与应用》. The student's entry
+point is the course topic "海洋大数据的计算引擎": ocean big data is computed not only in data
+centres but more and more on the vehicle itself, and an autonomous underwater vehicle's onboard
+computing is limited, which naturally raises the trade-off between computing, measuring and moving.
+The student first asked when an ocean vehicle should keep computing and when it should observe
+again, and we studied it on harmful-algal-bloom surveys (the earlier study, facts_v3.md section 前期研究).
+That study found that computing more made the planner's answer more "refined" without giving it
+new information: its own score kept rising while the real value had stopped improving, and the
+choice of how to split time between computing and observing could change the outcome only a
+little. The student then sharpened the question and moved it to where it matters, the route
+choice under a coarse current map: two routes, a coarse map, and possibly several current fields
+that agree with what is known yet call for different routes. The new experiments answer it.
+Write a NEW paper; the earlier study is a short motivating section, not the subject.
+
+## The central idea (the one thing the reader must carry away)
+Computation and observation remove different kinds of uncertainty. When the two routes are close
+only because the solver is imprecise (numerical ambiguity), computing more decides correctly. When
+there exist current fields that agree with the available information as well as the real ocean
+does, yet make the other route better (environmental ambiguity), no amount of computation can
+decide; only new information can, and if information is too expensive the vehicle should choose
+the route whose worst plausible loss is smallest. The operational test is the student's question:
+for the recommended route, can we find a plausible current field that makes the other route
+better, and by how much? "Plausible" is defined with ocean big data: the error of stale coarse
+maps, calibrated on six years of reanalysis currents, sets the plausible set and its radius.
+Say this idea in the introduction where the approach is introduced, as contribution 1, and once
+more in the conclusion, each time from a different angle; do not repeat the same sentence.
+
+## What the evidence says (use these claims, with numbers only from facts_v3.md)
+- More computation fixes little: 64 times more computation lowers the wrong-side rate only from
+  21.7% to 19.7% (it fixes 28% of the cheap solver's errors), whereas today's 0.5° map would halve
+  it (10.4%).
+- Environmental ambiguity is the rule for a 3-day-old 1° map in the Kuroshio region: with the
+  plausible set just large enough to contain the real ocean (93% on development years, 94% on test
+  years), a plausible counterexample exists for 99.7% of decisions. So existence alone is not
+  informative; the size of the worst plausible loss is.
+- The worst plausible regret finds where the losses are: the 20% of missions it ranks highest hold
+  67% of the map's loss (32-member ensemble flip share 49%, map margin 34%).
+- Responses: the conservative choice on flagged missions cuts the mean loss from 0.98 to 0.70 h
+  (28%, interval excludes 0); measuring on the way (30 or 60 km) does not help because the decisive
+  currents lie farther ahead; detouring to measure costs 12.4 h; hovering costs 2 h and only
+  resolves noise at one point; surfacing for today's 0.5° map pays when it costs less than about
+  1 h, and the conservative choice is better when it costs more. The expected-time (Bayesian)
+  choice does not help on the test years.
+- State honestly that the gate's gain over always choosing conservatively is small (0.70 vs 0.72):
+  the value comes from the counterexample's worst regret itself.
+
+## Structure (sections and what each must do)
+- Title (sections/title.tex): concrete, says what was done. Suggested direction: “合理反例检验：粗分辨率
+  海流图下自主水下航行器何时计算、何时观测” (you may improve it; no English, no colon-less slogan).
+- 摘要 (about 450 Chinese characters) in Ma Dongfang's eight steps: background; need; what existing
+  methods lack; what this paper proposes; its key points; the experiment; the main numbers;
+  significance. 关键词 4-6. Then the English title, Abstract (same content) and Keywords, in
+  sections/abstract.tex formatted as in the current file ({\heiti 摘要：} ... and {\bfseries Abstract:} ...).
+- 1 引言 (no subsections, about 1500-1800 characters): (1) paradigm: the computing engine of ocean big
+  data extends to the vehicle's edge; limited onboard computing makes "compute, measure or move" a
+  real decision; (2) the case and why it is hard: routing an underwater vehicle through strong
+  currents (the Kuroshio east of Taiwan and the East China Sea) with a coarse, days-old current map,
+  where currents are comparable to the vehicle's speed and a wrong side costs hours; (3)-(5) the
+  existing paths, one per paragraph, each "the obvious way -> why it fails here": plan on the best
+  estimate and spend more computation (certainty equivalence: answers sharpen, information does
+  not grow; the earlier study and Fig. 1); risk-aware planning over ensembles of forecasts (chooses
+  a safe route but does not say whether to compute or observe, and a finite ensemble can miss the
+  field that flips the decision); value-of-information sampling (values information about the
+  whole field rather than about the decision; sequential design and best-arm identification give
+  the right principle: look for the closest alternative that changes the decision); no own numbers
+  in these paragraphs; (6) this paper's idea and approach, ending with Fig. 1; (7) three
+  contributions as bullets, each opening with a bold label and a claim of what is new (idea /
+  method / evidence), contribution 1 with "据我们所知，首次" on separating numerical and
+  environmental ambiguity for ocean-vehicle route decisions and testing the latter by a plausible
+  counterexample; (8) one organization paragraph.
+- 2 相关工作 (three short subsections, 900-1200 characters in total): metareasoning, value of
+  computation versus value of information, and over-thinking in agents, with clarification-seeking
+  for ambiguous tasks as the language-model counterpart; decision-relevant information (sequential
+  design, model discrimination, best-arm identification, information-directed sampling,
+  goal-oriented experimental design, info-gap robustness, predictive multiplicity); path planning
+  in uncertain ocean currents (level-set time-optimal planning, ensemble paths, stochastic and
+  risk-optimal paths, forecast-uncertainty planning, adaptive sampling). Each ends with one sentence
+  on how this paper differs.
+- 3 前期研究：多算为何收效甚微 (about 600-800 characters, Fig. curse): the bloom survey in one paragraph
+  (stale satellite chlorophyll map, compute/measure/stop), then the two findings: the planner's own
+  score inflates with computation while the real value saturates (numbers in facts), and the time
+  allocation has little room compared with information and launch position. End with the question
+  this raises, in the student's words: when several worlds fit what is known and call for different
+  decisions, computing more cannot tell them apart.
+- 4 问题建模 (about 1300-1600 characters): 4.1 scenario and data (Table 1; Fig. data may be cited
+  here or in Section 6); 4.2 route time and solver budgets (equation for the edge time: ground speed
+  along an edge = along-edge current + sqrt(V^2 - cross-edge current^2); the two sides via the
+  no-go zone); 4.3 plausible current fields: map + error modes from a stream function (divergence
+  free), scaled by the calibrated error map, coefficients standard normal, radius r; 4.4 actions
+  and costs (commit; compute; observe: hover, measure on the way, detour, surface for a newer map;
+  hedge) and the loss; 4.5 问题剖析: the root conflict (the decision needs information the map lacks,
+  while computation only sharpens what the map says) and two properties that make it hard, from
+  which the method follows: (a) ambiguity has two sources that call for different actions;
+  (b) whether new information is worth its cost depends on how much the decision could lose.
+- 5 方法 (about 1800-2200 characters, about 28-32% of the body): opening sentence with Fig. overview.
+  5.1 numerical check (cheap solve; refine when the margin is within the numerical tolerance);
+  5.2 counterexample search: maximize the margin against the chosen side over the plausible ball by
+  projected gradient ascent; the gradient of a route's optimal time with respect to the currents is
+  the sum along that route (envelope theorem), so each step costs two route solves; first jump to
+  the ball's edge along the gradient (exact if the margin were linear), then refine; output the
+  worst regret and the counterexample field; 5.3 calibrating "plausible" with ocean big data: the
+  radius is the smallest one whose range covers the real margin in at least 90% of development
+  missions; 5.4 gated response: worst regret below the threshold -> commit; above it -> observe if
+  an observation is cheap (surface for a newer map), otherwise choose the side with the smaller
+  worst regret; thresholds set on development years only. Algorithm 1 (algorithm + algpseudocode:
+  \Require, \Ensure, \State, \If, \Else, \EndIf, \Return) for the whole check. Each subsection opens
+  with its principle, then the choice existing methods would make and the cost it ignores.
+- 6 实验 (about 35-40% of the body): opening paragraph stating the questions answered, in order.
+  6.1 设置 (Table 1; baselines defined once with the names of terms_v5.md, grouped as in Fig. main;
+  development/test split; statistics). 6.2 旧粗图错在哪里 (Fig. data). 6.3 计算消除不了环境歧义
+  (Fig. ambiguity). 6.4 主对比 (Fig. main). 6.5 损失集中在哪里、何时值得观测 (Fig. risk; include the
+  probe numbers in words: switching after 30 km happens in 3.4% of missions and is right in 81%,
+  after 60 km in 18.8% and right in 15%; detours start with a 15.4-hour transit). 6.6 适用范围
+  (Table 2, tables/route_scope.tex; if the table file is not attached, write the subsection from the
+  facts' 适用范围 section). 6.7 局限 (one short paragraph: steady snapshots rather than evolving
+  currents; reanalysis as the real ocean; a two-sided decision; the within-side execution
+  assumption). Each subsection: first sentence = its finding; then purpose -> finding -> interpretation.
+- 7 原创创新点拆解 (required by the course; about 900-1200 characters plus one table): open with the
+  path of thinking in plain academic Chinese (the course topic -> limited edge computing -> the
+  first question -> the earlier study's small gains -> the sharper question about indistinguishable
+  worlds -> the counterexample test). Then a table (\begin{table}[htbp] ... tabular with p-columns,
+  \toprule/\midrule/\bottomrule) with four rows: (1) separating numerical from environmental
+  ambiguity; (2) the counterexample test with the gradient search; (3) calibrating "plausible" with
+  big data (coverage of the real margin); (4) the gated response (observe or hedge by cost). Columns:
+  创新点 | 已有做法及其不足 | 本文做法 | 证据（图表） | 局限. Then one paragraph on what the student
+  contributed and what the AI tools did (consistent with Appendix B): the student proposed the
+  original question, insisted on real data, criticized the small gains and limited novelty of the
+  first method, and proposed the two-route counterexample question that this paper tests; the
+  AI assistant did the literature search, code, experiments and figures; Gemini wrote the text.
+- 8 结论: formal; the idea restated from a new angle; the main evidence in two sentences without
+  repeating every number; one sentence of future work (evolving forecasts and field trials with an
+  onboard current profiler).
+- 附录 (sections/appendix.tex): A 代码与数据 — the repository (keep the \url{...} address exactly:
+  https://github.com/frankxucd0826-source/auv-compute-or-observe), the data (HYCOM reanalysis via the
+  public server; NOAA satellite chlorophyll for the earlier study), and the scripts:
+  scripts/download_hycom.py, src/oceanroute/ (solver.py, fields.py, errormodel.py, mission.py),
+  experiments/route_eval.py, experiments/route_summary.py, experiments/route_facts.py,
+  experiments/route_example.py, paper/figures/fig_route_*.py; the earlier study's scripts are listed
+  in the repository README. B 人工智能工具使用说明 — a numbered list, factual: the student (作者) proposed
+  the research question and its later sharpening, set the requirements and judged every turn,
+  and is responsible for the paper; Claude (Anthropic) did literature search, coding, experiments,
+  figures and checked every number and citation; Gemini (Google) wrote the text from Claude's facts
+  and outline; the full conversation records are in the repository.
+
+## Style (the student's standing requirements)
+1. The first sentence of every paragraph states its conclusion; reading only first sentences must
+   tell the whole story. Never open a paragraph with "如图X所示" or with a setting.
+2. Introduction and method follow "常规做法 -> 为何在这里失效 -> 因此这样做"; principle first, the
+   replaced choice second.
+3. No hedging, no defensive asides, no replies to imagined reviewers, no "值得注意的是/需要指出".
+   Limitations only in 6.7, once. Do not oversell: write what the evidence shows (e.g., measuring on
+   the way did not help here) plainly, as findings.
+4. No coined terms beyond terms_v5.md and NO English abbreviations in the Chinese text (write
+   自主水下航行器/航行器, 再分析, 流函数; not AUV, HYCOM is a product name and may appear once in 4.1
+   and Table 1 only). Units: 千米、米/秒、小时.
+5. Numbers: reason first, numbers after; at most about 6 numbers per paragraph; quote 95% intervals
+   only where they carry a claim (the 28% reduction; the non-significant ones may be summarized in
+   words); never invent a number - every number must come from facts_v3.md.
+6. Formal academic Chinese with proper connectives (然而、因此、相反、进一步); no slogans, no
+   rhetorical questions, no semicolon chains of facts, no list-style paragraphs in the body (lists
+   only for contributions).
+7. Figures are part of the argument: cite each figure where its claim is made; each caption = what
+   is shown (panels) + the takeaway in one sentence; do not repeat captions in the text. Figure
+   order of first mention: overview, curse, data, ambiguity, main, risk.
+8. Cite only keys in the attached list; each citation must support its sentence.
+9. Length: body (sections 1-8, without captions, tables, algorithm and references) 10,000-12,000
+   Chinese characters.
+
+## LaTeX
+- Files: sections/title.tex (title text only), abstract.tex, intro.tex, related.tex, prior.tex
+  (Section 3), problem.tex, method.tex, experiments.tex, innovation.tex (Section 7),
+  conclusion.tex, appendix.tex.
+- \section{...} is numbered by ctex as "1 引言". Figures: \begin{figure}[htbp]\centering
+  \includegraphics[width=\linewidth]{fig_<name>}\caption{...}\label{fig:<name>}\end{figure}, placed
+  right after the paragraph that first cites it; labels: fig:overview, fig:curse, fig:data,
+  fig:ambiguity, fig:main, fig:risk. Tables: Table 1 = \begin{table}[htbp]\centering\caption{...}
+  \label{tab:settings}\small\input{tables/route_settings.tex}\end{table}; Table 2 = the same with
+  tables/route_scope.tex and tab:scope; Table 3 = the innovation table in innovation.tex (tab:innovation).
+- Escape every % as \%. Use math mode for symbols ($V$, $r$, $\Delta T$). Use \cite{key}.
+
+## Output
+The eleven files, each preceded by a line "===== FILE: sections/<name>.tex =====".
+
+
+########## ATTACHED FILE: facts_v3.md ##########
+
+# 事实清单 v3（航路决策研究；由 experiments/route_facts.py 从结果文件生成，正文所有数字只能取自这里）
+
+## 数据与设置
+- 海流数据：HYCOM 全球海洋再分析（GLBy0.08，实验 93.0），水平分辨率 1/12°，取 10 米深度的海流，区域 23–31°N、121–129°E（台湾以东至东海，含黑潮），2019-01-01 至 2024-08-29 每 3 天一张（12:00 UTC），共 689 张；开发年份 2019–2021 共 365 张，测试年份 2022–2024 共 324 张。
+- 任务：每张快照抽 2 个任务；起终点相距 100–140 千米，中点有半径 15 千米的禁航区，左右两侧各求最快航线；起终点离岸至少 20 千米；只取粗图上任务区平均流速不低于 0.3 米/秒的强流任务。开发年份 710 个任务（357 天），测试年份 623 个任务（313 天）。
+- 航行器：对水速度 1.0 米/秒（长航程自主水下航行器量级）；更快一侧的平均航时 39.2 小时（测试年份）。
+- 航行器带的地图：1° 粗分辨率（格内平均），3 天前制作（主设置）。真实海流：当天 1/12° 场。
+- 航线求解（三档计算量）：粗算 8 千米网格、8 个方向；标准 4 千米、16 个方向；精算 2 千米、32 个方向（相对计算量 1 : 8 : 64，按边数）。最快航线用图上的最短路（Dijkstra）求，过一条边的时间 = 边长 / 对地速度，对地速度 = 沿边流速 + sqrt(V² − 垂直边流速²)；顶流过强则该边不可通行。
+- 执行假设：选定一侧后，航行器按真实海流在该侧以最优方式航行（贴近实际的边走边测、边调整）；本文研究的是选哪一侧这个二元决策。
+- 误差模型（大数据标定，开发年份）：旧粗图减真实海流的误差，3 天前 1° 粗图：典型误差中位数 0.17 米/秒，相关长度 76 千米；当天 0.5° 图：0.07 米/秒，18 千米。合理海流 = 粗图 + 由流函数生成的无散误差模态的组合（各点方差按标定的误差图缩放），系数服从标准正态。
+- 合理集合的半径在开发年份标定：使合理集合给出的两侧时间差范围包住真实差值的任务比例不低于 90% 的最小半径，得 r = 1.5；该半径下开发年份覆盖 93%，测试年份覆盖 94%。
+- 反例搜索：在半径 r 的球内对“两侧时间差”做投影梯度上升（梯度由最快航线上各段时间对海流的导数给出，即包络定理），先沿梯度跳到球面，再步长减半细化；分别朝两个方向、在半径 1 与 2 上各搜一次，其他半径按两者线性插值；每个任务共约 71 次标准网格航线求解，与 32 个成员的集合（64 次）相近。
+- 数值误差容限（开发年份）：粗算与精算两侧时间差之差的 95% 分位 3.2 小时；粗算差值小于它时改用精算（按需精算）。
+- 门控阈值（开发年份按平均损失最小选定，测试年份原样使用）：最坏后悔超过 8 小时时取保守一侧；最坏后悔超过 8 小时时上浮取当天 0.5° 图（上浮一次计 1 小时）。
+- 观测方式：原地停留 2 小时测 12 次；沿所选一侧航行 30 或 60 千米并连续测流后再决定是否换边；绕到反例与地图差别最大处（前方 40 千米内）去测；上浮取当天 1° 或 0.5° 图（每次 1 小时）。测流噪声 0.05 米/秒，同化时取 0.15 米/秒（含模型误差）。
+- 统计：损失 = 实际航时 − 更快一侧的航时（小时）；95% 区间按天整组重抽样 2000 次。
+
+## 主要结果（测试年份，括号内为 95% 区间；与“照精算地图走”的配对差）
+- 地图+粗算：平均损失 1.16 小时 [0.80, 1.60]；与精算地图之差 +0.18 [-0.14, 0.58]
+- 地图+标准：平均损失 1.03 小时 [0.73, 1.38]；与精算地图之差 +0.05 [-0.05, 0.18]
+- 地图+精算：平均损失 0.98 小时 [0.69, 1.33]；与精算地图之差 +0.00 [0.00, 0.00]
+- 集合期望（贝叶斯）：平均损失 1.04 小时 [0.76, 1.37]；与精算地图之差 +0.06 [-0.22, 0.34]
+- 保守（最坏后悔最小）：平均损失 0.72 小时 [0.50, 0.99]；与精算地图之差 -0.26 [-0.49, -0.05]
+- 原地停留测：平均损失 2.91 小时 [2.67, 3.19]；与精算地图之差 +1.94 [1.55, 2.31]
+- 总是沿途测30km：平均损失 0.93 小时 [0.69, 1.21]；与精算地图之差 -0.05 [-0.30, 0.18]
+- 总是沿途测60km：平均损失 0.91 小时 [0.66, 1.22]；与精算地图之差 -0.07 [-0.27, 0.05]
+- 总是绕行定点测：平均损失 12.43 小时 [11.50, 13.45]；与精算地图之差 +11.45 [10.49, 12.46]
+- 总是上浮取当天1°图：平均损失 1.67 小时 [1.49, 1.89]；与精算地图之差 +0.69 [0.40, 0.96]
+- 总是上浮取当天0.5°图：平均损失 1.22 小时 [1.14, 1.31]；与精算地图之差 +0.24 [-0.11, 0.53]
+- 反例门控→保守：平均损失 0.70 小时 [0.48, 0.97]；与精算地图之差 -0.28 [-0.51, -0.07]
+- 反例门控→上浮取0.5°图：平均损失 0.78 小时 [0.69, 0.89]；与精算地图之差 -0.20 [-0.54, 0.08]
+- 反例门控→贝叶斯：平均损失 0.96 小时 [0.68, 1.29]；与精算地图之差 -0.01 [-0.29, 0.25]
+- 开发年份对应：精算地图 1.13，保守 0.76，门控后取保守 0.70，门控后上浮取 0.5° 图 0.76，集合期望 0.96。
+- 门控后取保守比精算地图少损失 28%（0.98 → 0.70 小时）。
+
+## 歧义的性质（测试年份；开发年份在括号内）
+- 选错一侧的比例：粗算 21.7%（25.1%），精算 19.7%（21.3%）；换成当天 0.5° 图 10.4%；计算量增加 64 倍只修好粗算错误的 28%。
+- 平均损失：粗算 1.16，精算 0.98 小时（差异不显著，见上）。
+- 能找到合理反例（存在使地图所选一侧变差、且让另一侧更好的合理海流）的任务比例，按半径：r=0.25：41.6%，r=0.5：64.8%，r=1.0：94.1%，r=1.5：99.7%，r=2.0：100.0%。
+- 损失高度集中：精算地图损失最大的 10% 任务占全部损失的 92%（开发年份 88%）。
+- 按风险排序，排在前 20% 的任务所占的地图损失：反例的最坏后悔 67%，32 个合理场中翻转的比例 49%，地图上两侧时间差越小越危险 34%，随机 20%，按真实损失（上限）100%。
+- 门控（最坏后悔 > 8 小时）标记 47% 的任务，这些任务占地图损失的 82%；其中保守规则改选另一侧的有 41 个任务。
+- 只论“是否选错且多花 1 小时以上”（测试年份 79 个）而不论多花多少时，三种排序的区分能力相近（曲线下面积：反例 0.65，32 成员集合 0.67，地图差值 0.67）；反例的优势在于把损失大的任务排在前面（见上一条）。
+
+## 观测的代价（测试年份）
+- 上浮一次 0.0 小时：总是上浮取 0.5° 图 0.22，门控后上浮 0.22，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 0.5 小时：总是上浮取 0.5° 图 0.72，门控后上浮 0.55，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 1.0 小时：总是上浮取 0.5° 图 1.22，门控后上浮 0.78，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 2.0 小时：总是上浮取 0.5° 图 2.22，门控后上浮 1.06，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 3.0 小时：总是上浮取 0.5° 图 3.22，门控后上浮 0.98，门控后取保守 0.70，精算地图 0.98（小时）。
+- 沿途测 30 千米后换边的任务 3.4%，换对 81%；测 60 千米后换边 18.8%，换对 15%。
+- 绕行定点测平均先花 15.4 小时到测点。
+
+## 示例任务（图 1；按规则选出：测试年份按日期第一个满足“精算地图选错且多花 3 小时以上、存在合理反例、门控后保守选对”的任务）
+- 日期 2022-01-18；粗图上左侧 37.71 小时、右侧 38.02 小时（地图选左）；合理反例中左侧 55.69、右侧 44.07；真实海洋左侧 53.44、右侧 41.72（右侧快 11.7 小时）。
+
+## 前期研究（东海赤潮巡测：航行器带 3 天前的卫星叶绿素图，在“继续计算”“边走边测”“停下复测”之间分配时间；损失为对数叶绿素浓度）
+- 规划器在自己搜索过的想象海洋上给航线打分，随推演次数增加而虚高：64、2000、20 万次推演时自评 0.762、0.833、0.917，真实价值 0.749、0.793、0.803，在不参与搜索的留出海洋上评判 0.745、0.794、0.802。
+- 出发前预演选用时策略的遗憾 0.265，每个任务事后挑最好的策略 0.243（用时分配本身的空间约 0.022），经典单步元推理 0.287。
+- 遗憾拆解：从窗口边缘下水（离最浓处中位数 48 千米）时，知道真相直奔最浓处 0.206，换成当天卫星图 0.235；改在旧图最浓处下水后，五种用时策略 0.126–0.145，换成当天卫星图 0.098。即下水点约 0.13、信息新鲜度约 0.03、用时分配约 0.02。
+- 用前一天的移动（光流）把旧图外推 3 天，比直接用旧图误差大 0.018（95% 区间 0.012–0.025）：逐日卫星图里没有可外推的整体移动。
+
+## 适用范围（每组测试年份约 350 个任务；阈值各自在开发年份标定）
+- 主设置：3 天前 1° 粗图，对水 1.0 米/秒：测试任务 623，标定半径 1.5，精算地图选错 19.7%，粗算选错 21.7%，精算地图损失 0.98，门控后取保守 0.70，门控后取保守与地图之差 -0.28 [-0.51, -0.07]，门控后上浮取图 0.78，存在合理反例 99.7%，反例前20%所占损失 67%，平均最快航时 39.2
+- 地图较好：当天 0.5° 图：测试任务 349，标定半径 1.75，精算地图选错 8.0%，粗算选错 8.9%，精算地图损失 0.17，门控后取保守 0.17，门控后取保守与地图之差 +0.00 [-0.04, 0.05]，门控后上浮取图 0.16，存在合理反例 64.5%，反例前20%所占损失 60%，平均最快航时 38.7
+- 慢速航行器：对水 0.75 米/秒：测试任务 347，标定半径 1.5，精算地图选错 18.4%，粗算选错 22.2%，精算地图损失 2.43，门控后取保守 1.80，门控后取保守与地图之差 -0.63 [-1.67, 0.30]，门控后上浮取图 1.32，存在合理反例 99.1%，反例前20%所占损失 74%，平均最快航时 59.8
+- 消融：合理集合改用历史相似日的小尺度差：测试任务 349，标定半径 1.5，精算地图选错 19.5%，粗算选错 22.3%，精算地图损失 0.99，门控后取保守 0.95，门控后取保守与地图之差 -0.04 [-0.43, 0.36]，门控后上浮取图 0.77，存在合理反例 99.4%，反例前20%所占损失 64%，平均最快航时 39.8
+
+
+
+########## ATTACHED FILE: figures_v5.md ##########
+
+# 图表说明（v5）：每张图的文件名、标签、内容与要传达的一句话。图注 = 面板说明 + 一句结论；正文在提出该论点处引用。
+
+1. `fig_route_overview`（\label{fig:overview}，放在引言里介绍本文思路的段落之后）
+   (a) 3 天前的 1° 粗图：左侧 37.7 小时、右侧 38.0 小时，几乎一样快，地图选左侧；(b) 一个与粗图同样相容的合理反例海流：左侧 55.7、右侧 44.1 小时；
+   (c) 当天真实海流：左侧 53.4、右侧 41.7 小时，右侧快 11.7 小时；(d) 决策流程：粗图上算出两侧时间差 → 差值小于数值误差则加密网格再算 → 反例检验得到最坏后悔 → 最坏后悔小则照地图走，大则观测便宜时上浮取新图后再定、观测太贵时选最坏后悔最小的一侧。
+   结论：再加计算只会把地图上的 0.3 小时之差算得更准，却分辨不出 (b)(c) 这样同样合理的世界；反例检验把这一点显式找出来。
+   示例按规则选出（见 facts_v3.md），正文用半句话交代规则。
+2. `fig_curse`（\label{fig:curse}，前期研究一节）——沿用前期赤潮研究的图
+   (a) 横轴每次决策的想象推演次数（64 到 20 万），纵轴所选航线的价值（对数浓度）：规划器搜索时的自评从 0.762 升到 0.917，真实价值 0.749→0.803、约 2000 次后不再提高，留出海洋上的评判贴着真实价值；
+   (b) 估计减真实：搜索自评偏高随计算量增大，留出评判无偏，不确定性设错只整体平移。
+   结论：多算让答案越来越“精致”，却没有带来区分环境的新信息。
+3. `fig_route_data`（\label{fig:data}，问题建模或实验开头）
+   (a) 研究海区（23°--31°N、121°--129°E）与 2019--2021 年平均海流（10 米），黑潮清晰，橙点为测试任务禁航区的位置；
+   (b) 3 天前 1° 粗图的典型误差（米/秒），沿黑潮最大；(c) 误差相关系数随两点距离：当天 0.5° 图约 18 千米，3 天前 1° 粗图约 76 千米。
+   结论：旧粗图的误差有空间结构、可从多年数据标定，这是“合理海流”的依据。
+4. `fig_route_ambiguity`（\label{fig:ambiguity}，实验：计算与信息）
+   (a) 测试年份选错一侧的比例：粗算 21.7%、标准 20.5%、精算 19.7%（计算量增加 64 倍只降 1.9 个百分点）；换成当天 0.5° 图 10.4%；知道真相 0%；
+   (b) 随合理集合半径增大：包住真实两侧时间差的比例（开发年份）与存在合理反例的比例（测试年份）；标定半径 1.5 时分别为 93% 与 99.7%。
+   结论：计算只能消除数值歧义；在能包住真实世界的合理集合里，几乎每个决定都有合理反例，所以“有没有反例”不够，要看反例让损失有多大。
+5. `fig_route_main`（\label{fig:main}，实验：主对比）
+   横排点图：各响应在测试年份的平均损失（小时），按类分组：同一张粗图上加算（粗算 1.16、标准 1.03、精算 0.98）；不取新信息、改变决策准则（按期望时间 1.04、最坏情况后悔最小 0.72）；
+   就地取新信息（原地停留 2 小时 2.91、沿途测 30 千米 0.93、沿途测 60 千米 0.91、绕到反例差异最大处去测 12.4）；上浮取新图（每次 1 小时：1° 图 1.67、0.5° 图 1.22）；
+   反例检验分流（门控后取保守 0.70、门控后上浮取 0.5° 图 0.78）；虚线为照精算地图走。
+   结论：只有用到合理集合的保守准则，尤其是门控后取保守，显著降低了损失；就地测量与加算都不行。
+6. `fig_route_risk`（\label{fig:risk}，实验：损失在哪、观测何时值得）
+   (a) 按风险从高到低排序的任务累计所占地图损失：排前 20% 的任务，按反例最坏后悔 67%、按 32 个合理场的翻转比例 49%、按地图两侧时间差 34%、随机 20%、上限 100%；
+   (b) 平均损失随一次上浮取图的代价（0--4 小时）：总是上浮取图随代价线性变差；门控后上浮取图在代价低于约 1 小时时最好；代价更高时门控后取保守最好；照精算地图走为 0.98。
+   结论：反例的最坏后悔最能找出损失集中的任务；观测便宜就去观测，昂贵就保守。
+7. 表 1 `tables/route_settings.tex`（\label{tab:settings}，问题建模或实验设置处，原样 \input）。
+8. 表 2 `tables/route_scope.tex`（\label{tab:scope}，实验：适用范围）——三种变化下的结果：当天 0.5° 图（地图较好）、对水速度 0.75 米/秒的慢速航行器、用历史相似日的小尺度差代替标定误差模型构造合理集合（消融）。数字见 facts_v3.md “适用范围”一节。
+
+
+########## ATTACHED FILE: terms_v5.md ##########
+
+# 术语表（v5，航路决策研究）——正文、图注、表格必须与此一致；中文里不出现英文缩写
+
+| 写法 | 含义 |
+|---|---|
+| 自主水下航行器（首次出现后可称“航行器”） | 研究对象；不写 AUV |
+| 粗图 | 航行器所带的 3 天前 1° 粗分辨率海流图（格内平均） |
+| 真实海流 / 真实海洋 | 当天 1/12° 再分析海流场 |
+| 禁航区；左侧、右侧 | 起终点中间半径 15 千米的圆形禁航区；从它的左边或右边绕过 |
+| 两侧时间差 | 左侧航时减右侧航时（小时）；为负则左侧快 |
+| 粗算、标准、精算 | 三档航线求解计算量（8 千米 8 向、4 千米 16 向、2 千米 32 向） |
+| 数值歧义 | 两侧时间差小于求解误差，加大计算量可以消除 |
+| 环境歧义 | 存在与现有信息同样相容、却要求选另一侧的海流场，计算消除不了 |
+| 合理海流、合理集合、半径 | 粗图加上按多年数据标定的误差模态组合；组合系数范数不超过半径 r 的全部海流场 |
+| 合理反例 | 合理集合中让地图所选一侧变差、另一侧更好的海流场 |
+| 反例检验 | 在合理集合中搜索最坏的合理反例的过程 |
+| 最坏后悔 | 合理集合中，所选一侧比另一侧多花时间的最大值（小时） |
+| 门控 | 以最坏后悔是否超过阈值决定是否采取观测或保守动作 |
+| 照地图走（精算） | 基线：在粗图上用精算选更快一侧 |
+| 按需精算 | 粗算差值小于数值误差容限时改用精算 |
+| 按期望时间 | 选 32 个合理海流中平均航时更短的一侧 |
+| 保守（最坏后悔最小） | 选合理集合中最坏后悔更小的一侧 |
+| 原地停留测、沿途测 30 千米、沿途测 60 千米、绕行定点测、上浮取当天 1° 图、上浮取当天 0.5° 图 | 各种观测方式（见表 1） |
+| 门控后取保守、门控后上浮取图 | 本文的两种响应 |
+| 知道真相 | 仅作参考的上限：直接选真实更快的一侧 |
+| 损失 | 实际航时减去更快一侧的航时（小时），越低越好 |
+| 前期研究里的词 | 想象海洋、留出海洋、自评、出发前预演、遗憾（对数叶绿素浓度） |
+| 单位 | 千米、米/秒、小时（与图一致） |
+
+
+########## ATTACHED FILE: tables/route_settings.tex (Table 1) ##########
+
+\begin{tabular}{@{}p{0.16\linewidth}p{0.80\linewidth}@{}}
+\toprule
+项目 & 设置 \\
+\midrule
+海流数据 & HYCOM 全球海洋再分析（GLBy0.08，实验 93.0），水平分辨率 1/12°，取 10 米深度；23°--31°N、121°--129°E（台湾以东至东海，含黑潮）；2019-01-01 至 2024-08-29 每 3 天 12:00 时一张，共 689 张 \\
+任务 & 每张快照抽 2 个：起终点相距 100--140 千米、离岸不少于 20 千米，两点中间设半径 15 千米的禁航区，可从左侧或右侧绕过；只取粗图上任务区平均流速不低于 0.3 米/秒的强流任务；开发 710 个（2019--2021 年），测试 623 个（2022--2024 年） \\
+地图与真实海流 & 航行器带 3 天前的 1° 粗分辨率海流图（格内平均）；真实海流为当天 1/12° 场 \\
+航行器 & 对水速度 1.0 米/秒；选定一侧后，按真实海流在该侧以最快方式航行 \\
+航线求解 & 网格最短路：粗算 8 千米网格、8 个方向；标准 4 千米、16 个方向；精算 2 千米、32 个方向（计算量之比 1 : 8 : 64）；顶流过强的边不可通行 \\
+合理海流 & 粗图加上由流函数生成的无散误差模态的组合，各点误差大小与相关长度（76 千米）由开发年份标定，组合系数服从标准正态；半径 $r=1.5$（开发年份中包住真实两侧时间差的任务占 93\%） \\
+反例检验 & 在半径 $r$ 的球内对两侧时间差做投影梯度上升（梯度沿最快航线累加）；两个方向、半径 1 与 2 各搜一次，其他半径线性插值，每个任务约 71 次标准网格求解 \\
+观测方式 & 出发前原地停留 2 小时测 12 次；沿所选一侧航行 30 或 60 千米并连续测流后可换边；绕到反例与地图差别最大处（前方 40 千米内）去测；上浮取当天 1° 或 0.5° 海流图（每次 1 小时）；测流噪声 0.05 米/秒 \\
+门控 & 最坏后悔超过 8 小时（开发年份选定）时取保守一侧或上浮取图，否则照地图走 \\
+评价 & 损失 = 实际航时 $-$ 更快一侧的航时（小时）；配对差值的 95\% 置信区间按天整组自助重抽样 2000 次 \\
+\bottomrule
+\end{tabular}
+
+
+########## ATTACHED FILE: tables/route_scope.tex (Table 2) ##########
+
+\begin{tabular}{@{}p{0.27\linewidth}cccccc@{}}
+\toprule
+设置 & 测试任务 & 存在合理反例 & 精算地图选错 & 精算地图损失 & 门控后取保守 & 反例前 20\% 所占损失 \\
+\midrule
+主设置：3 天前 1° 粗图，对水 1.0 米/秒 & 623 & 99.7\% & 19.7\% & 0.98 & 0.70 & 67\% \\
+地图较好：当天 0.5° 图 & 349 & 64.5\% & 8.0\% & 0.17 & 0.17 & 60\% \\
+慢速航行器：对水 0.75 米/秒 & 347 & 99.1\% & 18.4\% & 2.43 & 1.80 & 74\% \\
+消融：合理集合改用历史相似日的小尺度差 & 349 & 99.4\% & 19.5\% & 0.99 & 0.95 & 64\% \\
+\bottomrule
+\end{tabular}
+
+
+########## ATTACHED FILE: citation keys in refs.bib (key: title) ##########
+
+fossum2019: Toward adaptive robotic sampling of phytoplankton in the coastal ocean
+sung2021quit: Learning When to Quit: Meta-Reasoning for Motion Planning
+magnino2026metareasoning: Learning Robot Metareasoning: Adaptive Computation Budgets for Real-Time Control
+shen2025thinking: Thinking vs. Doing: Improving Agent Reasoning by Scaling Test-Time Interaction
+cuadron2025overthinking: The Danger of Overthinking: Examining the Reasoning-Action Dilemma in Agentic Tasks
+lin2015metareasoning: Metareasoning for Planning Under Uncertainty
+horvitz1987reasoning: Reasoning About Beliefs and Actions Under Computational Resource Constraints
+xiao2020thinking: Thinking While Moving: Deep Reinforcement Learning with Concurrent Control
+elboher2023formal: A Formal Metareasoning Model of Concurrent Planning and Execution
+jiang2015horizon: The Dependence of Effective Planning Horizon on Model Accuracy
+smith2006curse: The Optimizer's Curse: Skepticism and Postdecision Surprise in Decision Analysis
+vanhasselt2010double: Double Q-learning
+hunt2021formalizing: Formalizing planning and information search in naturalistic decision-making
+anderson2001eakf: An Ensemble Adjustment Kalman Filter for Data Assimilation
+beckers2003dineof: EOF Calculations and Data Filling from Incomplete Oceanographic Datasets
+assran2025vjepa2: V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning
+lou2014diurnal: Diurnal changes of a harmful algal bloom in the East China Sea: Observations from GOCI
+chin2017mur: A multi-scale high-resolution analysis of global sea surface temperature
+ye2021cocts: Global Ocean Chlorophyll-a Concentrations Derived From COCTS Onboard the HY-1C Satellite and Their Preliminary Evaluation
+gaspari1999correlation: Construction of correlation functions in two and three dimensions
+deboer2005cem: A Tutorial on the Cross-Entropy Method
+russell1991right: Do the Right Thing: Studies in Limited Rationality
+remus100: REMUS 100 Autonomous Underwater Vehicle: product information (1 kWh lithium-ion battery; up to 22 h at 3 kn; 100 m depth rating)
+jetsonorinnx: Jetson Orin NX modules: configurable module power 10--25 W (16 GB), up to 100 sparse INT8 TOPS
+mnr2024bulletin: 2023 年中国海洋灾害公报
+zhao2025distinguishing: A novel method for distinguishing different algal blooms in the East China Sea via geostationary ocean color satellite observations
+galceran2013coverage: A survey on coverage path planning for robotics
+srinivas2012gpucb: Information-theoretic regret bounds for Gaussian process optimization in the bandit setting
+russo2018thompson: A tutorial on Thompson sampling
+hollinger2014sampling: Sampling-based robotic information gathering algorithms
+chernoff1959sequential: Sequential Design of Experiments
+box1967discrimination: Discrimination Among Mechanistic Models
+garivier2016optimal: Optimal Best Arm Identification with Fixed Confidence
+russo2018ids: Learning to Optimize via Information-Directed Sampling
+attia2018goal: Goal-Oriented Optimal Design of Experiments for Large-Scale Bayesian Linear Inverse Problems
+benhaim2006infogap: Info-Gap Decision Theory: Decisions Under Severe Uncertainty
+wang2016path: Path Planning in Uncertain Flow Fields Using Ensemble Method
+subramani2018stochastic: Stochastic Time-Optimal Path-Planning in Uncertain, Strong, and Dynamic Flows
+kularatne2018forecast: Optimal Path Planning in Time-Varying Flows with Forecasting Uncertainties
+lolla2014levelset: Time-Optimal Path Planning in Dynamic Flows Using Level Set Equations: Realistic Applications
+chassignet2007hycom: The HYCOM (HYbrid Coordinate Ocean Model) Data Assimilative System
+dijkstra1959note: A Note on Two Problems in Connexion with Graphs
+kobalczyk2025active: Active Task Disambiguation with LLMs
+marx2020predictive: Predictive Multiplicity in Classification

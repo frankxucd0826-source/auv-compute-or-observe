@@ -1,0 +1,15 @@
+{\heiti 摘要：}
+随着海洋大数据的计算引擎延伸至移动观测平台边缘，自主水下航行器在受限算力与能量下必须在继续计算、补充观测与立即行动之间做出在线权衡。在强流区携带3天前的粗分辨率海流图绕越禁航区时，选错绕行一侧将导致数小时航时损失。现有确定性规划通过加密网格增加计算，只能提升求解精度而无法补充缺失的海洋信息；集合规划与自适应采样或需大量样本才能估准不利流场，或将观测耗费在与二元选边无关的全场重构上。为此，本文提出基于海洋大数据标定的合理反例检验方法，分离数值歧义与环境歧义以决定何时计算、何时观测、何时保守绕行。该方法先按需精算以消除数值歧义，再用多年再分析海流标定旧粗图的无散误差模态与合理集合半径，利用包络定理投影梯度上升搜索使所选一侧变差、另一侧变好的合理反例及最坏后悔，据此门控触发上浮取图或选最坏后悔更小的一侧。台湾以东至东海黑潮区六年再分析数据实验表明：计算量增加64倍仅将选错率从21.7\%降至19.7\%，而在覆盖94\%真实时间差的合理集合内99.7\%的任务存在合理反例；最坏后悔前20\%的任务集中了67\%的损失；反例搜索仅用约71次航线求解，即达到按期望时间选边使用约1024个随机合理场时的效果；门控后取保守将平均损失从0.98小时降至0.70小时。在湾流区与阿古拉斯回流区的重复实验中，单纯增加计算同样无效，最坏后悔风险排序与门控后上浮取图均成立（平均损失分别由3.56降至1.31小时、由6.87降至2.20小时），而不观测的保守改选在这两个海区均无显著收益；航行器改带真实卫星测高地转流图后，加算无效与风险排序仍成立，但各种响应的收益不再显著。
+
+{\heiti 关键词：}海洋大数据；自主水下航行器；航路规划；合理反例检验；元推理；不确定性量化
+
+\vspace{1em}
+\begin{center}
+{\large\bfseries Plausible Counterexample Test: When an Autonomous Underwater Vehicle Should Compute and When It Should Observe Under a Coarse Current Map}
+\end{center}
+\vspace{0.5em}
+
+{\bfseries Abstract:}
+As ocean big-data computing moves onto mobile platforms, an autonomous underwater vehicle with limited onboard computation and energy must trade off computing, observing and moving. Rounding a no-go zone in strong currents with a three-day-old coarse current map, a vehicle that picks the wrong side loses hours. A finer solver grid sharpens precision but adds no oceanographic information; ensemble planning needs many samples, and adaptive sampling spends observations on the whole field rather than on the binary route choice. We propose a plausible counterexample test, calibrated by ocean big data, that separates numerical from environmental ambiguity to decide when to compute, observe or hedge. The method resolves numerical ambiguity with an on-demand fine solve, calibrates divergence-free error modes and a plausible-set radius from multi-year reanalysis currents, finds the worst counterexample and its worst regret by envelope-theorem gradient ascent, and gates between surfacing for a new map and taking the side with smaller worst regret. Across six years of Kuroshio reanalysis data, 64-fold more computation cuts wrong-side choices only from 21.7\% to 19.7\%, whereas 99.7\% of missions admit a plausible counterexample inside a set covering 94\% of real time differences; the top 20\% of missions by worst regret hold 67\% of total loss; the search reaches with about 71 route solves what the expected-time rule needs about 1024 random plausible fields to reach; and gated conservative routing lowers mean loss from 0.98 to 0.70 hours. In replications in the Gulf Stream and the Agulhas retroflection, extra computation remains ineffective, while risk ranking and gated surfacing hold (mean loss from 3.56 to 1.31 hours and from 6.87 to 2.20 hours); observation-free conservative routing brings no significant gain in either region. With a real satellite altimetry map, computation stays ineffective and ranking holds, but no response gains significantly.
+
+{\bfseries Keywords:} ocean big data; autonomous underwater vehicle; path planning; plausible counterexample test; metareasoning; uncertainty quantification

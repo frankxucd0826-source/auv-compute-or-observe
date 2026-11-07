@@ -1,0 +1,202 @@
+
+=== sat+ weak: n=148 tuned=periodic-100
+  means: {'double': 0.278, 'fixed-0': 0.374, 'fixed-1': 0.273, 'greedy': 0.285, 'lawnmower': 0.424, 'periodic-100': 0.27, 'periodic-200': 0.408, 'periodic-300': 0.331, 'rational': 0.287, 'rehearsal': 0.276, 'rehearsal-self': 0.273, 'thompson': 0.332, 'ucb': 0.299, 'tuned': 0.27, 'random5': 0.331, 'random3': 0.306, 'oracle': 0.25, 'learned': 0.278}
+  rehearsal - tuned           +0.007 [-0.000, +0.014]
+  rehearsal - rational        -0.011 [-0.019, -0.002]
+  rehearsal - double          -0.002 [-0.010, +0.007]
+  rehearsal - rehearsal-self  +0.004 [-0.004, +0.012]
+  rehearsal - learned         -0.001 [-0.009, +0.006]
+  rehearsal - random5         -0.055 [-0.066, -0.044]
+  rehearsal - random3         -0.029 [-0.039, -0.020]
+  rehearsal - oracle          +0.027 [+0.019, +0.035]
+  rehearsal - lawnmower       -0.148 [-0.185, -0.111]
+  rehearsal - greedy          -0.009 [-0.022, +0.004]
+  rehearsal - ucb             -0.023 [-0.039, -0.008]
+  rehearsal - thompson        -0.056 [-0.070, -0.042]
+  rehearsal - fixed-0         -0.098 [-0.121, -0.075]
+  rehearsal - fixed-1         +0.003 [-0.002, +0.009]
+  rehearsal - periodic-100    +0.007 [-0.000, +0.015]
+  rehearsal - periodic-300    -0.055 [-0.066, -0.043]
+  rehearsal - periodic-200    -0.132 [-0.155, -0.110]
+  choice: {'think 1 in 3': 0.554, 'think': 0.392, 'stop and resample 1 in 3': 0.027, 'go': 0.014, 'stop and think 1 in 3': 0.014}  learned picks: {'periodic-100': 0.547, 'fixed-1': 0.385, 'fixed-0': 0.054, 'periodic-200': 0.014}
+  meta: {'think': 0.8038828179493142, 'stopped': 0.3348058591025343}  double: {'think': 0.295021186440678, 'stopped': 0.1673728813559322}
+
+=== sat+ moderate: n=148 tuned=periodic-100
+  means: {'double': 0.27, 'fixed-0': 0.267, 'fixed-1': 0.269, 'greedy': 0.285, 'lawnmower': 0.424, 'periodic-100': 0.269, 'periodic-200': 0.335, 'periodic-300': 0.328, 'rational': 0.287, 'rehearsal': 0.265, 'rehearsal-self': 0.268, 'thompson': 0.332, 'ucb': 0.299, 'tuned': 0.269, 'random5': 0.293, 'random3': 0.268, 'oracle': 0.243, 'learned': 0.269}
+  rehearsal - tuned           -0.003 [-0.009, +0.003]
+  rehearsal - rational        -0.022 [-0.030, -0.013]
+  rehearsal - double          -0.005 [-0.011, +0.003]
+  rehearsal - rehearsal-self  -0.003 [-0.008, +0.003]
+  rehearsal - learned         -0.004 [-0.012, +0.004]
+  rehearsal - random5         -0.028 [-0.032, -0.023]
+  rehearsal - random3         -0.003 [-0.008, +0.003]
+  rehearsal - oracle          +0.022 [+0.017, +0.028]
+  rehearsal - lawnmower       -0.159 [-0.196, -0.127]
+  rehearsal - greedy          -0.020 [-0.033, -0.006]
+  rehearsal - ucb             -0.034 [-0.049, -0.020]
+  rehearsal - thompson        -0.067 [-0.079, -0.055]
+  rehearsal - fixed-0         -0.001 [-0.007, +0.005]
+  rehearsal - fixed-1         -0.003 [-0.011, +0.004]
+  rehearsal - periodic-100    -0.003 [-0.009, +0.003]
+  rehearsal - periodic-300    -0.062 [-0.072, -0.052]
+  rehearsal - periodic-200    -0.070 [-0.079, -0.060]
+  choice: {'think 1 in 3': 0.432, 'go': 0.304, 'think': 0.25, 'stop and resample 1 in 3': 0.014}  learned picks: {'fixed-1': 0.405, 'fixed-0': 0.311, 'periodic-100': 0.257, 'periodic-200': 0.02, 'periodic-300': 0.007}
+  meta: {'think': 0.9250091452261919, 'stopped': 0.32849652481404706}  double: {'think': 0.38286274937316034, 'stopped': 0.1735528180529816}
+
+=== sat+ strong: n=148 tuned=fixed-0
+  means: {'double': 0.27, 'fixed-0': 0.267, 'fixed-1': 0.269, 'greedy': 0.285, 'lawnmower': 0.424, 'periodic-100': 0.265, 'periodic-200': 0.331, 'periodic-300': 0.327, 'rational': 0.282, 'rehearsal': 0.268, 'rehearsal-self': 0.271, 'thompson': 0.332, 'ucb': 0.299, 'tuned': 0.267, 'random5': 0.292, 'random3': 0.267, 'oracle': 0.243, 'learned': 0.273}
+  rehearsal - tuned           +0.002 [-0.005, +0.008]
+  rehearsal - rational        -0.013 [-0.020, -0.007]
+  rehearsal - double          -0.001 [-0.007, +0.004]
+  rehearsal - rehearsal-self  -0.003 [-0.009, +0.003]
+  rehearsal - learned         -0.004 [-0.012, +0.003]
+  rehearsal - random5         -0.024 [-0.030, -0.017]
+  rehearsal - random3         +0.001 [-0.003, +0.005]
+  rehearsal - oracle          +0.025 [+0.020, +0.031]
+  rehearsal - lawnmower       -0.156 [-0.192, -0.120]
+  rehearsal - greedy          -0.017 [-0.029, -0.004]
+  rehearsal - ucb             -0.031 [-0.048, -0.017]
+  rehearsal - thompson        -0.064 [-0.077, -0.051]
+  rehearsal - fixed-0         +0.002 [-0.005, +0.009]
+  rehearsal - fixed-1         -0.001 [-0.007, +0.005]
+  rehearsal - periodic-100    +0.003 [-0.003, +0.008]
+  rehearsal - periodic-300    -0.058 [-0.071, -0.045]
+  rehearsal - periodic-200    -0.063 [-0.077, -0.051]
+  choice: {'go': 0.473, 'think 1 in 3': 0.284, 'think': 0.216, 'stop and resample 1 in 3': 0.02, 'stop and think 1 in 3': 0.007}  learned picks: {'periodic-100': 0.345, 'fixed-0': 0.297, 'fixed-1': 0.297, 'periodic-200': 0.041, 'periodic-300': 0.02}
+  meta: {'think': 0.9701177929324241, 'stopped': 0.3299442033477991}  double: {'think': 0.435773635751179, 'stopped': 0.15102178306759487}
+
+=== sat+ efficient: n=148 tuned=fixed-1
+  means: {'double': 0.267, 'fixed-0': 0.267, 'fixed-1': 0.267, 'greedy': 0.285, 'lawnmower': 0.424, 'periodic-100': 0.266, 'periodic-200': 0.335, 'periodic-300': 0.327, 'rational': 0.278, 'rehearsal': 0.266, 'rehearsal-self': 0.265, 'thompson': 0.332, 'ucb': 0.299, 'tuned': 0.267, 'random5': 0.292, 'random3': 0.267, 'oracle': 0.242, 'learned': 0.266}
+  rehearsal - tuned           -0.001 [-0.006, +0.005]
+  rehearsal - rational        -0.012 [-0.019, -0.004]
+  rehearsal - double          -0.001 [-0.006, +0.004]
+  rehearsal - rehearsal-self  +0.001 [-0.004, +0.006]
+  rehearsal - learned         +0.000 [-0.005, +0.007]
+  rehearsal - random5         -0.026 [-0.032, -0.020]
+  rehearsal - random3         -0.001 [-0.004, +0.003]
+  rehearsal - oracle          +0.024 [+0.019, +0.030]
+  rehearsal - lawnmower       -0.159 [-0.195, -0.123]
+  rehearsal - greedy          -0.019 [-0.031, -0.007]
+  rehearsal - ucb             -0.033 [-0.048, -0.021]
+  rehearsal - thompson        -0.067 [-0.079, -0.054]
+  rehearsal - fixed-0         -0.001 [-0.007, +0.006]
+  rehearsal - fixed-1         -0.001 [-0.006, +0.006]
+  rehearsal - periodic-100    -0.000 [-0.005, +0.005]
+  rehearsal - periodic-300    -0.061 [-0.073, -0.049]
+  rehearsal - periodic-200    -0.069 [-0.081, -0.058]
+  choice: {'think': 0.432, 'think 1 in 3': 0.351, 'go': 0.203, 'stop and resample 1 in 3': 0.007, 'stop and think 1 in 3': 0.007}  learned picks: {'fixed-1': 0.534, 'periodic-100': 0.236, 'fixed-0': 0.203, 'periodic-300': 0.014, 'periodic-200': 0.014}
+  meta: {'think': 0.9360403139839132, 'stopped': 0.3264851245275705}  double: {'think': 0.3871441150572351, 'stopped': 0.1778690930437335}
+
+=== sat weak: n=148 tuned=periodic-100
+  means: {'fixed-0': 0.281, 'fixed-1': 0.195, 'greedy': 0.206, 'lawnmower': 0.328, 'periodic-100': 0.194, 'periodic-200': 0.319, 'periodic-300': 0.252, 'rational': 0.202, 'rehearsal': 0.197, 'thompson': 0.256, 'ucb': 0.224, 'tuned': 0.194, 'random5': 0.248, 'random3': 0.223, 'oracle': 0.183, 'learned': 0.2}
+  rehearsal - tuned           +0.003 [-0.001, +0.008]
+  rehearsal - rational        -0.006 [-0.011, -0.000]
+  rehearsal - learned         -0.003 [-0.009, +0.001]
+  rehearsal - random5         -0.052 [-0.061, -0.043]
+  rehearsal - random3         -0.027 [-0.033, -0.020]
+  rehearsal - oracle          +0.014 [+0.010, +0.019]
+  rehearsal - lawnmower       -0.132 [-0.163, -0.101]
+  rehearsal - greedy          -0.010 [-0.018, -0.001]
+  rehearsal - ucb             -0.027 [-0.042, -0.014]
+  rehearsal - thompson        -0.059 [-0.075, -0.045]
+  rehearsal - fixed-0         -0.084 [-0.104, -0.064]
+  rehearsal - fixed-1         +0.001 [-0.003, +0.005]
+  rehearsal - periodic-100    +0.003 [-0.001, +0.008]
+  rehearsal - periodic-300    -0.055 [-0.065, -0.044]
+  rehearsal - periodic-200    -0.122 [-0.143, -0.103]
+  choice: {'think 1 in 3': 0.568, 'think': 0.392, 'go': 0.02, 'stop and resample 1 in 3': 0.014, 'stop and think 1 in 3': 0.007}  learned picks: {'periodic-100': 0.527, 'fixed-1': 0.405, 'fixed-0': 0.034, 'periodic-200': 0.027, 'periodic-300': 0.007}
+  meta: {'think': 0.7958164963156644, 'stopped': 0.2876158782980746}  double: None
+
+=== sat moderate: n=148 tuned=fixed-0
+  means: {'fixed-0': 0.196, 'fixed-1': 0.194, 'greedy': 0.206, 'lawnmower': 0.328, 'periodic-100': 0.19, 'periodic-200': 0.251, 'periodic-300': 0.248, 'rational': 0.202, 'rehearsal': 0.191, 'thompson': 0.256, 'ucb': 0.224, 'tuned': 0.196, 'random5': 0.216, 'random3': 0.193, 'oracle': 0.179, 'learned': 0.197}
+  rehearsal - tuned           -0.004 [-0.010, +0.000]
+  rehearsal - rational        -0.010 [-0.016, -0.004]
+  rehearsal - learned         -0.005 [-0.012, +0.000]
+  rehearsal - random5         -0.024 [-0.029, -0.020]
+  rehearsal - random3         -0.002 [-0.005, +0.002]
+  rehearsal - oracle          +0.012 [+0.009, +0.017]
+  rehearsal - lawnmower       -0.137 [-0.167, -0.106]
+  rehearsal - greedy          -0.015 [-0.024, -0.007]
+  rehearsal - ucb             -0.033 [-0.046, -0.021]
+  rehearsal - thompson        -0.064 [-0.078, -0.052]
+  rehearsal - fixed-0         -0.004 [-0.010, +0.000]
+  rehearsal - fixed-1         -0.002 [-0.008, +0.003]
+  rehearsal - periodic-100    +0.001 [-0.002, +0.005]
+  rehearsal - periodic-300    -0.056 [-0.067, -0.047]
+  rehearsal - periodic-200    -0.059 [-0.069, -0.050]
+  choice: {'think 1 in 3': 0.446, 'go': 0.277, 'think': 0.27, 'stop and resample 1 in 3': 0.007}  learned picks: {'fixed-0': 0.453, 'periodic-100': 0.311, 'fixed-1': 0.182, 'periodic-200': 0.047, 'periodic-300': 0.007}
+  meta: {'think': 0.9215856841058779, 'stopped': 0.29017024978252764}  double: None
+
+=== sat strong: n=148 tuned=periodic-100
+  means: {'fixed-0': 0.194, 'fixed-1': 0.193, 'greedy': 0.206, 'lawnmower': 0.328, 'periodic-100': 0.191, 'periodic-200': 0.248, 'periodic-300': 0.245, 'rational': 0.204, 'rehearsal': 0.195, 'thompson': 0.256, 'ucb': 0.224, 'tuned': 0.191, 'random5': 0.214, 'random3': 0.193, 'oracle': 0.18, 'learned': 0.191}
+  rehearsal - tuned           +0.003 [-0.000, +0.008]
+  rehearsal - rational        -0.010 [-0.017, -0.002]
+  rehearsal - learned         +0.003 [-0.000, +0.008]
+  rehearsal - random5         -0.020 [-0.025, -0.014]
+  rehearsal - random3         +0.002 [-0.002, +0.005]
+  rehearsal - oracle          +0.015 [+0.011, +0.020]
+  rehearsal - lawnmower       -0.134 [-0.166, -0.102]
+  rehearsal - greedy          -0.011 [-0.021, -0.003]
+  rehearsal - ucb             -0.029 [-0.044, -0.016]
+  rehearsal - thompson        -0.061 [-0.076, -0.047]
+  rehearsal - fixed-0         +0.000 [-0.004, +0.005]
+  rehearsal - fixed-1         +0.001 [-0.005, +0.007]
+  rehearsal - periodic-100    +0.003 [-0.000, +0.008]
+  rehearsal - periodic-300    -0.050 [-0.061, -0.040]
+  rehearsal - periodic-200    -0.053 [-0.065, -0.043]
+  choice: {'go': 0.392, 'think 1 in 3': 0.385, 'think': 0.189, 'stop and think 1 in 3': 0.02, 'stop and resample 1 in 3': 0.014}  learned picks: {'fixed-0': 0.372, 'fixed-1': 0.338, 'periodic-100': 0.284, 'periodic-300': 0.007}
+  meta: {'think': 0.9698089171974522, 'stopped': 0.2763057324840764}  double: None
+
+=== sat efficient: n=148 tuned=periodic-100
+  means: {'fixed-0': 0.196, 'fixed-1': 0.189, 'greedy': 0.206, 'lawnmower': 0.328, 'periodic-100': 0.191, 'periodic-200': 0.251, 'periodic-300': 0.247, 'rational': 0.199, 'rehearsal': 0.19, 'thompson': 0.256, 'ucb': 0.224, 'tuned': 0.191, 'random5': 0.215, 'random3': 0.192, 'oracle': 0.179, 'learned': 0.189}
+  rehearsal - tuned           -0.001 [-0.003, +0.001]
+  rehearsal - rational        -0.010 [-0.014, -0.006]
+  rehearsal - learned         +0.000 [-0.003, +0.004]
+  rehearsal - random5         -0.025 [-0.029, -0.021]
+  rehearsal - random3         -0.002 [-0.004, +0.000]
+  rehearsal - oracle          +0.010 [+0.008, +0.013]
+  rehearsal - lawnmower       -0.139 [-0.169, -0.110]
+  rehearsal - greedy          -0.016 [-0.024, -0.009]
+  rehearsal - ucb             -0.034 [-0.049, -0.022]
+  rehearsal - thompson        -0.066 [-0.081, -0.053]
+  rehearsal - fixed-0         -0.006 [-0.012, -0.001]
+  rehearsal - fixed-1         +0.001 [-0.002, +0.004]
+  rehearsal - periodic-100    -0.001 [-0.003, +0.001]
+  rehearsal - periodic-300    -0.058 [-0.068, -0.049]
+  rehearsal - periodic-200    -0.061 [-0.072, -0.052]
+  choice: {'think': 0.419, 'think 1 in 3': 0.385, 'go': 0.182, 'stop and think 1 in 3': 0.007, 'stop and resample 1 in 3': 0.007}  learned picks: {'fixed-1': 0.378, 'fixed-0': 0.365, 'periodic-100': 0.209, 'periodic-200': 0.034, 'periodic-300': 0.014}
+  meta: {'think': 0.937799043062201, 'stopped': 0.30846597012010546}  double: None
+
+=== ablation weak
+  rehearsal-k1     mean 0.289  minus main rehearsal +0.013 [-0.000, +0.027]
+  rehearsal-k2     mean 0.286  minus main rehearsal +0.010 [-0.001, +0.022]
+  rehearsal-k8     mean 0.269  minus main rehearsal -0.007 [-0.012, -0.001]
+  rehearsal-self   mean 0.273  minus main rehearsal -0.004 [-0.011, +0.004]
+  double           mean 0.278  minus main rehearsal +0.002 [-0.007, +0.010]
+  random5          mean 0.331  minus main rehearsal +0.055 [+0.044, +0.066]
+  random3          mean 0.306  minus main rehearsal +0.029 [+0.021, +0.039]
+  tuned            mean 0.270  minus main rehearsal -0.007 [-0.014, +0.001]
+  learned          mean 0.278  minus main rehearsal +0.001 [-0.007, +0.009]
+  sd0.5            mean 0.278  minus main rehearsal +0.002 [-0.008, +0.013]
+  sd2              mean 0.287  minus main rehearsal +0.011 [+0.001, +0.020]
+
+=== ablation moderate
+  rehearsal-k1     mean 0.275  minus main rehearsal +0.010 [-0.001, +0.020]
+  rehearsal-k2     mean 0.271  minus main rehearsal +0.006 [-0.002, +0.013]
+  rehearsal-k8     mean 0.268  minus main rehearsal +0.003 [-0.004, +0.009]
+  rehearsal-self   mean 0.268  minus main rehearsal +0.003 [-0.003, +0.008]
+  double           mean 0.270  minus main rehearsal +0.005 [-0.002, +0.011]
+  random5          mean 0.293  minus main rehearsal +0.028 [+0.023, +0.032]
+  random3          mean 0.268  minus main rehearsal +0.003 [-0.003, +0.007]
+  tuned            mean 0.269  minus main rehearsal +0.003 [-0.003, +0.009]
+  learned          mean 0.269  minus main rehearsal +0.004 [-0.004, +0.011]
+  sd0.5            mean 0.270  minus main rehearsal +0.004 [-0.006, +0.014]
+  sd2              mean 0.286  minus main rehearsal +0.020 [+0.011, +0.030]
+
+=== lag 1 weak: tuned fixed-1 {'fixed-0': 0.348, 'fixed-1': 0.25, 'periodic-100': 0.246, 'periodic-200': 0.383, 'periodic-300': 0.307, 'rational': 0.26, 'rehearsal': 0.251, 'tuned': 0.25}
+  rehearsal - tuned {'mean': 0.0012638129673279606, 'lo': -0.005046677354574193, 'hi': 0.011349926023669703, 'n': 148}  - meta {'mean': -0.009045802319708467, 'lo': -0.018291949214703927, 'hi': 0.00136533731682928, 'n': 148}
+
+=== lag 1 moderate: tuned fixed-0 {'fixed-0': 0.25, 'fixed-1': 0.249, 'periodic-100': 0.239, 'periodic-200': 0.313, 'periodic-300': 0.306, 'rational': 0.26, 'rehearsal': 0.243, 'tuned': 0.25}
+  rehearsal - tuned {'mean': -0.00727244742036409, 'lo': -0.01368172356856737, 'hi': -0.0016731823766999304, 'n': 148}  - meta {'mean': -0.01733934956625707, 'lo': -0.02236168550115089, 'hi': -0.012530568819180288, 'n': 148}
+
+written results/rev2_summary.json

@@ -1,0 +1,8 @@
+{
+ "out": "curse1_dev",
+ "split": "dev",
+ "n": 80,
+ "lag": 3,
+ "sat_err": 0.15,
+ "workers": 3
+}

@@ -1,0 +1,26 @@
+{
+ "out": "cf1",
+ "n": 274,
+ "branches": 4,
+ "repeat": 2,
+ "seed": 1,
+ "workers": 8,
+ "ranges": {
+  "rate_low": [
+   10,
+   300
+  ],
+  "p_think": [
+   5,
+   30
+  ],
+  "sat_err": [
+   0.05,
+   0.3
+  ],
+  "noise": [
+   0.05,
+   0.3
+  ]
+ }
+}

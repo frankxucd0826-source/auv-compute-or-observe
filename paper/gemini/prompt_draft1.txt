@@ -1,0 +1,555 @@
+Please write the first full draft now.
+
+Return exactly these five files, each introduced by a line `===== FILE: <path> =====` and nothing
+else between files:
+sections/title.tex, sections/subtitle.tex, sections/abstract.tex, sections/body.tex, sections/appendix.tex
+
+Where a number is marked TBD in the facts sheet, write the sentence so that it does not need that
+number yet, or put the placeholder \TBD{what is missing} (I will define \TBD). Do not invent
+numbers. Cite only keys from refs.bib. Use the figure files listed in figures.md (fig_overview,
+fig_atlas, fig_curse, fig_phase, fig_main, fig_example). A table of the main comparison is welcome
+(booktabs). Write in Chinese, academic register, about 9000-11000 Chinese characters of body text.
+
+
+===== ATTACHED FILE: gemini/brief_draft1.md =====
+
+# Brief for the first full draft
+
+You are the writer of a Chinese course paper; I (Claude) ran the research and will check every
+fact you write. Decide the structure, wording, terminology, emphasis and length yourself; keep
+every fact, number, citation and figure content in the attached facts sheet exactly as given,
+and do not add references that are not in refs.bib.
+
+## The paper
+- Course: 海洋大数据 (Ocean Big Data), Zhejiang University, autumn 2026; instructor 张帆 (research:
+  AI for Science, millisecond-level real-time scientific computing, air-sea intelligent
+  integration, polar intelligent navigation computing). He is not an oceanographer by training:
+  explain ocean terms (chlorophyll as bloom indicator, gap-filled satellite products, AUV) in one
+  plain clause where they first appear.
+- Length: about 12-16 pages in the ZJU course-paper template, figures included. Chinese,
+  academic register.
+- Output: LaTeX for ctexart, in four files I will \input into the template (cover, table of
+  contents and reference list are handled by the template):
+    sections/title.tex      one-line title (≤ 30 characters)
+    sections/subtitle.tex   one-line subtitle starting with "——"
+    sections/abstract.tex   \section*{摘\quad 要} ... 关键词 ... \clearpage \section*{Abstract} ... Keywords ...
+                            (each with \addcontentsline{toc}{section}{...} as in the current file)
+    sections/body.tex       \section{...} etc.; cite with \cite{key}; figures with
+                            \begin{figure}[htbp]\centering\includegraphics[width=\linewidth]{fig_xxx}\caption{...}\label{fig:xxx}\end{figure}
+    sections/appendix.tex   \section{...} sections for: code and data availability (GitHub
+                            repository, to be filled), and the use of AI tools (who did what)
+
+## What the paper must get across (my view; you may frame it differently)
+An ocean robot that carries a big-data map has to decide, again and again, how to spend its
+time and energy: imagine more (plan on its map), go and look, or stop and look again. The
+question is studied with eight years of satellite chlorophyll over the East China Sea and
+422 bloom-season missions. Three findings: (1) the planner's own score of how much more thinking
+helps keeps rising after the real benefit has stopped, while imagined oceans kept out of the
+search judge it correctly; (2) heavy thinking pays only when the onboard computer is too slow
+for the planning problem, stopping to resample mid-mission never pays here, and which fixed
+allocation is best changes with the vehicle; (3) rehearsing the mission in imagination before
+setting off picks the allocation as well as tuning each vehicle on past missions would, and
+better than any single fixed rule or classic one-step metareasoning.
+
+## Writing standards the student holds (from earlier papers)
+- Abstract in eight steps: background; need; what existing approaches lack; what this paper
+  proposes; its key points; the experiment; numbers; significance.
+- The first sentence of every paragraph states that paragraph's conclusion; read in a row, the
+  first sentences tell the paper.
+- General question first, the bloom case second.
+- Argue each choice as: the obvious way -> why it fails here -> therefore this.
+- Contributions name the new idea, not the amount of work.
+- No coined jargon or internal code names; standard terms, explained once; no English
+  abbreviations inside Chinese sentences except well-known ones (AUV, GPU).
+- No defensive writing, no hedging chains, no replies to imagined reviewers; limitations in one
+  short paragraph near the end.
+- Present only results that carry a claim; numbers sparingly in the text, most in figures/tables.
+- Formal connectives, not slogans.
+
+## Attached
+- facts.md (facts, numbers, setting, method, results)
+- refs.bib (the only references you may cite)
+- figures.md (figure files and what each shows)
+- the current template files (main.tex, sections/*.tex)
+
+
+===== ATTACHED FILE: facts.md =====
+
+# Facts sheet for the writer
+
+Everything here must hold in the paper. Structure, wording, terminology and emphasis are the
+writer's choice. TBD = filled from results/ when the runs finish. Numbers are log10
+chlorophyll unless stated.
+
+## Setting
+- Course: Ocean Big Data, Zhejiang University, autumn 2026 (instructor Zhang Fan). Paper in
+  Chinese, ZJU course paper format, about 12-16 pages.
+- Scenario: harmful algal bloom (HAB) emergency survey east of Zhoushan, East China Sea.
+  Prorocentrum donghaiense blooms occur in late spring and early summer off Zhejiang and the
+  Changjiang estuary (Zhao et al. 2025, Front. Mar. Sci.; Lou & Hu 2014, GOCI tracking of a May
+  2011 bloom drifting with tides). Bloom patches above about 6 mg m^-3 (SPIE 8175).
+- Vehicle: REMUS 100 class AUV, 1.5 m/s, 1 kWh, about 22 h at 3 kn, so about 45 W in cruise
+  (15 W hotel, 30 W propulsion); an embedded GPU module (Jetson Orin NX class, 10-25 W, 20 W
+  used) for deep planning; a low-power processor always replans in the background.
+- Each 20-minute interval: body = follow the plan and sample on the way, or switch the motor
+  off and drift with the water, resampling it; brain = keep replanning on the low-power
+  computer, or plan deeply on the GPU at extra energy. Computing and moving run at the same
+  time; the new plan is computed for where the vehicle will be when it takes over (latency
+  compensation) and replaces the old one at the end of the interval. Mission ends at 24 h or
+  when the battery runs out.
+- Everything is described in the frame that drifts with the surface water: the bloom does not
+  move relative to the water, so the vehicle does not "chase" it against the current; currents
+  matter through the age of the satellite map, which the data contain.
+- Score: the operations centre can ask at any moment where the densest water is; the vehicle
+  answers with the visited place of highest estimated chlorophyll. Regret = log10 chlorophyll
+  of the true densest water minus that of the answer; averaged over a 24 h window (answer
+  frozen after the mission ends). Also reported: the regret at the end, and whether the end
+  answer is within 0.1 (26%) of the maximum.
+
+## Data (ocean big data)
+- Chlorophyll-a: NOAA CoastWatch, merged VIIRS (S-NPP, NOAA-20) and Sentinel-3A OLCI,
+  gap-filled with DINEOF, 2 km, daily, 2018-01-01 to 2026-10-23 (3197 days), CC0
+  (ERDDAP noaacwNPPN20S3ASCIDINEOF2kmDaily). Box 25-33 N, 119.5-127 E, 385 x 361 pixels/day.
+- SST: JPL MUR v4.1, 0.01 deg, daily, gap-free, subsampled to 0.04 deg (ERDDAP jplMURSST41).
+- Mission windows: April-June days; strongest smoothed local maximum above 5 mg m^-3 on the
+  shelf off Zhejiang (26.5-31.5 N, 121.5-125 E) at least 30 km from land; 80 km x 80 km window
+  (40 x 40 cells of 2 km), centre shifted at random by up to 16 km; cells within 15 km of land
+  out of bounds; >= 80% navigable; bloom contrast >= 0.3. Development 2018-2022: 274 windows;
+  test 2023-2026: 148 windows. The vehicle starts at a random point on the window edge.
+- Stale-map error (development windows, truth minus k-day-old map): sd 0.125 / 0.176 / 0.210
+  for 1 / 2 / 3 days; spatial correlation ~5 cells (10 km); mean bias +0.016/+0.032/+0.045.
+- Gap-filled maps are smooth in time; the real ocean also differs from a same-day satellite map
+  (validation in the East and South China Seas: unbiased percentage difference about 39%,
+  HY-1C COCTS, IEEE TGRS 2020, doi 10.1109/TGRS.2020.3036963). The simulated real ocean adds a
+  spatially correlated field of 0.15 (correlation 3 cells) to the satellite map; 0.05-0.3 tested.
+- Sensor: fluorometer error 0.1 per independent sample; one sample per km while moving, one per
+  4 min while drifting.
+- Staleness atlas (all 3197 days): spread of the 3-day change, median over the box: spring
+  0.127, summer 0.107 (90th percentile 0.204, a band along the Zhejiang-Fujian coast and the
+  Changjiang plume front reaching 0.25-0.3), autumn 0.103, winter 0.081.
+- World model (JEPA, 5.5 M parameters; trained 2018-2021 March-June, validated 2022): 1-3 day
+  forecasts of the gap-filled map are no better than the latest map on the test years
+  (RMSE 0.1229 vs 0.1226, 0.1439 vs 0.1439, 0.1487 vs 0.1474 for leads 1, 2, 3; spread/error
+  0.70-0.93), 1.4% better on the validation year. Small-scale information has to be observed.
+
+## Method
+- The vehicle's map and memory: 48 imagined oceans (ensemble) drawn around the stale map with the
+  data-calibrated uncertainty; updated with every sample by a serial ensemble adjustment Kalman
+  filter (Anderson 2001) with Gaspari-Cohn localisation.
+- Thinking = imagination: the planner scores candidate routes (polylines through two
+  waypoints) on imagined oceans; a rollout = one route on one imagined ocean; route value =
+  the best water found so far, averaged over the rest of the window (arriving sooner is worth
+  more). Cross-entropy search, warm-started between intervals. The search uses 32 imagined
+  oceans; 16 are never searched on (held out).
+- Low-power computer 5-200 rollouts per minute (swept); GPU 50 times faster.
+- Proposed controller: rehearsal in imagination. Before setting off, the vehicle takes 4
+  held-out imagined oceans as "truths" and runs a complete imagined mission for each of five
+  time-allocation strategies (always go; always think; think one interval in three; stop and
+  think one in three; stop and resample one in three), with its own planner, computer speeds
+  and battery, the same imagined truths and noise for every strategy; it follows the strategy
+  with the lowest imagined regret. Self-assessed rehearsal (control) takes the truths from the
+  imagined oceans the planner searches on.
+- Baselines: the five fixed strategies; the fixed strategy that was best on the development
+  years for that vehicle (per-vehicle tuning); classic one-step metareasoning (value of
+  computation from the planner's own improvement trace, value of information by preposterior
+  analysis over imagined oceans; Russell & Wefald 1991 style).
+
+## Formulas (use these symbols or rename consistently)
+- Field: $c(\mathbf{x})$ = log10 chlorophyll on a 40 x 40 grid of 2 km cells; the vehicle's
+  answer at time $t$: $\hat{\mathbf{x}}(t) = \arg\max_{\mathbf{x}\in\mathcal{V}(t)} \bar{c}_t(\mathbf{x})$ over
+  visited cells $\mathcal{V}(t)$, $\bar{c}_t$ = ensemble mean.
+- Score (time-averaged regret over the window $T=24$ h):
+  $R = \frac{1}{T}\int_0^T [\max_{\mathbf{x}} c(\mathbf{x}) - c(\hat{\mathbf{x}}(t))]\,dt$.
+- Prior ensemble: $c^{(i)} = c_{\text{map}} + \sigma_k\, z^{(i)}$, $i=1..48$, $z^{(i)}$ Gaussian random fields with
+  squared-exponential correlation of length $\ell$ (5 cells), $\sigma_k = \sqrt{s_k^2 + s_{\text{sat}}^2}$
+  ($s_k$ = stale-map error for a $k$-day-old map, $s_{\text{sat}}$ = 0.15 satellite-vs-ocean error).
+- Observation: $y = c(\mathbf{x}) + \varepsilon$, $\varepsilon \sim N(0, 0.1^2)$; serial EAKF update of every member
+  with Gaspari-Cohn localisation (half-width $2\ell$).
+- Route value on imagined ocean $i$: with $m_i(\tau)$ the best value met by time $\tau$ along the
+  route (starting from the current best estimate),
+  $V_i = \frac{1}{T_{\text{left}}}\int_0^{T_{\text{left}}} m_i(\tau)\,d\tau$ (frozen once cruising time runs out).
+  Route chosen by the mean of $V_i$ over the 32 searched members; judged honestly by the mean
+  over the 16 held-out members.
+- Energy: hotel 15 W, propulsion 30 W when moving, GPU +20 W when thinking; 1 kWh; the mission ends
+  at 24 h or when energy is exhausted.
+- Rehearsal: for $j$ in 4 held-out members, for each strategy $s$ in 5 strategies, run the
+  whole mission in imagination with truth $c^{(j)}$, get $R_{s,j}$; follow
+  $s^* = \arg\min_s \frac{1}{4}\sum_j R_{s,j}$.
+
+## Results
+- Planning budget (80 development windows x 3 seeds, map 3 days old, first 8 h; results/curse3_dev):
+  real route value 0.749 (64 rollouts), 0.793 (2000), 0.803 (200,000); the planner's own score
+  during search 0.762, 0.833, 0.917; the same routes judged on the 16 held-out imagined oceans
+  0.745, 0.794, 0.802 - within 0.005 of reality at every budget when the map uncertainty is
+  calibrated. Halving the stated uncertainty biases the held-out judgement by -0.06, 1.5x by
+  +0.07, but the improvement with budget stays right (64 -> 200,000: held-out +0.059/+0.054,
+  real +0.054/+0.047).
+- Main comparison on the test years (148 windows 2023-2026, map 3 days old, satellite-vs-ocean
+  error 0.15, sensor 0.1; results/main_v3_test_*). Time-averaged regret (lower is better);
+  "tuned" = the fixed strategy best on 120 development windows for that vehicle; differences to
+  tuned with 95% intervals from a bootstrap over bloom weeks:
+  | controller | slow computer (5/min) | moderate (20/min) | fast (100/min) | efficient accelerator (20/min, +5 W) |
+  |---|---|---|---|---|
+  | always go | 0.374 (+0.104) | 0.266 (tuned) | TBD | TBD |
+  | always think | 0.273 (+0.003) | 0.269 | TBD | TBD |
+  | think 1 in 3 | 0.270 (tuned) | 0.269 | TBD | TBD |
+  | stop and think 1 in 3 | 0.331 (+0.061) | 0.328 | TBD | TBD |
+  | stop and resample 1 in 3 | 0.408 (+0.138) | 0.335 | TBD | TBD |
+  | one-step metareasoning | 0.287 (+0.017; 0.009 to 0.025) | 0.287 (+0.021) | TBD | TBD |
+  | rehearsal (held-out truths) | 0.276 (+0.007; -0.001 to 0.015) | 0.265 (-0.001) | TBD | TBD |
+  | rehearsal (searched truths) | 0.273 (+0.003) | 0.268 (+0.002) | TBD | TBD |
+  One-step metareasoning spends 65% of intervals thinking and 28% stopped to think (moderate).
+  Rehearsal almost never picks a stopping strategy (1% of missions). Imagined regrets are higher
+  than real by 0.05-0.07 for every strategy alike, so the ranking is kept; held-out and searched
+  rehearsal pick nearly the same strategies (imagined "think minus go" -0.002 vs +0.006, real +0.002).
+- Example mission (2023-04-15, slow computer; first test mission in date order where the two
+  strategies differ by more than 0.1): always go wanders near the start, its answer stays 0.4 off
+  (time-average 0.43); thinking one interval in three crosses the window to the true densest
+  water in the south-west, its answer reaches it after about 19 h (time-average 0.31).
+- Earlier (final-regret objective, superseded, not for the paper unless useful as motivation):
+  learning a strategy selector from noisy mission outcomes failed (strategy differences <= 0.01
+  vs mission-to-mission spread ~0.08).
+- TBD: fast and efficient vehicles; phase diagram (which fixed strategy wins as computer speed
+  and map accuracy vary).
+
+
+===== ATTACHED FILE: gemini/figures.md =====
+
+# Figures available (file names without extension; width = \linewidth unless noted)
+
+- fig_overview (to be composed; reserve it as Figure 1): central 3D render of the East China
+  Sea window of one test mission (2025-04-04): the sea surface textured with the real
+  chlorophyll field the vehicle meets, a REMUS-class AUV heading to the bloom core (yellow ring),
+  its track coloured blue (going, low-power planning) and orange (thinking on the GPU), a stack
+  of six imagined oceans above the sea (four framed dark blue: searched by the planner; two
+  framed orange: held out), a satellite for the satellite map. Side panels: (A) eight years of
+  satellite maps and how fast a map goes stale; (B) the vehicle's imagination: 48 imagined
+  oceans, 32 searched, 16 held out to judge; rehearsal of five strategies before setting off;
+  (C) each 20 minutes: go / think / stop and resample; energy and time; the answer the
+  operations centre receives.
+- fig_atlas: four seasonal maps of the East China Sea box (25-33 N, 119.5-127 E): spread of
+  the 3-day change of log10 chlorophyll from all 3197 days; land grey; dots in the spring panel
+  are mission windows (blue development 2018-2022, green test 2023-2026).
+- fig_curse: (a) value of the planned route against rollouts per decision (64 to 200,000, log
+  axis): the planner's own score during search (red, keeps rising), the same route judged on
+  held-out imagined oceans (blue dashed) and in the real ocean (black) - both flatten after about
+  2000; (b) estimate minus reality: search score grows to +0.11, held-out stays within 0.005 of
+  zero with calibrated uncertainty; dotted: held-out with uncertainty halved / enlarged 1.5x
+  (constant offsets).
+- fig_phase: (to be redrawn from the final sweep) grid of low-power computer speed (5-200
+  rollouts per minute) x departure of the real ocean from the satellite map (0.05-0.3): colour =
+  best of five fixed strategies, number = its gain over always going.
+- fig_main: test years 2023-2026, four vehicles (slow computer 5/min; moderate 20/min; fast
+  100/min; efficient accelerator 20/min with only +5 W): for each controller, difference of
+  time-averaged regret to the fixed strategy tuned on the development years, with 95% intervals
+  (bootstrap over bloom weeks).
+- fig_example: one test mission (2023-04-15, slow computer): (a) the 3-day-old map; (b) the
+  real ocean with the tracks of "always go" (blue) and "think one interval in three" (orange,
+  thick where the GPU ran), the true densest water (star); (c) the answer's error over 24 h
+  (always go stays at 0.4, time-average 0.43; thinking one in three reaches 0 after about 19 h,
+  time-average 0.31).
+
+
+===== ATTACHED FILE: refs.bib =====
+
+% Only entries whose bibliographic details were checked against the publisher or the
+% preprint record are listed here; see notes/文献调研.md for links.
+
+@article{fossum2019,
+  author = {Fossum, Trygve O. and Fragoso, Glaucia M. and Davies, Emlyn J. and others},
+  title = {Toward adaptive robotic sampling of phytoplankton in the coastal ocean},
+  journal = {Science Robotics},
+  volume = {4}, number = {27}, pages = {eaav3041}, year = {2019},
+  doi = {10.1126/scirobotics.aav3041}
+}
+
+@inproceedings{sung2021quit,
+  author = {Sung, Yoonchang and Kaelbling, Leslie Pack and Lozano-P{\'e}rez, Tom{\'a}s},
+  title = {Learning When to Quit: Meta-Reasoning for Motion Planning},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2021}
+}
+
+@misc{magnino2026metareasoning,
+  author = {Magnino, Lorenzo and Marino, Antonio and Amir, Michael and Shishika, Daigo and Prorok, Amanda},
+  title = {Learning Robot Metareasoning: Adaptive Computation Budgets for Real-Time Control},
+  howpublished = {arXiv:2610.23662},
+  year = {2026}
+}
+
+@inproceedings{shen2025thinking,
+  author = {Shen, Junhong and others},
+  title = {Thinking vs. Doing: Improving Agent Reasoning by Scaling Test-Time Interaction},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume = {38}, year = {2025}
+}
+
+@misc{cuadron2025overthinking,
+  author = {Cuadron, Alejandro and others},
+  title = {The Danger of Overthinking: Examining the Reasoning-Action Dilemma in Agentic Tasks},
+  howpublished = {arXiv:2502.08235},
+  year = {2025}
+}
+
+@inproceedings{lin2015metareasoning,
+  author = {Lin, Christopher H. and Kolobov, Andrey and Kamar, Ece and Horvitz, Eric},
+  title = {Metareasoning for Planning Under Uncertainty},
+  booktitle = {International Joint Conference on Artificial Intelligence (IJCAI)},
+  year = {2015}
+}
+
+@inproceedings{horvitz1987reasoning,
+  author = {Horvitz, Eric J.},
+  title = {Reasoning About Beliefs and Actions Under Computational Resource Constraints},
+  booktitle = {Proceedings of the Third Conference on Uncertainty in Artificial Intelligence (UAI)},
+  year = {1987}
+}
+
+@inproceedings{xiao2020thinking,
+  author = {Xiao, Ted and Jang, Eric and Kalashnikov, Dmitry and Levine, Sergey and Ibarz, Julian and Hausman, Karol and Herzog, Alexander},
+  title = {Thinking While Moving: Deep Reinforcement Learning with Concurrent Control},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year = {2020}
+}
+
+@inproceedings{elboher2023formal,
+  author = {Elboher, Amihay and Shperberg, Shahaf S. and Shimony, Solomon Eyal},
+  title = {A Formal Metareasoning Model of Concurrent Planning and Execution},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year = {2023}
+}
+
+@inproceedings{jiang2015horizon,
+  author = {Jiang, Nan and Kulesza, Alex and Singh, Satinder and Lewis, Richard},
+  title = {The Dependence of Effective Planning Horizon on Model Accuracy},
+  booktitle = {International Conference on Autonomous Agents and Multiagent Systems (AAMAS)},
+  pages = {1181--1189}, year = {2015}
+}
+
+@article{smith2006curse,
+  author = {Smith, James E. and Winkler, Robert L.},
+  title = {The Optimizer's Curse: Skepticism and Postdecision Surprise in Decision Analysis},
+  journal = {Management Science},
+  volume = {52}, number = {3}, pages = {311--322}, year = {2006},
+  doi = {10.1287/mnsc.1050.0451}
+}
+
+@inproceedings{vanhasselt2010double,
+  author = {van Hasselt, Hado},
+  title = {Double Q-learning},
+  booktitle = {Advances in Neural Information Processing Systems (NIPS)},
+  volume = {23}, year = {2010}
+}
+
+@article{hunt2021formalizing,
+  author = {Hunt, Laurence T. and Daw, Nathaniel D. and Kaanders, Paula and others},
+  title = {Formalizing planning and information search in naturalistic decision-making},
+  journal = {Nature Neuroscience},
+  volume = {24}, number = {8}, pages = {1051--1064}, year = {2021}
+}
+
+@article{anderson2001eakf,
+  author = {Anderson, Jeffrey L.},
+  title = {An Ensemble Adjustment Kalman Filter for Data Assimilation},
+  journal = {Monthly Weather Review},
+  volume = {129}, number = {12}, pages = {2884--2903}, year = {2001},
+  doi = {10.1175/1520-0493(2001)129<2884:AEAKFF>2.0.CO;2}
+}
+
+@article{beckers2003dineof,
+  author = {Beckers, J. M. and Rixen, M.},
+  title = {{EOF} Calculations and Data Filling from Incomplete Oceanographic Datasets},
+  journal = {Journal of Atmospheric and Oceanic Technology},
+  volume = {20}, number = {12}, pages = {1839--1856}, year = {2003},
+  doi = {10.1175/1520-0426(2003)020<1839:ECADFF>2.0.CO;2}
+}
+
+@misc{assran2025vjepa2,
+  author = {Assran, Mido and others},
+  title = {{V-JEPA} 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning},
+  howpublished = {arXiv:2506.09985},
+  year = {2025}
+}
+
+@article{lou2014diurnal,
+  author = {Lou, Xiulin and Hu, Chuanmin},
+  title = {Diurnal changes of a harmful algal bloom in the {East China Sea}: Observations from {GOCI}},
+  journal = {Remote Sensing of Environment},
+  volume = {140}, pages = {562--572}, year = {2014},
+  doi = {10.1016/j.rse.2013.09.031}
+}
+
+@article{chin2017mur,
+  author = {Chin, Toshio M. and Vazquez-Cuervo, Jorge and Armstrong, Edward M.},
+  title = {A multi-scale high-resolution analysis of global sea surface temperature},
+  journal = {Remote Sensing of Environment},
+  volume = {200}, pages = {154--169}, year = {2017}
+}
+
+@article{ye2021cocts,
+  author = {Ye, X. M. and Liu, J. Q. and Lin, M. S. and Ding, J. and Zou, B. and Song, Q. J.},
+  title = {Global Ocean Chlorophyll-a Concentrations Derived From {COCTS} Onboard the {HY-1C} Satellite and Their Preliminary Evaluation},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
+  volume = {59}, number = {12}, pages = {9914--9926}, year = {2021},
+  doi = {10.1109/TGRS.2020.3036963}
+}
+
+@article{gaspari1999correlation,
+  author = {Gaspari, Gregory and Cohn, Stephen E.},
+  title = {Construction of correlation functions in two and three dimensions},
+  journal = {Quarterly Journal of the Royal Meteorological Society},
+  volume = {125}, number = {554}, pages = {723--757}, year = {1999},
+  doi = {10.1002/qj.49712555417}
+}
+
+@article{deboer2005cem,
+  author = {de Boer, Pieter-Tjerk and Kroese, Dirk P. and Mannor, Shie and Rubinstein, Reuven Y.},
+  title = {A Tutorial on the Cross-Entropy Method},
+  journal = {Annals of Operations Research},
+  volume = {134}, number = {1}, pages = {19--67}, year = {2005},
+  doi = {10.1007/s10479-005-5724-z}
+}
+
+@book{russell1991right,
+  author = {Russell, Stuart J. and Wefald, Eric H.},
+  title = {Do the Right Thing: Studies in Limited Rationality},
+  publisher = {MIT Press}, address = {Cambridge, MA}, year = {1991},
+  isbn = {0262181444}
+}
+
+@misc{remus100,
+  author = {{Kongsberg Maritime}},
+  title = {{REMUS} 100 Autonomous Underwater Vehicle: product information (1 kWh lithium-ion battery; up to 22 h at 3 kn; 100 m depth rating)},
+  howpublished = {\url{https://en.wikipedia.org/wiki/REMUS_(vehicle)}; \url{https://geo-matching.com/products/remus-100}},
+  year = {2026}, note = {accessed 2026-11-05}
+}
+
+@misc{jetsonorinnx,
+  author = {{NVIDIA}},
+  title = {Jetson Orin {NX} modules: configurable module power 10--25 W (16 GB), up to 100 sparse {INT8} {TOPS}},
+  howpublished = {\url{https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/}},
+  year = {2026}, note = {accessed 2026-11-05}
+}
+
+@misc{mnr2024bulletin,
+  author = {{自然资源部}},
+  title = {2023 年中国海洋灾害公报（据人民日报 2024-04-24 报道：全年海域发现赤潮 46 次，累计面积约 1500 平方千米，其中有毒有害赤潮 29 次）},
+  howpublished = {\url{https://paper.people.com.cn/rmrb/html/2024-04/24/nw.D110000renmrb_20240424_1-14.htm}},
+  year = {2024}
+}
+
+
+===== ATTACHED FILE: main.tex =====
+
+% 浙江大学《海洋大数据》课程论文。编译：latexmk -xelatex main.tex
+\documentclass[zihao=-4, a4paper, oneside]{ctexart}
+
+% ---------- 版面 ----------
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.0cm, right=2.6cm, headheight=15pt]{geometry}
+\usepackage{setspace}
+\setstretch{1.5}
+\setmainfont{Times New Roman}
+\setCJKmainfont[BoldFont=SimHei, ItalicFont=KaiTi]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKfamilyfont{hei}{SimHei}
+\setCJKfamilyfont{kai}{KaiTi}
+\usepackage{amsmath, amssymb, bm}
+\usepackage{graphicx, subcaption, booktabs, multirow, array}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[sort&compress, square, comma, numbers]{natbib}
+\usepackage{caption}
+\usepackage{placeins}
+
+\captionsetup{font=small, labelsep=quad, labelfont=bf}
+\captionsetup[figure]{name=图}
+\captionsetup[table]{name=表}
+\graphicspath{{figures/}}
+
+% 标题样式：1 绪论 / 1.1 研究背景 / 1.1.1
+\ctexset{
+  section = {format=\zihao{3}\heiti, beforeskip=18pt, afterskip=12pt, name={,}, number=\arabic{section}},
+  subsection = {format=\zihao{4}\heiti, beforeskip=12pt, afterskip=6pt},
+  subsubsection = {format=\zihao{-4}\heiti, beforeskip=6pt, afterskip=3pt},
+}
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\zihao{5}\songti 海洋大数据\quad 课程论文}
+\fancyfoot[C]{\zihao{5}\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newcommand{\coverline}[2]{\makebox[5em][s]{#1}：\underline{\makebox[16em][c]{#2}}}
+
+\begin{document}
+
+% ---------- 封面 ----------
+\begin{titlepage}
+  \centering
+  \singlespacing
+  \vspace*{2.0cm}
+  {\zihao{2}\songti 海洋大数据\par}
+  \vspace{0.9cm}
+  {\zihao{0}\heiti 课\hspace{0.5em}程\hspace{0.5em}论\hspace{0.5em}文\par}
+  \vspace{2.4cm}
+  {\zihao{2}\heiti \input{sections/title}\par}
+  \vspace{0.5cm}
+  {\zihao{3}\songti \input{sections/subtitle}\par}
+  \vfill
+  {\zihao{4}\songti
+  \begin{tabular}{l}
+    \coverline{课程}{海洋大数据}\\[12pt]
+    \coverline{姓名}{徐陈栋}\\[12pt]
+    \coverline{学号}{3240100538}\\[12pt]
+    \coverline{专业}{海洋工程与技术}\\[12pt]
+    \coverline{任课教师}{张帆\ 研究员}\\[12pt]
+    \coverline{提交日期}{2026 年 11 月\ \ \ 日}
+  \end{tabular}\par}
+  \vspace{2.0cm}
+\end{titlepage}
+
+% ---------- 摘要与目录 ----------
+\pagenumbering{Roman}
+\input{sections/abstract}
+\clearpage
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% ---------- 正文 ----------
+\input{sections/body}
+
+% ---------- 参考文献 ----------
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
+\bibliographystyle{gbt7714-numerical}
+\bibliography{refs}
+
+% ---------- 附录 ----------
+\clearpage
+\appendix
+\input{sections/appendix}
+
+\end{document}
+
+
+===== ATTACHED FILE: sections/abstract.tex =====
+
+\section*{摘\quad 要}
+\addcontentsline{toc}{section}{摘要}
+（待写）
+
+\noindent\textbf{关键词：}（待定）
+\clearpage
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+(to be written)
+
+
+===== ATTACHED FILE: sections/appendix.tex =====
+
+\section{代码与数据}
+（待写）

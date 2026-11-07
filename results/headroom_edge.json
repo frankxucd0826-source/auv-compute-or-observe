@@ -1,0 +1,6266 @@
+{
+ "geometry": {
+  "0.15": {
+   "km_start_to_max_median": 48.35286519208479,
+   "km_map_max_to_true_max_median": 20.591260281974,
+   "share_map_max_within_4km": 0.16216216216216217,
+   "regret_report_map_max_unvisited": 0.2891660540506744
+  },
+  "0.0": {
+   "km_start_to_max_median": 46.17358552246078,
+   "km_map_max_to_true_max_median": 4.47213595499958,
+   "share_map_max_within_4km": 0.4864864864864865,
+   "regret_report_map_max_unvisited": 0.11391007413810773
+  }
+ },
+ "regret_avg": {
+  "0.15/oracle_goto": {
+   "mean": 0.20615900194204526,
+   "se": 0.010201303573167224,
+   "n": 148
+  },
+  "0.15/map_goto": {
+   "mean": 0.32558758984710023,
+   "se": 0.014025098520330886,
+   "n": 148
+  },
+  "0.15/fresh_planner": {
+   "mean": 0.2351229070055183,
+   "se": 0.009823183868357397,
+   "n": 148
+  },
+  "0.0/oracle_goto": {
+   "mean": 0.16811982128093042,
+   "se": 0.00905950629429092,
+   "n": 148
+  },
+  "0.0/map_goto": {
+   "mean": 0.21536739799194038,
+   "se": 0.011389105539523462,
+   "n": 148
+  },
+  "0.0/fresh_planner": {
+   "mean": 0.14912593762918033,
+   "se": 0.008381673516526071,
+   "n": 148
+  }
+ },
+ "per_mission": [
+  {
+   "mission": 274,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.24169876118365702,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 275,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.35753023375446685,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 276,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.786175361563098,
+   "regret_end": 0.7763563294147964
+  },
+  {
+   "mission": 277,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.27420136386319355,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 278,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16506172252483708,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 279,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.22527833444133272,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 280,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.011152834498072911,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 281,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.04893920950810885,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 282,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2245448962538432,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 283,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1867313594987125,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 284,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.30683671956052255,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 285,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2365287671268516,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 286,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11014015770588667,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 287,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1285079672883924,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 288,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19903830957516483,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 289,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.024085604400288386,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 290,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.38416174421823357,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 291,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.34240151899792637,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 292,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3239293960641743,
+   "regret_end": 0.11102291804342901
+  },
+  {
+   "mission": 293,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2165917885208066,
+   "regret_end": 0.04741608878382486
+  },
+  {
+   "mission": 294,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.170202188047395,
+   "regret_end": 0.036651476056552834
+  },
+  {
+   "mission": 295,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14179160397489335,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 296,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16261454411001916,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 297,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.12093960701606736,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 298,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2202271800878604,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 299,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2545916833271739,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 300,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.28567625063097796,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 301,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14478710966101596,
+   "regret_end": 0.006032737497019269
+  },
+  {
+   "mission": 302,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16815286701292056,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 303,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3200890837118208,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 304,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2470639162082768,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 305,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.22737769785927975,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 306,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.29812057395849895,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 307,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07744842231374778,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 308,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09884452485419977,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 309,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1515588023736073,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 310,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2777903584351415,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 311,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1471464765988181,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 312,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08780040558553229,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 313,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.44007968370104433,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 314,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.12366041174009737,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 315,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3515113997034049,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 316,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08408375822338413,
+   "regret_end": 0.038988099443164614
+  },
+  {
+   "mission": 317,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16886428446304827,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 318,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.04997604587837207,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 319,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08897821129732743,
+   "regret_end": 0.003782291593163123
+  },
+  {
+   "mission": 320,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11645875849619941,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 321,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.034767321133244475,
+   "regret_end": 0.010243441229276007
+  },
+  {
+   "mission": 322,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16185928786172513,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 323,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.26558942596446766,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 324,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2582046848852829,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 325,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.026384676936178127,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 326,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13142195761076872,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 327,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.15718690134488422,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 328,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.189280996858841,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 329,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.40091702501585885,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 330,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10940982901089644,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 331,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07308296796297459,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 332,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2530974112013888,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 333,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3343357908877695,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 334,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3393072030078526,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 335,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.24483497094043563,
+   "regret_end": 0.006030783196686151
+  },
+  {
+   "mission": 336,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3459971809081758,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 337,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14810438442707755,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 338,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.362332358083264,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 339,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1651851128151342,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 340,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.31560304312794496,
+   "regret_end": 0.02927005322716525
+  },
+  {
+   "mission": 341,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1319347979571067,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 342,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08523011513579018,
+   "regret_end": 0.022453975328086573
+  },
+  {
+   "mission": 343,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3039807223188099,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 344,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.44093933447872014,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 345,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.5034505373071921,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 346,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.4061495143103941,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 347,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.42009621738280994,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 348,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19496007083899683,
+   "regret_end": 0.0013992899524533087
+  },
+  {
+   "mission": 349,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11140930892541671,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 350,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16037651754670912,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 351,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09982106132820995,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 352,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3274849713891813,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 353,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19763963675723958,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 354,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11563036585200416,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 355,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.151609268853687,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 356,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1592596271805186,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 357,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2608813555827128,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 358,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.06906280133837171,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 359,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1645886057520887,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 360,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.31798660373632615,
+   "regret_end": 0.010020137705259113
+  },
+  {
+   "mission": 361,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.18815011363949113,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 362,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.12170595918889854,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 363,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13071456871000572,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 364,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0797186541196325,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 365,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.17048339699267884,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 366,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.29584372890515076,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 367,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1607862440288576,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 368,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1228649252269066,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 369,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.5171060916521757,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 370,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.03285745847467097,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 371,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.27659656406994415,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 372,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.48699263157378925,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 373,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10557484620100478,
+   "regret_end": 0.01278762017839652
+  },
+  {
+   "mission": 374,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19052664700423724,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 375,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.05097091351828109,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 376,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13328822624277384,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 377,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23428535039068923,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 378,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0782707373834962,
+   "regret_end": 0.02300977014818928
+  },
+  {
+   "mission": 379,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14709092372821414,
+   "regret_end": 0.02593429536115921
+  },
+  {
+   "mission": 380,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0939520739697128,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 381,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10296426498245638,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 382,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3356516053592236,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 383,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1448664802007308,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 384,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23940841771867247,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 385,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.05129157034879524,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 386,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1900226506859284,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 387,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2757823449024426,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 388,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0666717092956747,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 389,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13714692732604808,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 390,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16047693662239645,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 391,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.18714086770001614,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 392,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16493679057741686,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 393,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.25272781385448106,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 394,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0331622680308959,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 395,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.20850397120560318,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 396,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13735767167185786,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 397,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1800232767181349,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 398,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1393122475193733,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 399,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.20052491583603932,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 400,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.346486060464987,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 401,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.4908775637276152,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 402,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.39547833724960646,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 403,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 404,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.20114596826410608,
+   "regret_end": 0.010865521324151306
+  },
+  {
+   "mission": 405,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2850176908871558,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 406,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19962331792484447,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 407,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13506358501146015,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 408,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.47167623693106875,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 409,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.17354593020726317,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 410,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.38125134027685187,
+   "regret_end": 0.028715586801582038
+  },
+  {
+   "mission": 411,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.18849605675194117,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 412,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.17181914564305878,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 413,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.42970313330923937,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 414,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10461486057043941,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 415,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07174158968204591,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 416,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19387899987555549,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 417,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13931391458623452,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 418,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09424498665426498,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 419,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14640338304039105,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 420,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.22173496149312402,
+   "regret_end": 0.06027884677763429
+  },
+  {
+   "mission": 421,
+   "sat_err": 0.15,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08489657552049787,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 274,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.27281425235895257,
+   "regret_end": 0.0672855095408138
+  },
+  {
+   "mission": 275,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.36053474019560283,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 276,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.7713178687640512,
+   "regret_end": 0.7576797545817537
+  },
+  {
+   "mission": 277,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.49819228393244186,
+   "regret_end": 0.44082545844686005
+  },
+  {
+   "mission": 278,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.44805136992421113,
+   "regret_end": 0.4441399112360713
+  },
+  {
+   "mission": 279,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.31042304088596456,
+   "regret_end": 0.13340210550241594
+  },
+  {
+   "mission": 280,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.056231629295175146,
+   "regret_end": 0.030479517342970386
+  },
+  {
+   "mission": 281,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.04893920950810885,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 282,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2298306328851259,
+   "regret_end": 0.04571736186817632
+  },
+  {
+   "mission": 283,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.24273814415620748,
+   "regret_end": 0.12713152082472612
+  },
+  {
+   "mission": 284,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.20211279323613038,
+   "regret_end": 0.05126916758340738
+  },
+  {
+   "mission": 285,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3501480590522242,
+   "regret_end": 0.2394129049611441
+  },
+  {
+   "mission": 286,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.23698689818121427,
+   "regret_end": 0.19696550913442523
+  },
+  {
+   "mission": 287,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.15270885185134084,
+   "regret_end": 0.028835434570179563
+  },
+  {
+   "mission": 288,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.24278280187182175,
+   "regret_end": 0.0966916234846329
+  },
+  {
+   "mission": 289,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.06936654067283064,
+   "regret_end": 0.06936654067283055
+  },
+  {
+   "mission": 290,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.38503222560430317,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 291,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3539355451669039,
+   "regret_end": 0.02196348067374565
+  },
+  {
+   "mission": 292,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.29575650256815167,
+   "regret_end": 0.001159882140124413
+  },
+  {
+   "mission": 293,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2165917885208066,
+   "regret_end": 0.04741608878382486
+  },
+  {
+   "mission": 294,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.24975615214784597,
+   "regret_end": 0.1299404003160285
+  },
+  {
+   "mission": 295,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.47766946681286904,
+   "regret_end": 0.4638339187453824
+  },
+  {
+   "mission": 296,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.21190868698979248,
+   "regret_end": 0.13600630579017126
+  },
+  {
+   "mission": 297,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4235557631039568,
+   "regret_end": 0.2583945225027804
+  },
+  {
+   "mission": 298,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5593880352011342,
+   "regret_end": 0.37068260591008784
+  },
+  {
+   "mission": 299,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2639230174852475,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 300,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3998952229191354,
+   "regret_end": 0.13815181310063473
+  },
+  {
+   "mission": 301,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.13237249757316288,
+   "regret_end": 0.022210920098006737
+  },
+  {
+   "mission": 302,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.19924010813372467,
+   "regret_end": 0.03453960216688401
+  },
+  {
+   "mission": 303,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.38573640292100314,
+   "regret_end": 0.13593000608001027
+  },
+  {
+   "mission": 304,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2470639162082768,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 305,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2747611190707087,
+   "regret_end": 0.06317789494857129
+  },
+  {
+   "mission": 306,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3176763432459543,
+   "regret_end": 0.10720846086546598
+  },
+  {
+   "mission": 307,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.32799188905752535,
+   "regret_end": 0.3281192721617391
+  },
+  {
+   "mission": 308,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.36091504439312955,
+   "regret_end": 0.3211852812822822
+  },
+  {
+   "mission": 309,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.27946416754103204,
+   "regret_end": 0.2234838726395163
+  },
+  {
+   "mission": 310,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.39015564698853084,
+   "regret_end": 0.23007091743117392
+  },
+  {
+   "mission": 311,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3526118975408673,
+   "regret_end": 0.142393013782798
+  },
+  {
+   "mission": 312,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.14176301425379512,
+   "regret_end": 0.12494512346167663
+  },
+  {
+   "mission": 313,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4342499523069911,
+   "regret_end": 0.006969665296187477
+  },
+  {
+   "mission": 314,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.12366041174009737,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 315,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.369706700552748,
+   "regret_end": 0.0340392016306732
+  },
+  {
+   "mission": 316,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.26874571395180635,
+   "regret_end": 0.26874571395180613
+  },
+  {
+   "mission": 317,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.29881026545781386,
+   "regret_end": 0.2716759356862486
+  },
+  {
+   "mission": 318,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.12353476164266408,
+   "regret_end": 0.09827713430111151
+  },
+  {
+   "mission": 319,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.20042377606417133,
+   "regret_end": 0.20042377606417117
+  },
+  {
+   "mission": 320,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.20167247077384146,
+   "regret_end": 0.02629434403940345
+  },
+  {
+   "mission": 321,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2805104147647767,
+   "regret_end": 0.2809795680139544
+  },
+  {
+   "mission": 322,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.21094869997159418,
+   "regret_end": 0.05553988664824905
+  },
+  {
+   "mission": 323,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.47725193602726423,
+   "regret_end": 0.3607962836607487
+  },
+  {
+   "mission": 324,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5431994214452112,
+   "regret_end": 0.43513157714986217
+  },
+  {
+   "mission": 325,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.05777069413902426,
+   "regret_end": 0.035781741102042686
+  },
+  {
+   "mission": 326,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.13511463659063747,
+   "regret_end": 0.0529223749456913
+  },
+  {
+   "mission": 327,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.26041155289030377,
+   "regret_end": 0.1862656501252119
+  },
+  {
+   "mission": 328,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3175433165815798,
+   "regret_end": 0.17588133591213562
+  },
+  {
+   "mission": 329,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.40387947329351837,
+   "regret_end": 0.006416157811990564
+  },
+  {
+   "mission": 330,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.22403713104137538,
+   "regret_end": 0.13556602294489029
+  },
+  {
+   "mission": 331,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3122537151685472,
+   "regret_end": 0.29933452225945834
+  },
+  {
+   "mission": 332,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4486200035757118,
+   "regret_end": 0.3438209661487788
+  },
+  {
+   "mission": 333,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.31590603850833043,
+   "regret_end": 0.21252992519919656
+  },
+  {
+   "mission": 334,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5693798580292897,
+   "regret_end": 0.3334847173914144
+  },
+  {
+   "mission": 335,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3201509573217719,
+   "regret_end": 0.14038620379143363
+  },
+  {
+   "mission": 336,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.20829049279561987,
+   "regret_end": 0.1550427356047308
+  },
+  {
+   "mission": 337,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2881420346150351,
+   "regret_end": 0.2242693756038211
+  },
+  {
+   "mission": 338,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5858728702033178,
+   "regret_end": 0.4127414830278724
+  },
+  {
+   "mission": 339,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.33670850549665965,
+   "regret_end": 0.3367085054966601
+  },
+  {
+   "mission": 340,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3173046049310458,
+   "regret_end": 0.15867896657526193
+  },
+  {
+   "mission": 341,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.32461123155575067,
+   "regret_end": 0.2666865309564823
+  },
+  {
+   "mission": 342,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.08523011513579018,
+   "regret_end": 0.022453975328086573
+  },
+  {
+   "mission": 343,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.31766680853127227,
+   "regret_end": 0.011248469395897409
+  },
+  {
+   "mission": 344,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4746854821732734,
+   "regret_end": 0.07212291607919874
+  },
+  {
+   "mission": 345,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5284980817174559,
+   "regret_end": 0.011589099713523066
+  },
+  {
+   "mission": 346,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4061495143103941,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 347,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4723569293201785,
+   "regret_end": 0.24209676177869044
+  },
+  {
+   "mission": 348,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3106918841455024,
+   "regret_end": 0.20739562289385116
+  },
+  {
+   "mission": 349,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.189970992640121,
+   "regret_end": 0.03868547677301937
+  },
+  {
+   "mission": 350,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5275762135781398,
+   "regret_end": 0.4812587430720794
+  },
+  {
+   "mission": 351,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.39418411064467607,
+   "regret_end": 0.33580460234970644
+  },
+  {
+   "mission": 352,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5028275058753793,
+   "regret_end": 0.2609380758822599
+  },
+  {
+   "mission": 353,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4257170056659429,
+   "regret_end": 0.31216812972664687
+  },
+  {
+   "mission": 354,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3038961562089987,
+   "regret_end": 0.2593563397123526
+  },
+  {
+   "mission": 355,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.19346358553861187,
+   "regret_end": 0.057118313244576946
+  },
+  {
+   "mission": 356,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2924462499582034,
+   "regret_end": 0.23648625031429193
+  },
+  {
+   "mission": 357,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3913974672956471,
+   "regret_end": 0.20762771322817608
+  },
+  {
+   "mission": 358,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.27610473292939436,
+   "regret_end": 0.19281014185616407
+  },
+  {
+   "mission": 359,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.16859150878283624,
+   "regret_end": 0.07726841772851678
+  },
+  {
+   "mission": 360,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5203764663905408,
+   "regret_end": 0.48446278759168004
+  },
+  {
+   "mission": 361,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2346199965513822,
+   "regret_end": 0.06764085464187053
+  },
+  {
+   "mission": 362,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.28779183108760226,
+   "regret_end": 0.1693304778592717
+  },
+  {
+   "mission": 363,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.19274675656551127,
+   "regret_end": 0.09752041425671854
+  },
+  {
+   "mission": 364,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.17502095352360525,
+   "regret_end": 0.11352039324195462
+  },
+  {
+   "mission": 365,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.49029235680381766,
+   "regret_end": 0.3535611036608538
+  },
+  {
+   "mission": 366,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.6451448200873275,
+   "regret_end": 0.50744745218148
+  },
+  {
+   "mission": 367,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.1908384693697688,
+   "regret_end": 0.042547501296225754
+  },
+  {
+   "mission": 368,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.1228649252269066,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 369,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.6313537292263395,
+   "regret_end": 0.17052813805989553
+  },
+  {
+   "mission": 370,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.40283478119501837,
+   "regret_end": 0.389821483153451
+  },
+  {
+   "mission": 371,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 1.3407323720095778,
+   "regret_end": 1.3363759943564864
+  },
+  {
+   "mission": 372,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5317589572564881,
+   "regret_end": 0.14562115767446793
+  },
+  {
+   "mission": 373,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.21952901984655135,
+   "regret_end": 0.1962512820486677
+  },
+  {
+   "mission": 374,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2265229556462297,
+   "regret_end": 0.09584776906577996
+  },
+  {
+   "mission": 375,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.09911088322439249,
+   "regret_end": 0.09597060644947897
+  },
+  {
+   "mission": 376,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.15971653149791787,
+   "regret_end": 0.029669880211046218
+  },
+  {
+   "mission": 377,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2491166803680621,
+   "regret_end": 0.09489657623375591
+  },
+  {
+   "mission": 378,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.08044304585183304,
+   "regret_end": 0.03162882143465451
+  },
+  {
+   "mission": 379,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.44410748626683355,
+   "regret_end": 0.44485890225592195
+  },
+  {
+   "mission": 380,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.31447255693377785,
+   "regret_end": 0.2375350908517606
+  },
+  {
+   "mission": 381,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.404531527185102,
+   "regret_end": 0.292626020389408
+  },
+  {
+   "mission": 382,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5002497532246393,
+   "regret_end": 0.13014576914073794
+  },
+  {
+   "mission": 383,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2173529816984877,
+   "regret_end": 0.09985673053093347
+  },
+  {
+   "mission": 384,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2822016655249063,
+   "regret_end": 0.13730266087633258
+  },
+  {
+   "mission": 385,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.1667025774968613,
+   "regret_end": 0.0793386372366498
+  },
+  {
+   "mission": 386,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.31077686510226393,
+   "regret_end": 0.21270966158849558
+  },
+  {
+   "mission": 387,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3566509550037976,
+   "regret_end": 0.0941176501692258
+  },
+  {
+   "mission": 388,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5644674667119937,
+   "regret_end": 0.5585034264290327
+  },
+  {
+   "mission": 389,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.20855813762380343,
+   "regret_end": 0.11387949463305347
+  },
+  {
+   "mission": 390,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.1716219709841607,
+   "regret_end": 0.005352191281266183
+  },
+  {
+   "mission": 391,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.22176048465365722,
+   "regret_end": 0.09400579646486662
+  },
+  {
+   "mission": 392,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.23733458827339224,
+   "regret_end": 0.14471336751325992
+  },
+  {
+   "mission": 393,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.46852951384626346,
+   "regret_end": 0.3463133679147278
+  },
+  {
+   "mission": 394,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.15732366455423336,
+   "regret_end": 0.14051038080179767
+  },
+  {
+   "mission": 395,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.2220344817119207,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 396,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.1989137919799682,
+   "regret_end": 0.06546758331666425
+  },
+  {
+   "mission": 397,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.28657593771912154,
+   "regret_end": 0.22892498786429227
+  },
+  {
+   "mission": 398,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3078505061506507,
+   "regret_end": 0.23714372264922545
+  },
+  {
+   "mission": 399,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.23293869898443031,
+   "regret_end": 0.061061015058986645
+  },
+  {
+   "mission": 400,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3663770630403917,
+   "regret_end": 0.177280527185379
+  },
+  {
+   "mission": 401,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.6736302715229046,
+   "regret_end": 0.6391252944392241
+  },
+  {
+   "mission": 402,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5185470380589917,
+   "regret_end": 0.31536392938663127
+  },
+  {
+   "mission": 403,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.007592755065981992,
+   "regret_end": 0.007809690925010049
+  },
+  {
+   "mission": 404,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.23386325120926565,
+   "regret_end": 0.06209090122597427
+  },
+  {
+   "mission": 405,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.35362727227336155,
+   "regret_end": 0.0988534569544528
+  },
+  {
+   "mission": 406,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.332734191112017,
+   "regret_end": 0.1424416159043782
+  },
+  {
+   "mission": 407,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4005017434810979,
+   "regret_end": 0.3284973874151018
+  },
+  {
+   "mission": 408,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5686142133509626,
+   "regret_end": 0.21293748388491585
+  },
+  {
+   "mission": 409,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5310950839009391,
+   "regret_end": 0.2845752042620666
+  },
+  {
+   "mission": 410,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.3808744499739511,
+   "regret_end": 0.028715586801582038
+  },
+  {
+   "mission": 411,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5198897112315707,
+   "regret_end": 0.4396737282074721
+  },
+  {
+   "mission": 412,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.640953814208909,
+   "regret_end": 0.6470818241925832
+  },
+  {
+   "mission": 413,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5224778924051025,
+   "regret_end": 0.07239776330728587
+  },
+  {
+   "mission": 414,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.5827261933944944,
+   "regret_end": 0.5334392704398462
+  },
+  {
+   "mission": 415,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.08504172079754423,
+   "regret_end": 0.01924266438663169
+  },
+  {
+   "mission": 416,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.21235018659497168,
+   "regret_end": 0.11017811668788413
+  },
+  {
+   "mission": 417,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.22900315043905223,
+   "regret_end": 0.21688508252192884
+  },
+  {
+   "mission": 418,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.1248773146220522,
+   "regret_end": 0.04120208890548738
+  },
+  {
+   "mission": 419,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.4304565296888142,
+   "regret_end": 0.2641420178099587
+  },
+  {
+   "mission": 420,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.29092083735504526,
+   "regret_end": 0.15979424867435976
+  },
+  {
+   "mission": 421,
+   "sat_err": 0.15,
+   "policy": "map_goto",
+   "regret_avg": 0.14452791417669575,
+   "regret_end": 0.1367208575839831
+  },
+  {
+   "mission": 274,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2724754761872858,
+   "regret_end": 0.07177301509025269
+  },
+  {
+   "mission": 275,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3760314746250954,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 276,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.5270728191748381,
+   "regret_end": 0.29213211288774055
+  },
+  {
+   "mission": 277,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2863374500166418,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 278,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2626629692953119,
+   "regret_end": 0.010142649890525046
+  },
+  {
+   "mission": 279,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3205579800371724,
+   "regret_end": 0.11317390667189897
+  },
+  {
+   "mission": 280,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.01759426927068057,
+   "regret_end": 0.005408731385141419
+  },
+  {
+   "mission": 281,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.054294901024501276,
+   "regret_end": 0.005900832808470868
+  },
+  {
+   "mission": 282,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2175791259862974,
+   "regret_end": 0.002938334736001469
+  },
+  {
+   "mission": 283,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18635090472150598,
+   "regret_end": 0.0397255623166799
+  },
+  {
+   "mission": 284,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20052773670782073,
+   "regret_end": 0.05126916758340738
+  },
+  {
+   "mission": 285,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.21555506765757831,
+   "regret_end": 0.06419669123599259
+  },
+  {
+   "mission": 286,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2569465616816725,
+   "regret_end": 0.19153684867749454
+  },
+  {
+   "mission": 287,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13351645364117934,
+   "regret_end": 0.056671056846397505
+  },
+  {
+   "mission": 288,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19436813986640505,
+   "regret_end": 0.01428475040175936
+  },
+  {
+   "mission": 289,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.03168388254708777,
+   "regret_end": 0.0001896734164832381
+  },
+  {
+   "mission": 290,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.38073960278927105,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 291,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3436171734169428,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 292,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.27329303312594727,
+   "regret_end": 0.030221433449940438
+  },
+  {
+   "mission": 293,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10675089788731536,
+   "regret_end": 0.04911896564903051
+  },
+  {
+   "mission": 294,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.21227051337547917,
+   "regret_end": 0.06952295583629642
+  },
+  {
+   "mission": 295,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2521776973623299,
+   "regret_end": 0.07148477253796526
+  },
+  {
+   "mission": 296,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19563723867933597,
+   "regret_end": 0.09699848151411494
+  },
+  {
+   "mission": 297,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.4074115641397442,
+   "regret_end": 0.2583945225027804
+  },
+  {
+   "mission": 298,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.31744858703938766,
+   "regret_end": 0.04782453272644771
+  },
+  {
+   "mission": 299,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.26375840428950126,
+   "regret_end": 0.014739916091022875
+  },
+  {
+   "mission": 300,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.31076160972688466,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 301,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13097201466911584,
+   "regret_end": 0.022210920098006737
+  },
+  {
+   "mission": 302,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16793897831419602,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 303,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3262422637432229,
+   "regret_end": 0.02085410617304717
+  },
+  {
+   "mission": 304,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2646461124788161,
+   "regret_end": 0.014770509757535022
+  },
+  {
+   "mission": 305,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.23203659615685043,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 306,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2995843427895316,
+   "regret_end": 0.0710505493955742
+  },
+  {
+   "mission": 307,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1780678136178452,
+   "regret_end": 0.1038747663447146
+  },
+  {
+   "mission": 308,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1469903316708386,
+   "regret_end": 0.07175318397731267
+  },
+  {
+   "mission": 309,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1751499738250572,
+   "regret_end": 0.09119773341945825
+  },
+  {
+   "mission": 310,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.26161621974449895,
+   "regret_end": 0.025405204706300477
+  },
+  {
+   "mission": 311,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16267355677444714,
+   "regret_end": 0.01548101871445784
+  },
+  {
+   "mission": 312,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10004913724462591,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 313,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3194086802799665,
+   "regret_end": 0.006969665296187477
+  },
+  {
+   "mission": 314,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1255106222802502,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 315,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.31511455411767286,
+   "regret_end": 0.04188262595980685
+  },
+  {
+   "mission": 316,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.06092479859920274,
+   "regret_end": 0.012433653755174356
+  },
+  {
+   "mission": 317,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20159913252727643,
+   "regret_end": 0.04320046866844196
+  },
+  {
+   "mission": 318,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.0812654912119492,
+   "regret_end": 0.04468639765587512
+  },
+  {
+   "mission": 319,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20042377606417133,
+   "regret_end": 0.20042377606417117
+  },
+  {
+   "mission": 320,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13134408702999487,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 321,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.05364161345551842,
+   "regret_end": 0.034506342498466624
+  },
+  {
+   "mission": 322,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.17754967052365675,
+   "regret_end": 0.05553988664824905
+  },
+  {
+   "mission": 323,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.39377817046884356,
+   "regret_end": 0.16641988452379342
+  },
+  {
+   "mission": 324,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.25802849940003664,
+   "regret_end": 0.02247660244263594
+  },
+  {
+   "mission": 325,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.029997965342014817,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 326,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.17423080022120485,
+   "regret_end": 0.048821931936823715
+  },
+  {
+   "mission": 327,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2563442576000104,
+   "regret_end": 0.16598113006786464
+  },
+  {
+   "mission": 328,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.25544014007198995,
+   "regret_end": 0.07250180091097613
+  },
+  {
+   "mission": 329,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3647208204891197,
+   "regret_end": 0.006416157811990564
+  },
+  {
+   "mission": 330,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1142733728275754,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 331,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1468030413130369,
+   "regret_end": 0.0709632349114604
+  },
+  {
+   "mission": 332,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2829409147824795,
+   "regret_end": 0.016995815340187903
+  },
+  {
+   "mission": 333,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2917068426677651,
+   "regret_end": 0.16687233760658182
+  },
+  {
+   "mission": 334,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.5109598157766008,
+   "regret_end": 0.23059379111219025
+  },
+  {
+   "mission": 335,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3317262568568991,
+   "regret_end": 0.1545099713393172
+  },
+  {
+   "mission": 336,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16986478827075463,
+   "regret_end": 0.0859881910595115
+  },
+  {
+   "mission": 337,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.15288987208720922,
+   "regret_end": 0.005115697341167902
+  },
+  {
+   "mission": 338,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.43495394803200493,
+   "regret_end": 0.013094029400549045
+  },
+  {
+   "mission": 339,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1413183298077109,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 340,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2725182261551019,
+   "regret_end": 0.005932704640256858
+  },
+  {
+   "mission": 341,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.17272384423411938,
+   "regret_end": 0.03605231451925772
+  },
+  {
+   "mission": 342,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08854639709783324,
+   "regret_end": 0.006236033832113463
+  },
+  {
+   "mission": 343,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.26956718872779667,
+   "regret_end": 0.06326610524925314
+  },
+  {
+   "mission": 344,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.4437445312480186,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 345,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.5271738826336128,
+   "regret_end": 0.011589099713523066
+  },
+  {
+   "mission": 346,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.4194489125619378,
+   "regret_end": 0.007948320926443042
+  },
+  {
+   "mission": 347,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.405066350853879,
+   "regret_end": 0.07179761519590389
+  },
+  {
+   "mission": 348,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.24815525449107156,
+   "regret_end": 0.11161504042148995
+  },
+  {
+   "mission": 349,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10254287559620151,
+   "regret_end": 0.011932771750870153
+  },
+  {
+   "mission": 350,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3325629485584132,
+   "regret_end": 0.23917387117655098
+  },
+  {
+   "mission": 351,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09905710966447885,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 352,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3255681276164446,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 353,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.26979807695001107,
+   "regret_end": 0.04317402310307972
+  },
+  {
+   "mission": 354,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.12058096821718141,
+   "regret_end": 0.0021620804128796856
+  },
+  {
+   "mission": 355,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.149595318629837,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 356,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.21620166320068374,
+   "regret_end": 0.06481536929852649
+  },
+  {
+   "mission": 357,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3062888909255054,
+   "regret_end": 0.06589684499475279
+  },
+  {
+   "mission": 358,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13169799563633483,
+   "regret_end": 0.1056862090355164
+  },
+  {
+   "mission": 359,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.21756012802648328,
+   "regret_end": 0.15327534620202687
+  },
+  {
+   "mission": 360,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3523437304810945,
+   "regret_end": 0.010020137705259113
+  },
+  {
+   "mission": 361,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1710955086225921,
+   "regret_end": 0.05606228134886382
+  },
+  {
+   "mission": 362,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1416363910887678,
+   "regret_end": 0.03333926569530932
+  },
+  {
+   "mission": 363,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13546070942416197,
+   "regret_end": 0.012006260440598604
+  },
+  {
+   "mission": 364,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09788209175774563,
+   "regret_end": 0.003933930096424065
+  },
+  {
+   "mission": 365,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2931515088727404,
+   "regret_end": 0.06719945914461478
+  },
+  {
+   "mission": 366,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2885400099514388,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 367,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1587633572753813,
+   "regret_end": 0.08847607549281511
+  },
+  {
+   "mission": 368,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13494434442045306,
+   "regret_end": 0.019248851192336325
+  },
+  {
+   "mission": 369,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.5418708254745362,
+   "regret_end": 0.021636899360806927
+  },
+  {
+   "mission": 370,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.056630323419849915,
+   "regret_end": 0.0018206984459656628
+  },
+  {
+   "mission": 371,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.31632086117097735,
+   "regret_end": 0.021283029442238144
+  },
+  {
+   "mission": 372,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.4880436045903167,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 373,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13350394750787306,
+   "regret_end": 0.01113846576028954
+  },
+  {
+   "mission": 374,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.22422329788582476,
+   "regret_end": 0.05826187705850283
+  },
+  {
+   "mission": 375,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09123282973183051,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 376,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18353230520865735,
+   "regret_end": 0.05403684892371663
+  },
+  {
+   "mission": 377,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2301647287014402,
+   "regret_end": 0.036563771035479364
+  },
+  {
+   "mission": 378,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16925608871902972,
+   "regret_end": 0.13571694426805325
+  },
+  {
+   "mission": 379,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3014850686067859,
+   "regret_end": 0.24216366957809998
+  },
+  {
+   "mission": 380,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.23447570574575347,
+   "regret_end": 0.0830895537083729
+  },
+  {
+   "mission": 381,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1921876873434523,
+   "regret_end": 0.008618878476149838
+  },
+  {
+   "mission": 382,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.33047013166986583,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 383,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16124609095283113,
+   "regret_end": 0.010605408984636133
+  },
+  {
+   "mission": 384,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.24637361593766455,
+   "regret_end": 0.08125625900095645
+  },
+  {
+   "mission": 385,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1449358122480938,
+   "regret_end": 0.042940468496986295
+  },
+  {
+   "mission": 386,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.24428942875239332,
+   "regret_end": 0.13393738083898432
+  },
+  {
+   "mission": 387,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.28668620983893184,
+   "regret_end": 0.02264596351307735
+  },
+  {
+   "mission": 388,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09046476546245749,
+   "regret_end": 0.00399065465085946
+  },
+  {
+   "mission": 389,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.199058436932983,
+   "regret_end": 0.014091860020025493
+  },
+  {
+   "mission": 390,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16803704748663256,
+   "regret_end": 0.005352191281266183
+  },
+  {
+   "mission": 391,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18916648966854588,
+   "regret_end": 0.006278618233936939
+  },
+  {
+   "mission": 392,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.17835875968385947,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 393,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3591220353019473,
+   "regret_end": 0.24906112262309954
+  },
+  {
+   "mission": 394,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.12829996945068597,
+   "regret_end": 0.10429793349658689
+  },
+  {
+   "mission": 395,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.34468570704388485,
+   "regret_end": 0.05984914438930988
+  },
+  {
+   "mission": 396,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19120691733474818,
+   "regret_end": 0.039195097216132346
+  },
+  {
+   "mission": 397,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2878204815810655,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 398,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18621374900989732,
+   "regret_end": 0.0772595153575204
+  },
+  {
+   "mission": 399,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20201598372061172,
+   "regret_end": 0.026495683294935124
+  },
+  {
+   "mission": 400,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3049000804885514,
+   "regret_end": 0.03743680710031283
+  },
+  {
+   "mission": 401,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.638781282603873,
+   "regret_end": 0.549892925191121
+  },
+  {
+   "mission": 402,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.463906228628229,
+   "regret_end": 0.2227488845464548
+  },
+  {
+   "mission": 403,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.010573849678293088,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 404,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.21840389949374664,
+   "regret_end": 0.01995395424240809
+  },
+  {
+   "mission": 405,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2948419412628238,
+   "regret_end": 0.0032562278996213223
+  },
+  {
+   "mission": 406,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1776745338042686,
+   "regret_end": 0.004195299649643713
+  },
+  {
+   "mission": 407,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.38166072891069075,
+   "regret_end": 0.22194316392264657
+  },
+  {
+   "mission": 408,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.48424989759240555,
+   "regret_end": 0.04439095279470551
+  },
+  {
+   "mission": 409,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16774516972424416,
+   "regret_end": 0.013942579493589902
+  },
+  {
+   "mission": 410,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.45912392165101673,
+   "regret_end": 0.028715586801582038
+  },
+  {
+   "mission": 411,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.315402839618162,
+   "regret_end": 0.12623086238668346
+  },
+  {
+   "mission": 412,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2308354852890081,
+   "regret_end": 0.03248072065689955
+  },
+  {
+   "mission": 413,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.4617962538270153,
+   "regret_end": 0.049482741970993116
+  },
+  {
+   "mission": 414,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09700711800328185,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 415,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08699651550430373,
+   "regret_end": 0.02124293374275754
+  },
+  {
+   "mission": 416,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.15093311099267528,
+   "regret_end": 0.02445071633320306
+  },
+  {
+   "mission": 417,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19620361961926247,
+   "regret_end": 0.1327256923883975
+  },
+  {
+   "mission": 418,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09876379283660237,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 419,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1755671220742935,
+   "regret_end": 0.023090114410008633
+  },
+  {
+   "mission": 420,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20310317772336053,
+   "regret_end": 0.02245618756729395
+  },
+  {
+   "mission": 421,
+   "sat_err": 0.15,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14597528098067006,
+   "regret_end": 0.1144450046618346
+  },
+  {
+   "mission": 274,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.26040931915243465,
+   "regret_end": 0.2007957100868225
+  },
+  {
+   "mission": 275,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.21585219808750683,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 276,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.39632748232947457,
+   "regret_end": 0.3684953451156616
+  },
+  {
+   "mission": 277,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23164808419015673,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 278,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09160714679294163,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 279,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1610698646141423,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 280,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.01897597312927246,
+   "regret_end": 0.01897597312927246
+  },
+  {
+   "mission": 281,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.21246218101845848,
+   "regret_end": 0.20972347259521484
+  },
+  {
+   "mission": 282,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2995016049179766,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 283,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11405899375677109,
+   "regret_end": 0.0021236538887023926
+  },
+  {
+   "mission": 284,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1185562697549661,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 285,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.15910215593046612,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 286,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.05250162879625956,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 287,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.19768226105305883,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 288,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16633503884077072,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 289,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14742258273892933,
+   "regret_end": 0.008669853210449219
+  },
+  {
+   "mission": 290,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.4012109508815532,
+   "regret_end": 0.020952820777893066
+  },
+  {
+   "mission": 291,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.18975267807642618,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 292,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23561989267667136,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 293,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23930570317639244,
+   "regret_end": 0.017627239227294922
+  },
+  {
+   "mission": 294,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08453201171424654,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 295,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.18749844448433983,
+   "regret_end": 0.05129075050354004
+  },
+  {
+   "mission": 296,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07173267917500602,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 297,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14763450912303394,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 298,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23802542148364914,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 299,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14131617546081543,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 300,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23727541665236154,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 301,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1678634931643804,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 302,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11738403451939423,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 303,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2830160319313614,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 304,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.25928750406536794,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 305,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13885785506055173,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 306,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.22929574083536863,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 307,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.026645056075519986,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 308,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07109469258122975,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 309,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1831958351863755,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 310,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2228134704960717,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 311,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3220265135169029,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 312,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.05291154235601425,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 313,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3517799670808017,
+   "regret_end": 0.0008515715599060059
+  },
+  {
+   "mission": 314,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0602364945742819,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 315,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.26809220347139573,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 316,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.028764152692423925,
+   "regret_end": 0.00013458728790283203
+  },
+  {
+   "mission": 317,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.162294187479549,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 318,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.03086839947435591,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 319,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.05529500047365824,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 320,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08326731787787543,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 321,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1099194809794426,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 322,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11987260066800648,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 323,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.21952782736884224,
+   "regret_end": 0.025066852569580078
+  },
+  {
+   "mission": 324,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.163428390191661,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 325,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.02332029574447208,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 326,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08480579406023026,
+   "regret_end": 0.016283035278320312
+  },
+  {
+   "mission": 327,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09480350423190329,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 328,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1651630670660072,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 329,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.40120803710306063,
+   "regret_end": 0.03944653272628784
+  },
+  {
+   "mission": 330,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.056496513800488576,
+   "regret_end": 0.020412564277648926
+  },
+  {
+   "mission": 331,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.042113245361381106,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 332,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1547791043089496,
+   "regret_end": 0.021839499473571777
+  },
+  {
+   "mission": 333,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13344736480050617,
+   "regret_end": 0.011090338230133057
+  },
+  {
+   "mission": 334,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.21013043665637574,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 335,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.17384323415656885,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 336,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0687263235449791,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 337,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08800808133350478,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 338,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.25753576763802105,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 339,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14727765984005398,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 340,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2193471822473738,
+   "regret_end": 0.08823525905609131
+  },
+  {
+   "mission": 341,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11596530841456519,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 342,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10811760773261388,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 343,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2620508174101512,
+   "regret_end": 0.006528615951538086
+  },
+  {
+   "mission": 344,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.4303565721751915,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 345,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.5430370155631358,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 346,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3794022754688437,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 347,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3033052035089996,
+   "regret_end": 0.03657776117324829
+  },
+  {
+   "mission": 348,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.15434974225031006,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 349,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1259938892390993,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 350,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16486843737463155,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 351,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09786633153756459,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 352,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.15523872441715664,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 353,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14616293149689832,
+   "regret_end": 0.0003719925880432129
+  },
+  {
+   "mission": 354,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.06160039289130105,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 355,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.060826157530148826,
+   "regret_end": 0.005018115043640137
+  },
+  {
+   "mission": 356,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.044866353273391724,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 357,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.17557506304648188,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 358,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1360814811454879,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 359,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11737604935963948,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 360,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1423228569328785,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 361,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08860524278134108,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 362,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10515102454357678,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 363,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2098191181818644,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 364,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.15392429340216848,
+   "regret_end": 0.00934821367263794
+  },
+  {
+   "mission": 365,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14487000347839463,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 366,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.22030622680257592,
+   "regret_end": 0.023363769054412842
+  },
+  {
+   "mission": 367,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1628547136982282,
+   "regret_end": 0.01426708698272705
+  },
+  {
+   "mission": 368,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1502513587474823,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 369,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.6234743104626735,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 370,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.02202485915687349,
+   "regret_end": 0.009787440299987793
+  },
+  {
+   "mission": 371,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.26599733360732597,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 372,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3054895049168004,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 373,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08213659872611363,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 374,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.17965769519408545,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 375,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08928712705771129,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 376,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10794893072711097,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 377,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.16671642495526207,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 378,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09070232179429796,
+   "regret_end": 0.005711674690246582
+  },
+  {
+   "mission": 379,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13038720273309284,
+   "regret_end": 0.0584416389465332
+  },
+  {
+   "mission": 380,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.13333433204227024,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 381,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.12126589152548048,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 382,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.26511592304127085,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 383,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10641492240958744,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 384,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.21744793901840845,
+   "regret_end": 0.035479187965393066
+  },
+  {
+   "mission": 385,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.03813406080007553,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 386,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11248002035750283,
+   "regret_end": 0.020109891891479492
+  },
+  {
+   "mission": 387,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.35594350482440656,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 388,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.04408688098192215,
+   "regret_end": 0.007993042469024658
+  },
+  {
+   "mission": 389,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10323960830767949,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 390,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.06583185493946075,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 391,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.11894156287113826,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 392,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14919257453746265,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 393,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07113509790764914,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 394,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.024480004277494218,
+   "regret_end": 0.020280838012695312
+  },
+  {
+   "mission": 395,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1380446809861395,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 396,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07659176571501626,
+   "regret_end": 0.004606008529663086
+  },
+  {
+   "mission": 397,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1940170969400141,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 398,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14569809287786484,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 399,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1858964040875435,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 400,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2216770313680172,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 401,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.3254481574727429,
+   "regret_end": 0.01877272129058838
+  },
+  {
+   "mission": 402,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.2990571853135609,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 403,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0005858672989739312,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 404,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1882202989525265,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 405,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.23377711584584582,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 406,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.44986341728104484,
+   "regret_end": 0.44203948974609375
+  },
+  {
+   "mission": 407,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.1700928724474377,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 408,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.41703086984085125,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 409,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.20340095625983345,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 410,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.29342664022826487,
+   "regret_end": 0.025792360305786133
+  },
+  {
+   "mission": 411,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.08459167554974556,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 412,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.0991510699192683,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 413,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.47720893249950475,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 414,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.06516668283277088,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 415,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07049859894646539,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 416,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.14698558631870481,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 417,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07096724543306562,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 418,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.09687525033950806,
+   "regret_end": 0.021451950073242188
+  },
+  {
+   "mission": 419,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.07461133764849769,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 420,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.10099617143472035,
+   "regret_end": 0.021898925304412842
+  },
+  {
+   "mission": 421,
+   "sat_err": 0.0,
+   "policy": "oracle_goto",
+   "regret_avg": 0.03368079413970312,
+   "regret_end": 0.028354763984680176
+  },
+  {
+   "mission": 274,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.22374340974622303,
+   "regret_end": 0.0903741717338562
+  },
+  {
+   "mission": 275,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2179928637213177,
+   "regret_end": 0.003528892993927002
+  },
+  {
+   "mission": 276,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.39632748232947457,
+   "regret_end": 0.3684953451156616
+  },
+  {
+   "mission": 277,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.22939872079425389,
+   "regret_end": 0.008156776428222656
+  },
+  {
+   "mission": 278,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.09669122265444861,
+   "regret_end": 0.009948015213012695
+  },
+  {
+   "mission": 279,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1837178799841139,
+   "regret_end": 0.03868460655212402
+  },
+  {
+   "mission": 280,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.01897597312927246,
+   "regret_end": 0.01897597312927246
+  },
+  {
+   "mission": 281,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.08028965526156956,
+   "regret_end": 0.05888521671295166
+  },
+  {
+   "mission": 282,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2995016049179766,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 283,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.12723611295223236,
+   "regret_end": 0.0072914958000183105
+  },
+  {
+   "mission": 284,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.12346917887528737,
+   "regret_end": 0.01751399040222168
+  },
+  {
+   "mission": 285,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2644442299173938,
+   "regret_end": 0.16253304481506348
+  },
+  {
+   "mission": 286,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.14069352630111906,
+   "regret_end": 0.12095785140991211
+  },
+  {
+   "mission": 287,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.19764971733093262,
+   "regret_end": 0.0029484033584594727
+  },
+  {
+   "mission": 288,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.17995740390486187,
+   "regret_end": 0.021642565727233887
+  },
+  {
+   "mission": 289,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.26240811083051896,
+   "regret_end": 0.1633164882659912
+  },
+  {
+   "mission": 290,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.4012109508815532,
+   "regret_end": 0.020952820777893066
+  },
+  {
+   "mission": 291,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1913415574365192,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 292,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.23561989267667136,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 293,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.23930570317639244,
+   "regret_end": 0.017627239227294922
+  },
+  {
+   "mission": 294,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.08453201171424654,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 295,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.4586416905124982,
+   "regret_end": 0.4580801725387573
+  },
+  {
+   "mission": 296,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.22884006881051594,
+   "regret_end": 0.10219752788543701
+  },
+  {
+   "mission": 297,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.14763450912303394,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 298,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.39055603473550743,
+   "regret_end": 0.11698400974273682
+  },
+  {
+   "mission": 299,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.14132809307840136,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 300,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.26398181542754173,
+   "regret_end": 0.024801135063171387
+  },
+  {
+   "mission": 301,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1678634931643804,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 302,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.11738403451939423,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 303,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2808784367645987,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 304,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2630540821701288,
+   "regret_end": 0.006408989429473877
+  },
+  {
+   "mission": 305,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.13885785506055173,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 306,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.22662867080523735,
+   "regret_end": 0.0018414855003356934
+  },
+  {
+   "mission": 307,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2046531836191813,
+   "regret_end": 0.20457994937896729
+  },
+  {
+   "mission": 308,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2991313404507107,
+   "regret_end": 0.259941041469574
+  },
+  {
+   "mission": 309,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.15770871399177444,
+   "regret_end": 0.07745915651321411
+  },
+  {
+   "mission": 310,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2272511021130615,
+   "regret_end": 0.006693780422210693
+  },
+  {
+   "mission": 311,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3220265135169029,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 312,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.06799341158734427,
+   "regret_end": 0.023928463459014893
+  },
+  {
+   "mission": 313,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.36640375018275034,
+   "regret_end": 0.02914494276046753
+  },
+  {
+   "mission": 314,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.0602364945742819,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 315,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2898183859005157,
+   "regret_end": 0.03315490484237671
+  },
+  {
+   "mission": 316,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.12111169099807739,
+   "regret_end": 0.12111169099807739
+  },
+  {
+   "mission": 317,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.39752910782893497,
+   "regret_end": 0.3931494951248169
+  },
+  {
+   "mission": 318,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.0390443429350853,
+   "regret_end": 0.011471211910247803
+  },
+  {
+   "mission": 319,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.058217776318391166,
+   "regret_end": 0.00456470251083374
+  },
+  {
+   "mission": 320,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21208015580972037,
+   "regret_end": 0.10828608274459839
+  },
+  {
+   "mission": 321,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.20674945993555915,
+   "regret_end": 0.2085999846458435
+  },
+  {
+   "mission": 322,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1307851200302442,
+   "regret_end": 0.026018142700195312
+  },
+  {
+   "mission": 323,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21952782736884224,
+   "regret_end": 0.025066852569580078
+  },
+  {
+   "mission": 324,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.36394202212492627,
+   "regret_end": 0.2541190981864929
+  },
+  {
+   "mission": 325,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.025534123182296753,
+   "regret_end": 0.0035126209259033203
+  },
+  {
+   "mission": 326,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1147778042488628,
+   "regret_end": 0.08335262537002563
+  },
+  {
+   "mission": 327,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.17875504824850294,
+   "regret_end": 0.0627550482749939
+  },
+  {
+   "mission": 328,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.16913230675790045,
+   "regret_end": 0.0019611120223999023
+  },
+  {
+   "mission": 329,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.40120803710306063,
+   "regret_end": 0.03944653272628784
+  },
+  {
+   "mission": 330,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.07017645198437902,
+   "regret_end": 0.04214853048324585
+  },
+  {
+   "mission": 331,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.12787044048309326,
+   "regret_end": 0.12787044048309326
+  },
+  {
+   "mission": 332,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.14960068754023975,
+   "regret_end": 0.009455263614654541
+  },
+  {
+   "mission": 333,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.13344736480050617,
+   "regret_end": 0.011090338230133057
+  },
+  {
+   "mission": 334,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21275379788130522,
+   "regret_end": 0.004208505153656006
+  },
+  {
+   "mission": 335,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.18927982511619726,
+   "regret_end": 0.021561861038208008
+  },
+  {
+   "mission": 336,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.06955984814299478,
+   "regret_end": 0.0009813308715820312
+  },
+  {
+   "mission": 337,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.09012290752596325,
+   "regret_end": 6.866455078125e-05
+  },
+  {
+   "mission": 338,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3375591862325867,
+   "regret_end": 0.08790016174316406
+  },
+  {
+   "mission": 339,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.35468746970097226,
+   "regret_end": 0.32552558183670044
+  },
+  {
+   "mission": 340,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21969672685696018,
+   "regret_end": 0.0830831527709961
+  },
+  {
+   "mission": 341,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.16221488018830618,
+   "regret_end": 0.09086370468139648
+  },
+  {
+   "mission": 342,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.10811760773261388,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 343,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.26490078535344863,
+   "regret_end": 0.012652158737182617
+  },
+  {
+   "mission": 344,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.4303565721751915,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 345,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.5430370155631358,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 346,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3780409038687746,
+   "regret_end": 0.02654087543487549
+  },
+  {
+   "mission": 347,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3012398236120741,
+   "regret_end": 0.040964603424072266
+  },
+  {
+   "mission": 348,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.15434974225031006,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 349,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1259938892390993,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 350,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.16486843737463155,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 351,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3533995896577835,
+   "regret_end": 0.27893930673599243
+  },
+  {
+   "mission": 352,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2257566841112243,
+   "regret_end": 0.11741584539413452
+  },
+  {
+   "mission": 353,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.24361853963798946,
+   "regret_end": 0.11530852317810059
+  },
+  {
+   "mission": 354,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.06727598110834758,
+   "regret_end": 0.00835263729095459
+  },
+  {
+   "mission": 355,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.05901314483748542,
+   "regret_end": 0.00022590160369873047
+  },
+  {
+   "mission": 356,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.05966112265984217,
+   "regret_end": 0.0219954252243042
+  },
+  {
+   "mission": 357,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1955868121650484,
+   "regret_end": 0.02247452735900879
+  },
+  {
+   "mission": 358,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1360814811454879,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 359,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21829229758845436,
+   "regret_end": 0.11456459760665894
+  },
+  {
+   "mission": 360,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1423228569328785,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 361,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.10812621098011732,
+   "regret_end": 0.009075701236724854
+  },
+  {
+   "mission": 362,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3649970106780529,
+   "regret_end": 0.271977961063385
+  },
+  {
+   "mission": 363,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.25180285713738865,
+   "regret_end": 0.19327527284622192
+  },
+  {
+   "mission": 364,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3154295753273699,
+   "regret_end": 0.28062915802001953
+  },
+  {
+   "mission": 365,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1492694885366493,
+   "regret_end": 0.008590102195739746
+  },
+  {
+   "mission": 366,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.389156945877605,
+   "regret_end": 0.2641914486885071
+  },
+  {
+   "mission": 367,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1628547136982282,
+   "regret_end": 0.01426708698272705
+  },
+  {
+   "mission": 368,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1502513587474823,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 369,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.6234743104626735,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 370,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.14751297235488892,
+   "regret_end": 0.14751297235488892
+  },
+  {
+   "mission": 371,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 1.0661651445552707,
+   "regret_end": 1.0666273785755038
+  },
+  {
+   "mission": 372,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3054895049168004,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 373,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.08213659872611363,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 374,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.18307890825801426,
+   "regret_end": 0.004754781723022461
+  },
+  {
+   "mission": 375,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.09742568267716302,
+   "regret_end": 0.0021899938583374023
+  },
+  {
+   "mission": 376,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.13485991872019237,
+   "regret_end": 0.041339755058288574
+  },
+  {
+   "mission": 377,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1747987704972426,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 378,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.17537447975741494,
+   "regret_end": 0.1163436770439148
+  },
+  {
+   "mission": 379,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.15852232111824882,
+   "regret_end": 0.13019144535064697
+  },
+  {
+   "mission": 380,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.19140033589469063,
+   "regret_end": 0.0619581937789917
+  },
+  {
+   "mission": 381,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.27559003565046525,
+   "regret_end": 0.16719520092010498
+  },
+  {
+   "mission": 382,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.368635301064286,
+   "regret_end": 0.09500956535339355
+  },
+  {
+   "mission": 383,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21243530677424538,
+   "regret_end": 0.13406825065612793
+  },
+  {
+   "mission": 384,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.21233415603637695,
+   "regret_end": 0.035479187965393066
+  },
+  {
+   "mission": 385,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.03813406080007553,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 386,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.11913736412922542,
+   "regret_end": 0.030141353607177734
+  },
+  {
+   "mission": 387,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3720732967679699,
+   "regret_end": 0.009428024291992188
+  },
+  {
+   "mission": 388,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.20489292509025997,
+   "regret_end": 0.19869112968444824
+  },
+  {
+   "mission": 389,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.10323960830767949,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 390,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.06583185493946075,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 391,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.18794596278005177,
+   "regret_end": 0.10867124795913696
+  },
+  {
+   "mission": 392,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1622153321901957,
+   "regret_end": 0.03904765844345093
+  },
+  {
+   "mission": 393,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.11550022164980571,
+   "regret_end": 0.021217048168182373
+  },
+  {
+   "mission": 394,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.037755021618472204,
+   "regret_end": 0.036379098892211914
+  },
+  {
+   "mission": 395,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.16667238457335365,
+   "regret_end": 0.018770575523376465
+  },
+  {
+   "mission": 396,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.07659176571501626,
+   "regret_end": 0.004606008529663086
+  },
+  {
+   "mission": 397,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.36903121943275136,
+   "regret_end": 0.2849924564361572
+  },
+  {
+   "mission": 398,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2766282649503814,
+   "regret_end": 0.20443809032440186
+  },
+  {
+   "mission": 399,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.19967257479826608,
+   "regret_end": 0.022208809852600098
+  },
+  {
+   "mission": 400,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2216770313680172,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 401,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.3785285608222087,
+   "regret_end": 0.17441624402999878
+  },
+  {
+   "mission": 402,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.30616082525294686,
+   "regret_end": 0.008322060108184814
+  },
+  {
+   "mission": 403,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.04019808106952243,
+   "regret_end": 0.04381042718887329
+  },
+  {
+   "mission": 404,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1882202989525265,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 405,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.28129383000648683,
+   "regret_end": 0.06434476375579834
+  },
+  {
+   "mission": 406,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.11972909917434056,
+   "regret_end": 0.017989516258239746
+  },
+  {
+   "mission": 407,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.11489564180374146,
+   "regret_end": 0.01796102523803711
+  },
+  {
+   "mission": 408,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.41703086984085125,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 409,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.5069038652711444,
+   "regret_end": 0.27401280403137207
+  },
+  {
+   "mission": 410,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.29342664022826487,
+   "regret_end": 0.025792360305786133
+  },
+  {
+   "mission": 411,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.4538489774697357,
+   "regret_end": 0.36457687616348267
+  },
+  {
+   "mission": 412,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.27808257771862877,
+   "regret_end": 0.27573370933532715
+  },
+  {
+   "mission": 413,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.5444348166800208,
+   "regret_end": 0.10559618473052979
+  },
+  {
+   "mission": 414,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.2964620937903722,
+   "regret_end": 0.29820138216018677
+  },
+  {
+   "mission": 415,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.07049859894646539,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 416,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.14698558631870481,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 417,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.08778560492727491,
+   "regret_end": 0.0009729862213134766
+  },
+  {
+   "mission": 418,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.08981551312737995,
+   "regret_end": 0.0013165473937988281
+  },
+  {
+   "mission": 419,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.1646190732717514,
+   "regret_end": 0.006062507629394531
+  },
+  {
+   "mission": 420,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.10099617143472035,
+   "regret_end": 0.021898925304412842
+  },
+  {
+   "mission": 421,
+   "sat_err": 0.0,
+   "policy": "map_goto",
+   "regret_avg": 0.03368079413970312,
+   "regret_end": 0.028354763984680176
+  },
+  {
+   "mission": 274,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2007097444600529,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 275,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19925364603598913,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 276,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2568785904182328,
+   "regret_end": 0.11305320262908936
+  },
+  {
+   "mission": 277,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.23784215831094319,
+   "regret_end": 0.09117782115936279
+  },
+  {
+   "mission": 278,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09870579673184289,
+   "regret_end": 8.654594421386719e-05
+  },
+  {
+   "mission": 279,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14543774889575112,
+   "regret_end": 0.0024347901344299316
+  },
+  {
+   "mission": 280,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.0007780558533138699,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 281,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.05701482130421533,
+   "regret_end": 0.03384190797805786
+  },
+  {
+   "mission": 282,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.28576404352982837,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 283,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1058280360367563,
+   "regret_end": 0.0003376603126525879
+  },
+  {
+   "mission": 284,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.11071526755889256,
+   "regret_end": 0.0017126798629760742
+  },
+  {
+   "mission": 285,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13873790784014595,
+   "regret_end": 0.0026050806045532227
+  },
+  {
+   "mission": 286,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.0477071205774943,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 287,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1710475240316656,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 288,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1743665842546357,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 289,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13456458267238405,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 290,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3903673487172152,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 291,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1878147820631663,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 292,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.22193610254261228,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 293,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1312994567884339,
+   "regret_end": 0.034693241119384766
+  },
+  {
+   "mission": 294,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08809256015552415,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 295,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.15655371877882215,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 296,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.06842197312249078,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 297,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.145543379502164,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 298,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.23689838064213595,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 299,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13813529825872845,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 300,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2353829157849153,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 301,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16547457956605488,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 302,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10764460783037874,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 303,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.25016758711232495,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 304,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.25639003401415217,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 305,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13858011715476298,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 306,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20587826498214984,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 307,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.022582092218928866,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 308,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07024856325652865,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 309,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1398623064160347,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 310,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2164718583226204,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 311,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19941292620367473,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 312,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.049230941467814975,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 313,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.28130525263905937,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 314,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.05750129868586858,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 315,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18251541489735246,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 316,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.02114774700668123,
+   "regret_end": 0.0004203915596008301
+  },
+  {
+   "mission": 317,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.15580717225869498,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 318,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.022670182916853163,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 319,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.05440216345919503,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 320,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.0765857845544815,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 321,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07309568176666896,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 322,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10995503101083967,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 323,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20492424277795684,
+   "regret_end": 4.315376281738281e-05
+  },
+  {
+   "mission": 324,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14508695031205812,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 325,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.03165249195363787,
+   "regret_end": 0.018805861473083496
+  },
+  {
+   "mission": 326,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07143819166554345,
+   "regret_end": 0.0007023215293884277
+  },
+  {
+   "mission": 327,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08667164461480246,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 328,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16216671177082592,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 329,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3726139662580358,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 330,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.03549022972583771,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 331,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.03203510493040085,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 332,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13705568367408383,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 333,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1237709845105807,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 334,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2075274931266904,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 335,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16811422196527323,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 336,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.06807207812865575,
+   "regret_end": 0.0009813308715820312
+  },
+  {
+   "mission": 337,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08858281373977661,
+   "regret_end": 6.866455078125e-05
+  },
+  {
+   "mission": 338,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.25365639684928787,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 339,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14430953479475445,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 340,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14365931258847317,
+   "regret_end": 0.0018709897994995117
+  },
+  {
+   "mission": 341,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1035916159550349,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 342,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10552040156390932,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 343,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.23667918311225045,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 344,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.4298583444000946,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 345,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.542531017453358,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 346,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3348762709906118,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 347,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.24532480620675617,
+   "regret_end": 0.0001302957534790039
+  },
+  {
+   "mission": 348,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.15310262516140938,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 349,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09104541192452113,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 350,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1512389290663931,
+   "regret_end": 0.019262194633483887
+  },
+  {
+   "mission": 351,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09502448638280232,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 352,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14784796287616095,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 353,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.14086566761963898,
+   "regret_end": 0.00012749433517456055
+  },
+  {
+   "mission": 354,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.060583167605929904,
+   "regret_end": 5.3763389587402344e-05
+  },
+  {
+   "mission": 355,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.0360465579562717,
+   "regret_end": 0.00022590160369873047
+  },
+  {
+   "mission": 356,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.042610648605558604,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 357,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.16117467648453182,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 358,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.12789800431993273,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 359,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.11005601493848695,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 360,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.13654930682645905,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 361,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08281179631335868,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 362,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09887840557429525,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 363,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1899300573600663,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 364,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1416411610941092,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 365,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.11662171574102508,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 366,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.20004236628301442,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 367,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.12469375381867091,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 368,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1496311757299635,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 369,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.6138696319734057,
+   "regret_end": 0.00017213821411132812
+  },
+  {
+   "mission": 370,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.012404055231147341,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 371,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.26486287674763137,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 372,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2953101560059521,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 373,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08001856588655049,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 374,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.17237795806593365,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 375,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08355261964930429,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 376,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.11375247769885594,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 377,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1580438618030813,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 378,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09877571049663755,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 379,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09646259165472454,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 380,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.12168577230638927,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 381,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1187052031358083,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 382,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2654909885798891,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 383,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1066251504752371,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 384,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19021766798363793,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 385,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.03793242656522327,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 386,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.09446202963590622,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 387,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3427590291377985,
+   "regret_end": 0.00033104419708251953
+  },
+  {
+   "mission": 388,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.030610462029774983,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 389,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.10186209860775206,
+   "regret_end": 0.010225892066955566
+  },
+  {
+   "mission": 390,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.06435285011927287,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 391,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.11715192678901884,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 392,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1505205569167932,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 393,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.061205108960469566,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 394,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.013594155510266622,
+   "regret_end": 0.0018802881240844727
+  },
+  {
+   "mission": 395,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1305589915977584,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 396,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07245204514927334,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 397,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.19002489745616913,
+   "regret_end": 0.00021505355834960938
+  },
+  {
+   "mission": 398,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1339121452636189,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 399,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18223150736755794,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 400,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2118222676217556,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 401,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.28775668351186645,
+   "regret_end": 0.0003349184989929199
+  },
+  {
+   "mission": 402,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.28499436210323537,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 403,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.0008788009484608968,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 404,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.18070165150695378,
+   "regret_end": 0.043694376945495605
+  },
+  {
+   "mission": 405,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.23719816613528463,
+   "regret_end": 0.0008553266525268555
+  },
+  {
+   "mission": 406,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08667192111412685,
+   "regret_end": 0.006463885307312012
+  },
+  {
+   "mission": 407,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07935237222247654,
+   "regret_end": 0.0001627206802368164
+  },
+  {
+   "mission": 408,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.3606351559671263,
+   "regret_end": 0.050325989723205566
+  },
+  {
+   "mission": 409,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.1647285885281033,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 410,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.2325508731106917,
+   "regret_end": 0.008699893951416016
+  },
+  {
+   "mission": 411,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.08251109181178941,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 412,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07406212720606062,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 413,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.47600532742217183,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 414,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.05824507441785601,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 415,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.06657890313201481,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 416,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.11470536473724577,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 417,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.05894927846060859,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 418,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07996784233384663,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 419,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07638542105754216,
+   "regret_end": 0.006062507629394531
+  },
+  {
+   "mission": 420,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.07639384435282813,
+   "regret_end": 0.0
+  },
+  {
+   "mission": 421,
+   "sat_err": 0.0,
+   "policy": "fresh_planner",
+   "regret_avg": 0.007527395255035824,
+   "regret_end": 0.0
+  }
+ ]
+}

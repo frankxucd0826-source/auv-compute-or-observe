@@ -1,0 +1,75 @@
+\section{方法}
+
+本文提出如图\ref{fig:overview}(d)所示的四步决策方法：先通过按需精算消除数值歧义，再在多年海洋大数据标定的合理集合内用投影梯度上升搜索最坏合理反例，最后依据最坏后悔执行门控分流。
+
+\subsection{按需精算：数值歧义的快速识别与消除}
+区分求解器误差与环境不确定性的首要原则，是仅当粗算时间差落在数值离散误差容限之内时才动用精算。常规确定性规划要么一律使用粗算而在两侧航时接近时受网格锯齿误导，要么对所有任务一律执行耗时64倍的精算，在粗图上两侧本就相差十几个小时的任务上浪费算力。
+
+我们在开发年份任务上离线对比同一张粗图 $\boldsymbol{u}_0$ 的粗算时间差 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$ 与精算时间差 $\Delta T_{\text{fine}}(\boldsymbol{u}_0)$，取绝对偏差 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0) - \Delta T_{\text{fine}}(\boldsymbol{u}_0)|$ 的95\%分位数作为数值误差容限 $\tau_{\text{num}} = 3.2$ 小时。在线执行时，航行器先用粗算求 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$；若 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| \ge \tau_{\text{num}}$，直接采纳粗算结果；仅当 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$ 时才判定存在数值歧义并触发精算，以很小的平均算力确保地图基准选择 $s_0$ 不受求解器粗糙度误导。
+
+\subsection{反例检验：基于包络定理的合理集合投影梯度搜索}
+判断粗图所选一侧 $s_0$ 是否面临严重环境歧义，最直接的准则是主动在合理集合 $\mathcal{U}(r)$ 内寻找使 $s_0$ 相比另一侧 $\bar{s}_0$ 尽可能变慢的最坏合理反例，而非在少数随机样本上求平均。现有集合规划通常随机抽取32个流场样本统计航时均值或翻转比例\cite{wang2016path}；然而，翻转比例只反映有多少样本翻转了决定，不反映翻转后损失有多大；而两侧时间差只对少数扰动方向敏感，随机样本要很多才能把这些方向上的效应估准（第\ref{sec:budget}节）。
+
+我们将反例检验构建为合理球域上的约束最大化问题。定义流场 $\boldsymbol{u}(\boldsymbol{z}) \in \mathcal{U}(r)$ 下选用一侧 $s$ 的“最坏后悔”为该侧航时超出另一侧 $\bar{s}$ 的最大值 $R_s(r)$：
+\begin{equation}
+R_s(r) = \max_{\|\boldsymbol{z}\|_2 \le r} J_s(\boldsymbol{z}), \qquad J_s(\boldsymbol{z}) = \max\left\{ 0,\, T_s(\boldsymbol{u}(\boldsymbol{z})) - T_{\bar{s}}(\boldsymbol{u}(\boldsymbol{z})) \right\}.
+\label{eq:worst_regret}
+\end{equation}
+当 $R_{s_0}(r) > 0$ 时，即存在使另一侧 $\bar{s}_0$ 更快的合理反例，且 $R_{s_0}(r)$ 给出了坚持选 $s_0$ 可能多付出的最大航时。
+
+由于 $T_{\text{L}}(\boldsymbol{u}(\boldsymbol{z})) - T_{\text{R}}(\boldsymbol{u}(\boldsymbol{z}))$ 嵌套了图最短路算子，对每个系数 $z_k$ 做有限差分每次迭代需 $2K$ 次最短路求解。本文利用最优化中的包络定理（Danskin定理）避免了这一开销：当流场微小扰动时，最短路径 $P_s^*(\boldsymbol{z})$ 的节点序列在一阶近似下不变，因此最优航时 $T_s(\boldsymbol{u}(\boldsymbol{z}))$ 对系数 $\boldsymbol{z}$ 的梯度，等于沿当前最快航线 $P_s^*(\boldsymbol{z})$ 将各边通行时间 $t(e)$ 对局部流速的偏导数直接累加：
+\begin{equation}
+\frac{\partial T_s}{\partial z_k} = \sum_{e \in P_s^*(\boldsymbol{z})} \left( \frac{\partial t(e)}{\partial u_{\parallel}} \boldsymbol{d}_e + \frac{\partial t(e)}{\partial u_{\perp}} \boldsymbol{n}_e \right) \cdot \frac{\boldsymbol{m}_k(\boldsymbol{x}_e^{-}) + \boldsymbol{m}_k(\boldsymbol{x}_e^{+})}{2},
+\label{eq:envelope_grad}
+\end{equation}
+其中 $\boldsymbol{x}_e^{-}$、$\boldsymbol{x}_e^{+}$ 为有向边 $e$ 的两端节点，$\boldsymbol{n}_e$ 为垂直边方向的单位向量，$\boldsymbol{m}_k$ 为式(\ref{eq:plausible_field})中的误差模态，标量导数由式(\ref{eq:edge_time})解析给出：
+\begin{equation}
+\frac{\partial t(e)}{\partial u_{\parallel}} = -\frac{\ell_e}{v_{\text{g}}(e)^2}, \qquad \frac{\partial t(e)}{\partial u_{\perp}} = \frac{\ell_e u_{\perp}}{v_{\text{g}}(e)^2 \sqrt{V^2 - u_{\perp}^2}}.
+\label{eq:edge_deriv}
+\end{equation}
+由此，每步梯度计算只需在标准网格上对左、右两侧各求一次最短路（共2次求解），即可同时获得对全部 $K$ 个模态系数的梯度 $\boldsymbol{g}(\boldsymbol{z}) = \nabla_{\boldsymbol{z}} \Delta T(\boldsymbol{u}(\boldsymbol{z}))$。
+
+搜索时，算法先在粗图中心 $\boldsymbol{z}=\boldsymbol{0}$ 计算初始梯度，一步跳至球面边界 $\boldsymbol{z}^{(1)} = \pm r\, \boldsymbol{g}(\boldsymbol{0}) / \|\boldsymbol{g}(\boldsymbol{0})\|_2$，再在球内执行步长减半的投影梯度上升。算法分别朝使左侧变慢与使右侧变慢两个方向、在半径 $r=1$ 与 $r=2$ 上各搜一次，其他半径 $r$ 下的最坏后悔按两者线性插值得到。每个任务共消耗约71次标准网格航线求解，与评估32个集合成员的计算量（64次求解）相近。
+
+\subsection{海洋大数据标定：合理集合的物理结构与覆盖半径}
+“合理反例”具有实际决策意义的关键，在于“合理”二字由多年历史海洋大数据标定而非主观设定\cite{benhaim2006infogap}。我们利用开发年份中旧粗图减真实海流的历史误差分两步标定：第一步统计各网格点误差流速大小以定出式(\ref{eq:plausible_field})中的缩放矩阵 $\mathbf{S}(\boldsymbol{x})$（3天前1°粗图全区典型误差中位数为0.17米/秒），并由空间相关衰减曲线定出误差相关长度 $L_{\text{corr}} = 76$ 千米（当天0.5°图为0.07米/秒、18千米），据此生成流函数模态 $\{\phi_k\}$。
+
+第二步标定合理集合的半径 $r$：我们在开发年份任务上考察合理集合给出的两侧时间差范围包住真实时间差 $\Delta T(\boldsymbol{u}_{\text{true}})$ 的任务比例，将覆盖比例不低于90\%的最小半径选定为标定半径，得 $r = 1.5$（开发年份实际覆盖93\%，测试年份覆盖94\%）。这一准则以决策关心的时间差为尺度，使合理集合恰好包住大多数真实海洋。
+
+\subsection{门控响应：依据最坏后悔与观测代价权衡行动}
+获得两侧最坏后悔 $R_{s_0}(r)$ 与 $R_{\bar{s}_0}(r)$ 后，最后一步是根据最坏后悔是否超过门控阈值 $\theta$（开发年份按平均损失最小选定 $\theta = 8$ 小时）以及观测代价高低做出响应：
+\begin{enumerate}
+    \item 若 $R_{s_0}(r) \le \theta$，说明即使最不利的合理流场成真，坚持选 $s_0$ 的劣势也不超过 $\theta$，航行器直接照地图走（选 $s_0$）。
+    \item 若 $R_{s_0}(r) > \theta$，说明当前选择面临较大尾部风险：当存在低代价且能消解大尺度歧义的观测手段（如单次上浮代价 $c_{\text{surf}}$ 较低时上浮取当天0.5°图）时，触发“门控后上浮取图”；当上浮代价高昂或仅有看不清远方切变的原位测流可用时，触发“门控后取保守”，直接改选最坏后悔更小的一侧：
+    \begin{equation}
+    s_{\text{cons}} = \arg\min_{s \in \{\text{L}, \text{R}\}} R_s(r).
+    \label{eq:conservative_choice}
+    \end{equation}
+\end{enumerate}
+完整流程见算法\ref{alg:counterexample_gate}。
+
+\begin{algorithm}[htbp]
+\caption{基于合理反例检验的自主水下航行器航路门控决策算法}
+\label{alg:counterexample_gate}
+\begin{algorithmic}[1]
+\Require 粗分辨率海流图 $\boldsymbol{u}_0$，标定的误差模态 $\{\boldsymbol{m}_k\}_{k=1}^{K}$（式(\ref{eq:plausible_field})），标定半径 $r=1.5$，数值误差容限 $\tau_{\text{num}}=3.2$ 小时，门控阈值 $\theta=8.0$ 小时，上浮取图代价 $c_{\text{surf}}$ 及代价平衡点 $c^* \approx 1.0$ 小时。
+\Ensure 最终执行的航路决策动作（选定绕行一侧 $s^*$ 或触发上浮取新图）。
+\State 在粗图 $\boldsymbol{u}_0$ 上用粗算（8千米网格、8方向）求解两侧航时，得时间差 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$。
+\If{$|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$}
+    \State 触发按需精算：在 $\boldsymbol{u}_0$ 上用精算（2千米网格、32方向）重算得 $\Delta T_{\text{fine}}(\boldsymbol{u}_0)$，定地图倾向侧 $s_0 \gets \arg\min_{s \in \{\text{L},\text{R}\}} T_s^{\text{fine}}(\boldsymbol{u}_0)$。
+\Else
+    \State 直接采纳粗算结果：$s_0 \gets \arg\min_{s \in \{\text{L},\text{R}\}} T_s^{\text{coarse}}(\boldsymbol{u}_0)$。
+\EndIf
+\State 在中心 $\boldsymbol{z}=\boldsymbol{0}$ 处用标准网格（4千米、16方向）求左、右最快航线，按包络定理式(\ref{eq:envelope_grad})计算初始梯度 $\boldsymbol{g}(\boldsymbol{0})$。
+\State 分别沿 $+\boldsymbol{g}(\boldsymbol{0})$ 与 $-\boldsymbol{g}(\boldsymbol{0})$ 方向跳至 $r_1=1$ 与 $r_2=2$ 的球面边界，执行步长减半的投影梯度上升，并在标定半径 $r$ 处线性插值得两侧最坏后悔 $R_{\text{L}}(r)$ 与 $R_{\text{R}}(r)$。
+\If{$R_{s_0}(r) \le \theta$}
+    \State \Return 直接照地图走：选择绕行一侧 $s^* \gets s_0$。
+\Else
+    \If{允许上浮通信且 $c_{\text{surf}} < c^*$}
+        \State \Return 门控后上浮取图：付出代价 $c_{\text{surf}}$ 获取当天0.5°海流图 $\boldsymbol{u}_{\text{new}}$，选 $s^* \gets \arg\min_{s \in \{\text{L},\text{R}\}} T_s(\boldsymbol{u}_{\text{new}})$。
+    \Else
+        \State \Return 门控后取保守：选择最坏后悔更小的一侧 $s^* \gets \arg\min_{s \in \{\text{L},\text{R}\}} R_s(r)$。
+    \EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}

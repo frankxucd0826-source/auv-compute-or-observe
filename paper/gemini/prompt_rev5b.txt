@@ -1,0 +1,516 @@
+
+
+########## ATTACHED FILE: brief_rev5b.md ##########
+
+# Revision 5b: tighten and correct the revision-5 draft (edit the attached files; do not rewrite from scratch)
+
+The attached section files are your revision-5 draft after Claude's factual corrections. The content and
+structure are right; the draft is about 35% too long (23 pages; the course wants "十几页") and several
+paragraphs pile numbers. Edit the attached text: keep its argument, cut repetition and numbers, and keep
+every corrected fact listed below exactly as it now stands.
+
+## Length caps (Chinese characters of running text, excluding captions, tables and the algorithm)
+abstract 480 (English abstract at most 230 words, same content) | intro 1700 | related 1000 | prior 850 |
+problem 1700 | method 2200 | experiments 3200 | innovation 900 (the table stays) | conclusion 380.
+Do not go below 85% of any cap.
+
+## Numbers (the student's rule: a results paragraph must not read as a pile of numbers)
+- At most about 6 numbers per paragraph; give the finding in words first, then only the numbers that carry
+  it; leave the rest to the figures and tables (they already show them).
+- Intervals: keep only the main one (门控后取保守 vs 照精算地图走: −0.28 小时, [−0.51, −0.07]). For the
+  others say in words whether the interval contains 0.
+- Introduction paragraph 6 (the example): keep only "粗图上两侧只差约0.3小时" and "真实海洋中右侧快11.7小时";
+  the other example numbers are in the Fig. 1 caption.
+- Section 6.3: give 21.7%, 19.7%, 10.4%, 28% of cheap-solver errors fixed, 93%/94% coverage and 99.7%;
+  drop the list of shares at every radius (the figure shows it).
+- Section 6.5: give 67% vs 49% vs 34%, the 47% of missions flagged holding 82% of the loss, the probe facts
+  (3.4% switch / 81% right after 30 km; 18.8% / 15% after 60 km), the 15.4-hour detour, and the crossover
+  of surfacing near 1 hour (between 0.5 and 1 hour) with at most two points of the cost sweep.
+- Section 6.6: one or two sentences per setting, at most three numbers each, and the ablation conclusion as
+  now written.
+- Add one sentence in 6.4 explaining why the conservative choice pays (facts: of the 41 switched missions,
+  23 were right and saved 10.1 hours on average, 18 were wrong and cost 3.3 hours on average).
+
+## Corrected facts that must stay exactly as they are (Claude checked them against the code)
+1. problem.tex: the plausible-field equation u = u0 + sum z_k m_k, m_k = S(x) grad-perp phi_k, with S(x)
+   the diagonal rescaling to the calibrated error variance ("缩放后近似无散"); the set ||z||_2 <= r (no
+   1/sqrt(K)); "以边两端节点海流的平均作为该边的海流".
+2. method.tex: the worst-regret definition over ||z||_2 <= r; the jump z = ± r g/||g||; the envelope-gradient
+   equation with the edge's two end nodes and m_k; "避免了这一开销"; the ensemble limitation as now written
+   (flip share does not measure the size of the loss; the margin is sensitive to few directions);
+   the radius rule as now written; the two radii 1 and 2 with linear interpolation; about 71 solves.
+3. experiments.tex: the slow-vehicle sentence (interval contains 0, not significant; surfacing pays more
+   because a wrong side costs more); the ablation conclusion (same search, different definition of
+   "plausible"); the main-figure caption without error bars.
+4. innovation.tex and appendix.tex: the course entry point as now written ("课上讲授的“海洋大数据的计算引擎”
+   使作者联想到…"), the description of what the student did and what the AI tools did, the table row 2
+   wording, the file descriptions in appendix A. Do not add claims about the student beyond these.
+5. Keep every equation, \label, \ref, \cite, figure, table, the algorithm and the repository \url unchanged.
+
+## Wording to remove (informal, emotive or overstated)
+揪出、刀刃、彻底、本质边界、灾难性、有力证明、严格不包含、高达、仅仅、竟然、飙升、一眼看清、毫无、白白、
+"Danskin" may stay once. No "如图X所示" at the start of a paragraph; the first sentence of every paragraph
+states its conclusion. Keep formal connectives (然而、因此、相反、进一步).
+
+## Output
+All eleven files, each preceded by a line "===== FILE: sections/<name>.tex =====" (title, abstract, intro,
+related, prior, problem, method, experiments, innovation, conclusion, appendix).
+
+
+########## ATTACHED FILE: facts_v3.md ##########
+
+# 事实清单 v3（航路决策研究；由 experiments/route_facts.py 从结果文件生成，正文所有数字只能取自这里）
+
+## 数据与设置
+- 海流数据：HYCOM 全球海洋再分析（GLBy0.08，实验 93.0），水平分辨率 1/12°，取 10 米深度的海流，区域 23–31°N、121–129°E（台湾以东至东海，含黑潮），2019-01-01 至 2024-08-29 每 3 天一张（12:00 UTC），共 689 张；开发年份 2019–2021 共 365 张，测试年份 2022–2024 共 324 张。
+- 任务：每张快照抽 2 个任务；起终点相距 100–140 千米，中点有半径 15 千米的禁航区，左右两侧各求最快航线；起终点离岸至少 20 千米；只取粗图上任务区平均流速不低于 0.3 米/秒的强流任务。开发年份 710 个任务（357 天），测试年份 623 个任务（313 天）。
+- 航行器：对水速度 1.0 米/秒（长航程自主水下航行器量级）；更快一侧的平均航时 39.2 小时（测试年份）。
+- 航行器带的地图：1° 粗分辨率（格内平均），3 天前制作（主设置）。真实海流：当天 1/12° 场。
+- 航线求解（三档计算量）：粗算 8 千米网格、8 个方向；标准 4 千米、16 个方向；精算 2 千米、32 个方向（相对计算量 1 : 8 : 64，按边数）。最快航线用图上的最短路（Dijkstra）求，过一条边的时间 = 边长 / 对地速度，对地速度 = 沿边流速 + sqrt(V² − 垂直边流速²)；顶流过强则该边不可通行。
+- 执行假设：选定一侧后，航行器按真实海流在该侧以最优方式航行（贴近实际的边走边测、边调整）；本文研究的是选哪一侧这个二元决策。
+- 误差模型（大数据标定，开发年份）：旧粗图减真实海流的误差，3 天前 1° 粗图：典型误差中位数 0.17 米/秒，相关长度 76 千米；当天 0.5° 图：0.07 米/秒，18 千米。合理海流 = 粗图 + 由流函数生成的无散误差模态的组合（各点方差按标定的误差图缩放），系数服从标准正态。
+- 合理集合的半径在开发年份标定：使合理集合给出的两侧时间差范围包住真实差值的任务比例不低于 90% 的最小半径，得 r = 1.5；该半径下开发年份覆盖 93%，测试年份覆盖 94%。
+- 反例搜索：在半径 r 的球内对“两侧时间差”做投影梯度上升（梯度由最快航线上各段时间对海流的导数给出，即包络定理），先沿梯度跳到球面，再步长减半细化；分别朝两个方向、在半径 1 与 2 上各搜一次，其他半径按两者线性插值；每个任务共约 71 次标准网格航线求解，与 32 个成员的集合（64 次）相近。
+- 数值误差容限（开发年份）：粗算与精算两侧时间差之差的 95% 分位 3.2 小时；粗算差值小于它时改用精算（按需精算）。
+- 门控阈值（开发年份按平均损失最小选定，测试年份原样使用）：最坏后悔超过 8 小时时取保守一侧；最坏后悔超过 8 小时时上浮取当天 0.5° 图（上浮一次计 1 小时）。
+- 观测方式：原地停留 2 小时测 12 次；沿所选一侧航行 30 或 60 千米并连续测流后再决定是否换边；绕到反例与地图差别最大处（前方 40 千米内）去测；上浮取当天 1° 或 0.5° 图（每次 1 小时）。测流噪声 0.05 米/秒，同化时取 0.15 米/秒（含模型误差）。
+- 统计：损失 = 实际航时 − 更快一侧的航时（小时）；95% 区间按天整组重抽样 2000 次。
+
+## 主要结果（测试年份，括号内为 95% 区间；与“照精算地图走”的配对差）
+- 地图+粗算：平均损失 1.16 小时 [0.80, 1.60]；与精算地图之差 +0.18 [-0.14, 0.58]
+- 地图+标准：平均损失 1.03 小时 [0.73, 1.38]；与精算地图之差 +0.05 [-0.05, 0.18]
+- 地图+精算：平均损失 0.98 小时 [0.69, 1.33]；与精算地图之差 +0.00 [0.00, 0.00]
+- 集合期望（贝叶斯）：平均损失 1.04 小时 [0.76, 1.37]；与精算地图之差 +0.06 [-0.22, 0.34]
+- 保守（最坏后悔最小）：平均损失 0.72 小时 [0.50, 0.99]；与精算地图之差 -0.26 [-0.49, -0.05]
+- 原地停留测：平均损失 2.91 小时 [2.67, 3.19]；与精算地图之差 +1.94 [1.55, 2.31]
+- 总是沿途测30km：平均损失 0.93 小时 [0.69, 1.21]；与精算地图之差 -0.05 [-0.30, 0.18]
+- 总是沿途测60km：平均损失 0.91 小时 [0.66, 1.22]；与精算地图之差 -0.07 [-0.27, 0.05]
+- 总是绕行定点测：平均损失 12.43 小时 [11.50, 13.45]；与精算地图之差 +11.45 [10.49, 12.46]
+- 总是上浮取当天1°图：平均损失 1.67 小时 [1.49, 1.89]；与精算地图之差 +0.69 [0.40, 0.96]
+- 总是上浮取当天0.5°图：平均损失 1.22 小时 [1.14, 1.31]；与精算地图之差 +0.24 [-0.11, 0.53]
+- 反例门控→保守：平均损失 0.70 小时 [0.48, 0.97]；与精算地图之差 -0.28 [-0.51, -0.07]
+- 反例门控→上浮取0.5°图：平均损失 0.78 小时 [0.69, 0.89]；与精算地图之差 -0.20 [-0.54, 0.08]
+- 反例门控→贝叶斯：平均损失 0.96 小时 [0.68, 1.29]；与精算地图之差 -0.01 [-0.29, 0.25]
+- 开发年份对应：精算地图 1.13，保守 0.76，门控后取保守 0.70，门控后上浮取 0.5° 图 0.76，集合期望 0.96。
+- 门控后取保守比精算地图少损失 28%（0.98 → 0.70 小时）。
+
+## 歧义的性质（测试年份；开发年份在括号内）
+- 选错一侧的比例：粗算 21.7%（25.1%），精算 19.7%（21.3%）；换成当天 0.5° 图 10.4%；计算量增加 64 倍只修好粗算错误的 28%。
+- 平均损失：粗算 1.16，精算 0.98 小时（差异不显著，见上）。
+- 能找到合理反例（存在使地图所选一侧变差、且让另一侧更好的合理海流）的任务比例，按半径：r=0.25：41.6%，r=0.5：64.8%，r=1.0：94.1%，r=1.5：99.7%，r=2.0：100.0%。
+- 损失高度集中：精算地图损失最大的 10% 任务占全部损失的 92%（开发年份 88%）。
+- 按风险排序，排在前 20% 的任务所占的地图损失：反例的最坏后悔 67%，32 个合理场中翻转的比例 49%，地图上两侧时间差越小越危险 34%，随机 20%，按真实损失（上限）100%。
+- 门控（最坏后悔 > 8 小时）标记 47% 的任务，这些任务占地图损失的 82%；其中保守规则改选另一侧的有 41 个任务。
+- 门控后取保守为何有效：改选的 41 个任务中 23 个改对，改对时平均省 10.1 小时；18 个改错，改错时平均多花 3.3 小时——被避开的一侧往往有很大的下行风险，改对的收益远大于改错的代价。
+- 只论“是否选错且多花 1 小时以上”（测试年份 79 个）而不论多花多少时，三种排序的区分能力相近（曲线下面积：反例 0.65，32 成员集合 0.67，地图差值 0.67）；反例的优势在于把损失大的任务排在前面（见上一条）。
+
+## 观测的代价（测试年份）
+- 上浮一次 0.0 小时：总是上浮取 0.5° 图 0.22，门控后上浮 0.22，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 0.5 小时：总是上浮取 0.5° 图 0.72，门控后上浮 0.55，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 1.0 小时：总是上浮取 0.5° 图 1.22，门控后上浮 0.78，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 2.0 小时：总是上浮取 0.5° 图 2.22，门控后上浮 1.06，门控后取保守 0.70，精算地图 0.98（小时）。
+- 上浮一次 3.0 小时：总是上浮取 0.5° 图 3.22，门控后上浮 0.98，门控后取保守 0.70，精算地图 0.98（小时）。
+- 沿途测 30 千米后换边的任务 3.4%，换对 81%；测 60 千米后换边 18.8%，换对 15%。
+- 绕行定点测平均先花 15.4 小时到测点。
+
+## 示例任务（图 1；按规则选出：测试年份按日期第一个满足“精算地图选错且多花 3 小时以上、存在合理反例、门控后保守选对”的任务）
+- 日期 2022-01-18；粗图上左侧 37.71 小时、右侧 38.02 小时（地图选左）；合理反例中左侧 55.69、右侧 44.07；真实海洋左侧 53.44、右侧 41.72（右侧快 11.7 小时）。
+
+## 前期研究（东海赤潮巡测：航行器带 3 天前的卫星叶绿素图，在“继续计算”“边走边测”“停下复测”之间分配时间；损失为对数叶绿素浓度）
+- 规划器在自己搜索过的想象海洋上给航线打分，随推演次数增加而虚高：64、2000、20 万次推演时自评 0.762、0.833、0.917，真实价值 0.749、0.793、0.803，在不参与搜索的留出海洋上评判 0.745、0.794、0.802。
+- 出发前预演选用时策略的遗憾 0.265，每个任务事后挑最好的策略 0.243（用时分配本身的空间约 0.022），经典单步元推理 0.287。
+- 遗憾拆解：从窗口边缘下水（离最浓处中位数 48 千米）时，知道真相直奔最浓处 0.206，换成当天卫星图 0.235；改在旧图最浓处下水后，五种用时策略 0.126–0.145，换成当天卫星图 0.098。即下水点约 0.13、信息新鲜度约 0.03、用时分配约 0.02。
+- 用前一天的移动（光流）把旧图外推 3 天，比直接用旧图误差大 0.018（95% 区间 0.012–0.025）：逐日卫星图里没有可外推的整体移动。
+
+## 适用范围（每组测试年份约 350 个任务；阈值各自在开发年份标定）
+- 主设置：3 天前 1° 粗图，对水 1.0 米/秒：测试任务 623，标定半径 1.5，精算地图选错 19.7%，粗算选错 21.7%，精算地图损失 0.98，门控后取保守 0.70，门控后取保守与地图之差 -0.28 [-0.51, -0.07]，门控后上浮取图 0.78，存在合理反例 99.7%，反例前20%所占损失 67%，平均最快航时 39.2
+- 地图较好：当天 0.5° 图：测试任务 349，标定半径 1.75，精算地图选错 8.0%，粗算选错 8.9%，精算地图损失 0.17，门控后取保守 0.17，门控后取保守与地图之差 +0.00 [-0.04, 0.05]，门控后上浮取图 0.16，存在合理反例 64.5%，反例前20%所占损失 60%，平均最快航时 38.7
+- 慢速航行器：对水 0.75 米/秒：测试任务 347，标定半径 1.5，精算地图选错 18.4%，粗算选错 22.2%，精算地图损失 2.43，门控后取保守 1.80，门控后取保守与地图之差 -0.63 [-1.67, 0.30]，门控后上浮取图 1.32，存在合理反例 99.1%，反例前20%所占损失 74%，平均最快航时 59.8
+- 消融：合理集合改用历史相似日的小尺度差：测试任务 349，标定半径 1.5，精算地图选错 19.5%，粗算选错 22.3%，精算地图损失 0.99，门控后取保守 0.95，门控后取保守与地图之差 -0.04 [-0.43, 0.36]，门控后上浮取图 0.77，存在合理反例 99.4%，反例前20%所占损失 64%，平均最快航时 39.8
+
+
+
+########## ATTACHED FILE: terms_v5.md ##########
+
+# 术语表（v5，航路决策研究）——正文、图注、表格必须与此一致；中文里不出现英文缩写
+
+| 写法 | 含义 |
+|---|---|
+| 自主水下航行器（首次出现后可称“航行器”） | 研究对象；不写 AUV |
+| 粗图 | 航行器所带的 3 天前 1° 粗分辨率海流图（格内平均） |
+| 真实海流 / 真实海洋 | 当天 1/12° 再分析海流场 |
+| 禁航区；左侧、右侧 | 起终点中间半径 15 千米的圆形禁航区；从它的左边或右边绕过 |
+| 两侧时间差 | 左侧航时减右侧航时（小时）；为负则左侧快 |
+| 粗算、标准、精算 | 三档航线求解计算量（8 千米 8 向、4 千米 16 向、2 千米 32 向） |
+| 数值歧义 | 两侧时间差小于求解误差，加大计算量可以消除 |
+| 环境歧义 | 存在与现有信息同样相容、却要求选另一侧的海流场，计算消除不了 |
+| 合理海流、合理集合、半径 | 粗图加上按多年数据标定的误差模态组合；组合系数范数不超过半径 r 的全部海流场 |
+| 合理反例 | 合理集合中让地图所选一侧变差、另一侧更好的海流场 |
+| 反例检验 | 在合理集合中搜索最坏的合理反例的过程 |
+| 最坏后悔 | 合理集合中，所选一侧比另一侧多花时间的最大值（小时） |
+| 门控 | 以最坏后悔是否超过阈值决定是否采取观测或保守动作 |
+| 照地图走（精算） | 基线：在粗图上用精算选更快一侧 |
+| 按需精算 | 粗算差值小于数值误差容限时改用精算 |
+| 按期望时间 | 选 32 个合理海流中平均航时更短的一侧 |
+| 保守（最坏后悔最小） | 选合理集合中最坏后悔更小的一侧 |
+| 原地停留测、沿途测 30 千米、沿途测 60 千米、绕行定点测、上浮取当天 1° 图、上浮取当天 0.5° 图 | 各种观测方式（见表 1） |
+| 门控后取保守、门控后上浮取图 | 本文的两种响应 |
+| 知道真相 | 仅作参考的上限：直接选真实更快的一侧 |
+| 损失 | 实际航时减去更快一侧的航时（小时），越低越好 |
+| 前期研究里的词 | 想象海洋、留出海洋、自评、出发前预演、遗憾（对数叶绿素浓度） |
+| 单位 | 千米、米/秒、小时（与图一致） |
+
+
+########## ATTACHED FILE: sections/title.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+合理反例检验：粗分辨率海流图下自主水下航行器何时计算、何时观测
+
+
+########## ATTACHED FILE: sections/abstract.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+{\heiti 摘要：}
+随着海洋大数据的计算引擎从岸基超算中心延伸至移动观测平台边缘，自主水下航行器在有限的机载算力与观测能量约束下，必须在继续计算、补充观测与立即行动之间做出在线权衡。在台湾以东至东海的黑潮强流区，当航行器仅携带数天前生成的粗分辨率海流图绕越障碍时，海流速度与航行器对水速度相当，选错绕行一侧将导致数小时的航时损失。现有确定性规划方法在最佳估计地图上增加计算量以加密搜索网格，但只能提升求解精度而无法补充缺失的海洋信息；现有集合规划与自适应采样方法或因样本有限而漏掉翻转决策的极端流场，或将观测耗费在与当前航路选择无关的全场重构上。为此，本文提出一种基于海洋大数据标定的合理反例检验方法，通过分离数值歧义与环境歧义来决定何时计算、何时观测、何时采取保守航路。该方法首先通过粗精网格容限消除由求解器粗糙引起的数值歧义，随后利用多年历史再分析海流标定旧粗图的无散误差模态与合理集合半径，通过基于包络定理的投影梯度上升在合理集合内搜索使所选航路变差、另一侧变好的合理反例及最坏后悔，并据此门控触发上浮观测或最坏后悔最小的保守选择。基于六年黑潮区域再分析海流数据的仿真实验表明，将航线求解计算量增加64倍仅将选错一侧的比例从21.7\%微降至19.7\%，而在包住真实海洋94\%任务两侧时间差的合理集合内，99.7\%的任务存在合理反例；按反例最坏后悔排名前20\%的任务集中了67\%的航时损失，门控后取保守策略将平均航时损失从照精算地图走的0.98小时显著降至0.70小时（降低28\%），并在上浮通信代价低于约1小时时有效触发上浮取新图。该研究揭示了机载计算与现场观测在消除不同来源不确定性上的本质边界，为受限边缘平台提供了面向决策的轻量化元推理准则。
+
+{\heiti 关键词：}海洋大数据；自主水下航行器；航路规划；合理反例检验；元推理；不确定性量化
+
+\vspace{1em}
+\begin{center}
+{\large\bfseries Plausible Counterexample Test: When an Autonomous Underwater Vehicle Should Compute and When It Should Observe Under a Coarse Current Map}
+\end{center}
+\vspace{0.5em}
+
+{\bfseries Abstract:}
+As the computing engine of ocean big data extends from shore-based supercomputing centers to the edge of mobile observation platforms, an autonomous underwater vehicle operating under limited onboard computing power and observation energy must make online trade-offs among continued computation, additional observation, and immediate movement. In strong current regions such as the Kuroshio east of Taiwan and the East China Sea, when a vehicle navigates around an obstacle carrying only a multi-day-old coarse-resolution current map, current speeds are comparable to the vehicle's through-water speed, and choosing the wrong side of the obstacle costs hours of transit time. Existing deterministic planning methods increase computation on the best-estimate map to refine the search grid, which only sharpens numerical precision without supplying missing oceanographic information; meanwhile, ensemble planning and adaptive sampling methods either miss decision-flipping extreme flow fields due to finite ensemble sizes or expend observation budgets reconstructing the entire flow field rather than resolving the binary route choice. To address this, we propose a plausible counterexample test calibrated by ocean big data that separates numerical ambiguity from environmental ambiguity to decide when to compute, when to observe, and when to hedge conservatively. The method first resolves numerical ambiguity caused by coarse solvers via a coarse-to-fine numerical tolerance check, then uses multi-year historical reanalysis currents to calibrate divergence-free error modes and the radius of a plausible set for stale coarse maps, and applies envelope-theorem-based projected gradient ascent within the plausible ball to search for the worst plausible counterexample that flips the preferred side and quantifies its worst regret, gating between surfacing for a new map and choosing the side with the smaller worst regret. Experiments over six years of reanalysis currents in the Kuroshio region show that increasing route-solving computation by 64 times reduces the wrong-side rate only from 21.7\% to 19.7\%, whereas within the calibrated plausible set covering 94\% of real time differences on test years, 99.7\% of missions admit a plausible counterexample; the top 20\% of missions ranked by worst plausible regret capture 67\% of total map loss, and the gated conservative response reduces mean transit loss by 28\% from 0.98 hours to 0.70 hours while appropriately triggering surfacing when communication costs less than about 1 hour. This study establishes the fundamental boundary between onboard computation and in-situ observation in removing distinct sources of uncertainty, providing a decision-oriented lightweight metareasoning criterion for resource-constrained ocean edge platforms.
+
+{\bfseries Keywords:} ocean big data; autonomous underwater vehicle; path planning; plausible counterexample test; metareasoning; uncertainty quantification
+
+
+########## ATTACHED FILE: sections/intro.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{引言}
+
+海洋大数据的计算引擎正从岸基超算中心加速向海洋移动观测平台的边缘端延伸，使得“继续计算、补充观测还是立即行动”成为自主水下航行器必须面对的在线决策问题。传统的海洋数据处理依赖岸基中心汇集卫星遥感与数值模式输出，再将规划指令下发至水下平台\cite{chassignet2007hycom,chin2017mur}。然而，水下声学通信带宽极窄且上浮卫星通信代价高昂，航行器在执行长航程任务时必须依赖搭载的低功耗嵌入式计算模块独立完成环境推演与航路重规划\cite{remus100,jetsonorinnx}。由于机载电池总能量与算力极为有限，航行器既不能无限制地消耗算力进行高分辨率路径搜索，也不能频繁中断航行去执行耗时的原位测流或上浮通信\cite{horvitz1987reasoning,russell1991right}。因此，如何在计算、观测与行动之间合理分配受限的机载资源，构成了海洋边缘智能的核心挑战\cite{sung2021quit,magnino2026metareasoning}。
+
+在台湾以东至东海的黑潮等强流海区，当自主水下航行器仅携带数天前下发的粗分辨率海流图执行绕障航行时，选错绕行方向将导致数小时的航时损失。长航程航行器的典型对水巡航速度约为1.0米/秒，而黑潮主轴及其邻近中尺度涡旋的流速可达到甚至超过这一量级。当航行器需要在相距百余千米的起终点之间绕越岛礁或禁航区时，从左侧还是右侧绕行是一个不可逆的二元拓扑决策：一旦驶入逆流一侧，不仅航时剧增，还可能因顶流过强而无法通行。由于水下无法实时接收高分辨率分析场，本文考虑航行器只携带下水前数天制作的1°粗分辨率海流图的情形：这张图既丢失了数十千米尺度的锋面与涡旋切变，又包含了数天内流轴摆动带来的时效误差。在这样粗糙且陈旧的地图下判断左右两侧孰快孰慢，极易因地图失真而误入慢侧。
+
+面对粗图上的航路决策，最直接的常规做法是在当前最佳估计的海流图上投入更多机载算力，通过加密空间网格与航向离散度来求取更精确的最优航线\cite{lolla2014levelset}，但当环境信息本身缺失时，这种确定性等价的做法难以奏效。按确定性规划的原理，若左右两侧在粗网格上的预计航时十分接近，规划器会自然地将算力用于把网格进一步细分，以期分辨出哪一侧更快。然而，这一做法混淆了求解器的粗糙与海洋环境本身的不确定性：加密网格只能减少在同一张旧粗图上算路时的几何与离散误差，却不能为航行器提供任何关于真实涡旋位置的新信息\cite{jiang2015horizon,cuadron2025overthinking}。正如本文前期在东海赤潮巡测中的研究所示，当背景场存在明显时效误差时，成百上千倍地增加机载推演次数只会使规划器在自身想象模型上的打分不断虚高，而航线在真实海洋中的收益早已饱和\cite{smith2006curse}。
+
+第二种常见路径是利用集合预报或随机流体模型开展风险感知航路规划，但现有方法不仅无法回答何时应当停止计算或去观测，还容易因有限集合抽样而漏掉真正翻转决策的流场\cite{wang2016path,subramani2018stochastic,kularatne2018forecast}。集合规划通过在数十个扰动流场中评估备选航路的平均航时或航时方差，试图选出期望最快或风险较小的路径。然而，这类方法将不确定性视为静态给定的输入，只输出一条折中航线，并未建立在算力消耗与观测代价之间进行切换的元推理机制\cite{lin2015metareasoning,elboher2023formal}。进一步而言，海洋流场的误差自由度极高，随机抽取的几十个集合成员往往扎堆于概率密度较高的平庸状态，难以覆盖合理误差球边界上那些虽然偏离中心、却恰好处在物理相容范围内并使所选航路急剧恶化的不利流场，从而低估了选错一侧的真实尾部风险\cite{benhaim2006infogap,marx2020predictive}。
+
+第三种路径是基于信息价值的自适应采样与实验设计，即主动前往不确定性最高的海区进行测量，但对整个海流场有价值的信息并不等同于对当前左右绕行决策有价值的信息\cite{fossum2019,hollinger2014sampling}。传统的海洋自适应采样通常以降低全场估计方差或最大化互信息为目标，引导航行器前往误差最大的区域巡测\cite{srinivas2012gpucb}。然而，在绕障航行任务中，海流图在禁航区之外某处的巨大误差若对左右两侧航时的影响相同，或者该处根本不在备选航线上，测量它就纯粹是浪费航时；反之，顺路在起点附近测量虽然代价低廉，若决定两侧快慢的关键流场切变远在数十千米之外，近处测量也无法改变决策。序贯实验设计、模型判别与最优臂识别理论给出了正确的原则：真正决定是否需要新信息的，是在现有证据下能否找到一个与当前观测同样相容、却要求采取相反行动的竞争模型\cite{chernoff1959sequential,box1967discrimination,garivier2016optimal,attia2018goal}。
+
+为此，本文提出“合理反例检验”这一核心思想：机载计算与现场观测消除的是两类性质截然不同的不确定性；当左右两侧航路难分伯仲仅仅是因为求解网格粗糙（即数值歧义）时，多算就能做对决定；而当存在与现有粗图同样相容、却使另一侧明显更快的合理海流场（即环境歧义）时，无论投入多少算力都无法分辨真伪，唯有引入新观测才能消解，且在观测代价过高时应当直接选择最坏合理损失更小的一侧。我们将这一判别转化为一个可直接求解的操作问题：针对粗图推荐的一侧航路，能否在由多年海洋大数据标定的合理海流集合内，主动搜出一个使另一侧反而更快、且让当前选择付出沉重航时代价的合理反例？图\ref{fig:overview}展示了从测试年份中按固定规则（照精算地图走选错且多花3小时以上、存在合理反例、门控后取保守选对的第一个任务）选出的2022年1月18日真实任务示例：在3天前的1°粗图上，左侧与右侧航时分别为37.71小时与38.02小时，地图因微弱优势推荐左侧；继续加密网格计算只会将这0.3小时的账面差值算得更精细，而合理反例检验则在历史误差标定的合理集合内搜出一个使左侧耗时55.69小时、右侧仅需44.07小时的物理相容流场，准确预警了当天真实海洋中左侧53.44小时、右侧41.72小时（右侧快11.7小时）的巨大逆流风险，并指导航行器根据最坏后悔执行门控决策。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig_route_overview}
+\caption{粗分辨率海流图下的航路决策与合理反例检验（2022年1月18日任务示例）。(a) 航行器携带的3天前1°粗图，左侧航时37.7小时、右侧38.0小时，地图选左侧；(b) 在大数据标定的合理集合内搜出的合理反例海流，左侧55.7小时、右侧44.1小时；(c) 当天1/12°真实海流，左侧53.4小时、右侧41.7小时，右侧实际快11.7小时；(d) 本文决策流程：先校验粗图两侧时间差是否小于数值误差容限以决定是否按需精算，再通过反例检验计算最坏后悔，最坏后悔小则照地图走，大则在观测便宜时上浮取新图、观测昂贵时改选最坏后悔更小的保守一侧。再多的机载计算也只能把粗图上的0.3小时差值算准，唯有合理反例检验能显式揪出(b)(c)这类同样合理却翻转决策的海洋状态。}
+\label{fig:overview}
+\end{figure}
+
+本文的主要贡献如下：
+\begin{itemize}
+    \item \textbf{概念与判别准则创新：}据我们所知，首次在自主水下航行器航路决策中严格分离了可由计算消除的“数值歧义”与只能靠新信息或稳健决策应对的“环境歧义”，提出了以“是否存在高损失合理反例”为核心判据的合理反例检验框架，明确了边缘计算与海洋观测的功能边界。
+    \item \textbf{大数据标定与高效反例搜索方法：}提出了一种融合海洋大数据先验与包络定理梯度的反例检验算法；利用多年历史再分析海流标定旧粗图的无散流函数误差模态及覆盖90\%以上真实时间差的合理集合半径，将非凸流场搜索转化为球约束下的投影梯度上升，以相当于32成员集合的算力开销直接定位最坏后悔流场。
+    \item \textbf{黑潮强流区系统实验与实证发现：}在六年黑潮再分析海流的1333个强流任务上证实，64倍算力仅修复28\%的粗算错误，而99.7\%的粗图决策存在合理反例；证明了决定行动的不是反例是否存在而是最坏后悔的大小（前20\%高风险任务集中67\%损失），所提门控保守策略将平均航时损失显著降低28\%，并量化了原位测流与上浮取图的收益边界。
+\end{itemize}
+
+本文其余部分组织如下：第2节回顾元推理、面向决策的信息获取及不确定海流路径规划的相关工作；第3节简述东海赤潮巡测前期研究，说明单纯增加计算为何收效甚微；第4节建立粗分辨率海流图下的绕障航路决策模型并剖析问题本质；第5节详述数值校验、大数据合理集合标定、投影梯度反例搜索与门控响应方法；第6节给出黑潮海区的实验结果、归因分析与适用范围；第7节拆解本文的原创创新点与研究演进脉络；第8节总结全文并展望未来工作。
+
+
+########## ATTACHED FILE: sections/related.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{相关工作}
+
+\subsection{受限理性元推理与智能体过度思考}
+机载计算资源的分配问题源于人工智能领域的受限理性与元推理理论，其核心在于评估“计算的价值”是否超过计算所耗费的时间与能量代价\cite{horvitz1987reasoning,russell1991right}。在机器人运动规划与实时控制中，研究者通过学习停止规则或自适应计算预算，决定何时终止路径搜索并执行当前最优动作，或将规划与移动并行交织\cite{xiao2020thinking,sung2021quit,elboher2023formal,magnino2026metareasoning}。然而，当内部环境模型本身存在严重偏差时，延长规划视野或增加搜索深度反而会放大模型误差，诱发决策分析中的“优化器诅咒”，使规划器陷入无益的过度思考\cite{smith2006curse,jiang2015horizon,cuadron2025overthinking}。近期在智能体推理与任务消歧中也发现了高度一致的规律：当外部环境状态未知或指令本身存在多重解释时，增加测试时计算无法替代与环境的交互或主动向用户寻求澄清\cite{hunt2021formalizing,shen2025thinking,kobalczyk2025active}。与上述仅关注何时停止搜索的元推理方法不同，本文将模糊性明确拆解为求解器粗糙引起的数值歧义与地图失真引起的环境歧义，从而在继续计算、获取观测与保守行动之间建立定量切换准则。
+
+\subsection{面向决策的信息获取与多解性判别}
+并非所有减少环境不确定性的观测都能改善特定决策，唯有能够区分竞争假设的信息才具备决策价值\cite{chernoff1959sequential,box1967discrimination}。在统计实验设计与多臂赌博机理论中，最优臂识别与信息导向采样通过度量备选动作之间的置信重叠或信息比，专门收集能够尽快排除次优选项的样本，而非均匀降低全局参数方差\cite{garivier2016optimal,russo2018thompson,russo2018ids}。在大规模贝叶斯反问题中，目标导向实验设计同样强调只针对感兴趣的目标泛函优化传感器布放\cite{attia2018goal}。与之呼应，信息间隙决策理论与机器学习中的预测多解性研究指出，当多个与训练数据同样相容的模型对同一样本给出截然相反的预测时，单靠点估计无法保证决策安全，必须考察给定不确定性半径内的最坏表现\cite{benhaim2006infogap,marx2020predictive}。不同于在离散假设空间或线性反问题中计算期望信息增益的传统策略，本文利用包络定理直接在连续无散海流场上沿梯度搜寻翻转二元航路选择的物理反例，以最坏后悔直接度量环境歧义的严重程度。
+
+\subsection{不确定海洋流场中的航路规划与自适应采样}
+强海流环境下的自主水下航行器路径规划长期受到海洋工程界关注，经典方法利用图搜索或水平集方程在已知确定性流场中求取时间最优轨迹\cite{dijkstra1959note,lolla2014levelset}。为应对海洋预报的不确定性，研究者相继提出了基于集合预报的期望与风险折中路径规划、动态正交方程驱动的随机时间最优控制，以及显式纳入预报误差协方差的鲁棒路径搜索\cite{wang2016path,subramani2018stochastic,kularatne2018forecast}。与此同时，海洋自适应采样研究利用高斯过程或集合卡尔曼滤波在线更新叶绿素或温盐流场估计，引导航行器前往信息增益高的特征区域\cite{anderson2001eakf,srinivas2012gpucb,hollinger2014sampling,fossum2019}。然而，现有不确定流场规划大多将集合样本或概率分布作为固定输入来寻找单一路径，既不评估有限集合是否漏掉了翻转拓扑走向的极端流场，也不回答在出发前或航行中是否值得付出时间代价去换取新海流图；本文则将多年海洋再分析大数据转化为合理流场集合的物理边界，专门解决粗分辨率海流图下“算、测、走”的闭环元决策问题。
+
+
+########## ATTACHED FILE: sections/prior.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{前期研究：多算为何收效甚微}
+
+本文的研究问题始于作者在东海赤潮巡测场景下对机载算力分配的初步探索：当自主水下航行器仅携带一张3天前的陈旧卫星叶绿素浓度图下水，需要在“继续机载推演计算”“边走边测”与“停下复测”之间分配有限作业时间时，多算究竟能否带来更好的观测收益\cite{lou2014diurnal,mnr2024bulletin}？在该前期研究中，我们用多年卫星叶绿素数据标定旧图误差，构造48个想象海洋（32个用于搜索航线、16个留出不参与搜索）\cite{beckers2003dineof,gaspari1999correlation}，采用交叉熵方法在机载端搜索巡测航线\cite{deboer2005cem}，并以航行器随时报告的最浓位置与真实最浓处之间的对数叶绿素浓度差的时间平均（遗憾）作为评价指标，考察了推演次数与时间分配策略的作用。
+
+前期研究的第一个核心发现是，在陈旧背景图上大幅增加机载推演计算，只会使规划器在自身搜索过的想象海洋上给出的自评分数持续虚高，而航线在真实海洋中的价值早已停止增长\cite{smith2006curse,vanhasselt2010double}。如图\ref{fig:curse}所示，当每次决策的想象推演次数从64次增加到2000次乃至20万次时，规划器搜索时的自评价值从0.762一路攀升至0.833和0.917；然而，所选航线在真实海洋中的价值仅从0.749升至0.793和0.803，在约2000次推演后便彻底饱和，且在不参与搜索的留出海洋上的独立评判（0.745、0.794、0.802）始终紧贴真实价值。这表明过多的算力并未帮航行器看清真实赤潮的位置，而是被用来过度迎合有限想象样本中的偶然高值噪声。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig_curse}
+\caption{前期东海赤潮巡测研究揭示的机载过度计算现象。(a) 所选航线价值（对数叶绿素浓度）随每次决策想象推演次数（64至20万次）的变化：规划器搜索时的自评从0.762持续升至0.917，而真实价值从0.749升至0.793后在约2000次推演处饱和（20万次时为0.803），留出海洋上的独立评判紧贴真实价值；(b) 估计价值减真实价值的偏差：搜索自评的高估偏差随计算量单调膨胀，留出评判保持无偏，不确定性幅度设错仅引起整体平移。多算只让规划器的答案在旧信息上越来越“精致”，却不能提供区分真实环境的新信息。}
+\label{fig:curse}
+\end{figure}
+
+前期研究的第二个发现是，在连续平滑的标量场巡测中，无论如何精巧地设计计算与观测的时间分配策略，其所能改变的结局空间都极其有限。实验表明，采用出发前预演选出的用时策略其平均遗憾为0.265，而即使在每个任务结束后事后挑出最好的用时策略，遗憾也只能降到0.243，意味着用时分配本身的最大可改进空间仅有约0.022（经典单步元推理为0.287）。对遗憾来源的拆解进一步显示，当航行器从距离赤潮最浓处中位数达48千米的窗口边缘下水时，知道真相直奔最浓处的遗憾为0.206，换成当天卫星图为0.235；若改在旧图最浓处下水，五种不同用时策略的遗憾均集中在0.126至0.145之间，换成当天卫星图则降至0.098（尝试用前一天光流外推3天反而比直接用旧图误差增大0.018，95\%置信区间为0.012至0.025，说明逐日卫星图里没有可外推的整体移动）。换言之，下水位置决定了约0.13的差距，信息新鲜度决定了约0.03，而计算与观测的用时分配仅占约0.02。
+
+这一前期探索促使作者把问题进一步收紧：既然当多个可能的世界都与现有旧图相容、却要求采取截然不同的行动时，继续计算无法将它们区分开来，那么在强海流绕障这种一旦选错一侧就会付出数小时代价的离散拓扑决策中，我们能否直接检验“是否存在另一个同样合理却让当前选择吃大亏的流场”，并以此决定何时该算、何时该测、何时该保守绕行？这正是本文接下来要解决的核心问题。
+
+
+########## ATTACHED FILE: sections/problem.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{问题建模}
+
+\subsection{任务场景与海洋再分析数据}
+本文研究自主水下航行器在强流海区携带陈旧粗分辨率海流图执行绕障航行的二元路径决策问题，全部环境设置与参数汇总于表\ref{tab:settings}。研究海区选取台湾以东至东海的黑潮强流区（23°--31°N、121°--129°E），海流数据取自HYCOM全球海洋再分析产品（GLBy0.08，实验93.0\cite{chassignet2007hycom}）10米水深处的水平流速场，空间分辨率为1/12°，时间跨度自2019年1月1日至2024年8月29日每3天取一张12:00时快照，共689张；其中2019--2021年共365张作为开发年份用于标定误差模型与门控阈值，2022--2024年共324张作为独立测试年份。在每张海流快照上随机生成2个航行任务，要求起点与终点相距100--140千米且离岸不少于20千米，两点连线中点处存在一个半径15千米的圆形禁航区，航行器必须选择从禁航区的左侧或右侧绕过；为聚焦强流影响，只保留粗图上任务区平均流速不低于0.3米/秒的任务，最终得到开发年份710个任务（分布于357天）与测试年份623个任务（分布于313天）。航行器在下水时仅携带3天前生成的1°粗分辨率海流图（由3天前的1/12°场在1°网格内平均得到，简称粗图），而当天的1/12°再分析海流场则作为检验决策好坏的真实海流。
+
+\begin{table}[htbp]
+\centering
+\caption{粗分辨率海流图下自主水下航行器航路决策问题的实验设置与参数。}
+\label{tab:settings}
+\small
+\input{tables/route_settings.tex}
+\end{table}
+
+\subsection{航线求解与计算预算}
+给定任一水平海流场 $\boldsymbol{u}(\boldsymbol{x})$ 与航行器恒定的对水巡航速度 $V = 1.0$ 米/秒，航行器在选定绕行一侧 $s \in \{\text{L}, \text{R}\}$（左侧或右侧）后的最快航线通过有向图上的最短路算法求取\cite{dijkstra1959note}。将任务海域离散为规则空间网格，对连接相邻网格节点的有向边 $e$（长度为 $\ell_e$、单位方向向量为 $\boldsymbol{d}_e$），以边两端节点海流的平均作为该边的海流，记其沿边分量为 $u_{\parallel} = \boldsymbol{u} \cdot \boldsymbol{d}_e$、垂直边分量为 $u_{\perp} = \|\boldsymbol{u} - u_{\parallel}\boldsymbol{d}_e\|$。为保持航迹严格沿边方向推进，航行器必须以部分对水速度抵消横流，由此得到沿该边的有效对地速度 $v_{\text{g}}(e)$ 与通行时间 $t(e)$ 分别为：
+\begin{equation}
+v_{\text{g}}(e) = u_{\parallel} + \sqrt{V^2 - u_{\perp}^2}, \qquad t(e) = \frac{\ell_e}{v_{\text{g}}(e)}.
+\label{eq:edge_time}
+\end{equation}
+当横流过大导致 $|u_{\perp}| \ge V$ 或顶流过强导致 $v_{\text{g}}(e) \le 0$ 时，该有向边不可通行，其通行时间记为无穷大。通过在连接起点与终点且严格位于禁航区左侧或右侧的子图上求解最短路径，即可得到流场 $\boldsymbol{u}$ 下左、右两侧的最优航时 $T_{\text{L}}(\boldsymbol{u})$ 与 $T_{\text{R}}(\boldsymbol{u})$，并定义两侧时间差为：
+\begin{equation}
+\Delta T(\boldsymbol{u}) = T_{\text{L}}(\boldsymbol{u}) - T_{\text{R}}(\boldsymbol{u}),
+\label{eq:delta_t}
+\end{equation}
+其中 $\Delta T(\boldsymbol{u}) < 0$ 表示左侧更快，$\Delta T(\boldsymbol{u}) > 0$ 表示右侧更快。为刻画机载计算资源的投入，本文设置三档航线求解精度：粗算采用8千米网格与8个航向（相对计算量为1），标准采用4千米网格与16个航向（相对计算量为8），精算采用2千米网格与32个航向（相对计算量为64，按图中有向边总数计量）。选定绕行一侧 $s$ 后，假设航行器在实际下水航行过程中能够利用走航感知在该侧拓扑通道内按真实海流 $\boldsymbol{u}_{\text{true}}$ 以最优方式顺应流场（在测试年份中更快一侧的平均航时为39.2小时），因此本文聚焦于出发前或航行初段“选左侧还是选右侧”这一不可逆的二元拓扑决策。
+
+\subsection{合理海流集合的参数化建模}
+由于3天前的1°粗图 $\boldsymbol{u}_0(\boldsymbol{x})$ 同时缺失了中尺度切变与3天内的流轴演变，真实海流必然偏离 $\boldsymbol{u}_0$，但其偏离幅度与空间结构受区域海洋动力学约束而非任意噪声。我们用流函数生成无散的误差模态，并按多年数据标定的误差大小逐点缩放，构造叠加在粗图之上的合理海流 $\boldsymbol{u}(\boldsymbol{x}; \boldsymbol{z})$：
+\begin{equation}
+\boldsymbol{u}(\boldsymbol{x}; \boldsymbol{z}) = \boldsymbol{u}_0(\boldsymbol{x}) + \sum_{k=1}^{K} z_k \boldsymbol{m}_k(\boldsymbol{x}), \qquad \boldsymbol{m}_k(\boldsymbol{x}) = \mathbf{S}(\boldsymbol{x})\, \nabla^{\perp}\phi_k(\boldsymbol{x}),
+\label{eq:plausible_field}
+\end{equation}
+其中 $\nabla^{\perp} = (-\partial_y, \partial_x)$，$\{\phi_k\}_{k=1}^{K}$ 为相关长度 $L_{\text{corr}}$ 的高斯相关流函数的前 $K$ 个主模态（保留95\%方差），因而 $\nabla^{\perp}\phi_k$ 处处无散；$\mathbf{S}(\boldsymbol{x})$ 为对角缩放矩阵，使两个流速分量在各点的方差等于开发数据标定的误差方差（缩放后近似无散）；$\boldsymbol{z} = (z_1, \dots, z_K)^{\top}$ 为先验服从标准正态分布的组合系数。给定半径 $r > 0$，合理集合定义为
+\begin{equation}
+\mathcal{U}(r) = \left\{ \boldsymbol{u}(\boldsymbol{x}; \boldsymbol{z}) \;\middle|\; \|\boldsymbol{z}\|_2 \le r \right\}.
+\label{eq:plausible_set}
+\end{equation}
+半径 $r$ 由开发年份标定（第5.3节），使 $\mathcal{U}(r)$ 恰好大到能包住大多数真实海洋的两侧时间差。
+
+\subsection{可选动作、观测代价与评价指标}
+在任务起点处，航行器面对粗图 $\boldsymbol{u}_0$ 可在五类动作中做出选择：（1）直接照地图走：在粗图上用粗算、标准或精算选出账面更快的一侧立即出发；（2）改变决策准则而不取新信息：在合理集合上按期望时间选平均航时更短的一侧，或采取保守准则选最坏情况下后悔最小的一侧；（3）就地或顺路原位测流：包括出发前原地停留2小时连续测流12次、沿所选一侧航行30千米或60千米并连续测流后再决定是否调头换边，以及专门绕行到前方40千米内反例与地图流速差别最大处去定点测量（原位测流仪器噪声为0.05米/秒，执行数据同化更新流场时考虑代表性误差取0.15米/秒\cite{anderson2001eakf}）；（4）上浮取新图：上浮接收岸基下发的当天1°图或当天0.5°图，每次上浮通信与定位耗时计1小时（并在灵敏度分析中考察0至4小时的代价变化），随后在更新后的地图上选边出发；（5）本文提出的反例检验门控：先进行按需精算与反例检验，仅在最坏后悔超标时触发保守选边或上浮取图。设某决策动作最终耗费的总航行与观测时间为 $T_{\text{total}}$，定义该次任务的航时“损失”为实际总耗时减去真实海流下更快一侧的最优航时：
+\begin{equation}
+\mathcal{L} = T_{\text{total}} - \min\left\{ T_{\text{L}}(\boldsymbol{u}_{\text{true}}),\, T_{\text{R}}(\boldsymbol{u}_{\text{true}}) \right\}.
+\label{eq:loss}
+\end{equation}
+损失 $\mathcal{L} \ge 0$ 越低越好；当不发生额外驻留、绕行或上浮耗时且选对更快一侧时，损失为0小时。
+
+\subsection{问题剖析：为何常规计算与盲目观测难以奏效}
+上述决策问题的核心矛盾在于：选对左右绕行一侧高度依赖禁航区两侧数十千米尺度上的真实海流切变信息，而航行器手中的3天前1°粗图恰恰抹平了这一信息，机载计算只能不断锐化粗图自身的几何推论，却无法凭空创造缺失的海洋物理信息。这一根本矛盾衍生出两个决定方法设计的结构性性质：
+
+第一，粗图上的两侧时间差模糊性具有两个截然不同的来源——求解器网格离散引起的“数值歧义”与海洋背景场失真引起的“环境歧义”，二者要求的应对动作完全不同。当 $|\Delta T(\boldsymbol{u}_0)|$ 很小时，如果仅是因为8千米粗算网格过粗导致路径折线失真，换成2千米精算网格即可看清粗图本来的倾向；然而，如果即使在精算下地图选出了某侧 $s_0$，在合理集合 $\mathcal{U}(r)$ 内依然存在另一个物理相容的流场 $\boldsymbol{u}^*$ 使另一侧明显更快，那么这种模糊性就是环境本身的多解性，继续加密网格到1千米或0.5千米也丝毫无助于判断真实海洋究竟接近 $\boldsymbol{u}_0$ 还是 $\boldsymbol{u}^*$。
+
+第二，是否值得付出宝贵的航时去执行观测，并不取决于是否存在合理反例，而取决于该反例一旦成真会让当前决策多损失多少小时（即最坏后悔的大小）以及观测手段能否触及决定胜负的海区。在强流区使用3天前的1°粗图时，由于背景误差相关长度达数十千米，几乎任何任务都能在合理集合内找到某个让另一侧略快一点的流场；若一见到反例就去观测或放弃地图，系统将陷入过度反应。因此，算法必须直接求出合理集合内所选一侧相对于另一侧的最大可能航时劣势，并将这一最坏后悔与观测的时间代价直接比较，这自然引出了第5节的合理反例检验与门控方法。
+
+
+########## ATTACHED FILE: sections/method.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{方法}
+
+为在受限机载算力与高昂观测代价下做出稳健的航路选择，本文提出如图\ref{fig:overview}(d)所示的四步闭环决策方法：首先通过按需精算消除数值歧义，其次在基于多年海洋大数据标定的合理海流集合内利用投影梯度上升搜索最坏合理反例，最后根据反例的最坏后悔执行门控分流。本节依次阐述各模块的设计原理、其所替代的常规做法及完整算法流程。
+
+\subsection{按需精算：数值歧义的快速识别与消除}
+区分求解器误差与环境不确定性的首要原则，是仅当粗网格求解的账面时间差落在数值离散误差容限之内时，才动用高分辨率网格进行精算。常规的确定性航路规划往往采取一刀切的做法：要么为了节省算力对所有任务一律使用粗算，导致在两侧航时接近时因网格锯齿效应而选错方向；要么不计代价对所有任务一律执行耗时64倍的精算，在那些粗图上两侧原本就相差十几个小时的明朗任务上白白浪费机载电能。这种无差别的算力投放忽略了数值离散误差具有明确统计上界这一事实。
+
+为此，我们在开发年份的710个任务上预先离线对比粗算（8千米网格、8方向）与精算（2千米网格、32方向）在同一张粗图 $\boldsymbol{u}_0$ 上求出的两侧时间差 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$ 与 $\Delta T_{\text{fine}}(\boldsymbol{u}_0)$。统计二者绝对偏差 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0) - \Delta T_{\text{fine}}(\boldsymbol{u}_0)|$ 的经验分布，取其95\%分位数作为数值误差容限 $\tau_{\text{num}}$（在开发年份标定得 $\tau_{\text{num}} = 3.2$ 小时）。在线执行时，航行器首先以相对计算量为1的粗算快速求得 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$；若 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| \ge \tau_{\text{num}}$，说明精算有95\%以上的把握不会改变粗图上的左右快慢顺序，直接采纳粗算结果；仅当 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$ 时，才判定存在数值歧义并触发精算。这一按需精算机制以极小的平均算力开销确保了地图基准选择 $s_0 = \arg\min_{s \in \{\text{L}, \text{R}\}} T_s(\boldsymbol{u}_0)$ 不受求解器粗糙度的误导。
+
+\subsection{反例检验：基于包络定理的合理集合投影梯度搜索}
+判断粗图推荐的一侧 $s_0$ 是否面临严重的环境歧义，最直接的准则是主动在合理集合 $\mathcal{U}(r)$ 内寻找一个使所选一侧 $s_0$ 相比另一侧 $\bar{s}_0$ 尽可能变慢的“最坏合理反例”，而非在少数随机样本上求平均。现有的集合路径规划方法通常从误差分布中随机抽取 $M$ 个（如32个）流场样本，统计各样本下的航时均值或翻转比例\cite{wang2016path}。然而，翻转比例只反映有多少样本翻转了决定，不反映翻转后损失有多大；而两侧时间差只对少数扰动方向敏感，随机样本未必落在这些方向上。
+
+为直接揪出这一最坏流场，我们将反例检验构建为合理球域上的约束最大化问题。定义任意流场 $\boldsymbol{u}(\boldsymbol{z}) \in \mathcal{U}(r)$ 下选用一侧 $s$ 的“最坏后悔”函数为该侧航时超出另一侧 $\bar{s}$ 航时的部分，并在半径 $r$ 的合理球内求其最大值 $R_s(r)$：
+\begin{equation}
+R_s(r) = \max_{\|\boldsymbol{z}\|_2 \le r} J_s(\boldsymbol{z}), \qquad J_s(\boldsymbol{z}) = \max\left\{ 0,\, T_s(\boldsymbol{u}(\boldsymbol{z})) - T_{\bar{s}}(\boldsymbol{u}(\boldsymbol{z})) \right\}.
+\label{eq:worst_regret}
+\end{equation}
+当针对地图所选一侧 $s_0$ 求出的 $R_{s_0}(r) > 0$ 时，即表明合理集合内存在使另一侧 $\bar{s}_0$ 反而更快的合理反例，且 $R_{s_0}(r)$ 给出了若真实海洋恰为该反例流场时坚持选 $s_0$ 将多付出的最大航时（小时）。
+
+求解式(\ref{eq:worst_regret})的关键难点在于目标函数 $T_{\text{L}}(\boldsymbol{u}(\boldsymbol{z})) - T_{\text{R}}(\boldsymbol{u}(\boldsymbol{z}))$ 嵌套了图最短路算子，若对每个模态系数 $z_k$ 采用有限差分求导，每次迭代将需要 $2K$ 次最短路求解，机载算力根本无法承受。本文利用最优化中的包络定理（Danskin定理）避免了这一开销：当流场发生微小扰动时，最短路径 $P_s^*(\boldsymbol{z})$ 自身的节点序列在一阶近似下保持不变，因此最优航时 $T_s(\boldsymbol{u}(\boldsymbol{z}))$ 对流场切变系数 $\boldsymbol{z}$ 的梯度，精确等于沿着当前已求出的那条最快航线 $P_s^*(\boldsymbol{z})$ 将各条边通行时间 $t(e)$ 对局部流速的偏导数直接累加：
+\begin{equation}
+\frac{\partial T_s}{\partial z_k} = \sum_{e \in P_s^*(\boldsymbol{z})} \left( \frac{\partial t(e)}{\partial u_{\parallel}} \boldsymbol{d}_e + \frac{\partial t(e)}{\partial u_{\perp}} \boldsymbol{n}_e \right) \cdot \frac{\boldsymbol{m}_k(\boldsymbol{x}_e^{-}) + \boldsymbol{m}_k(\boldsymbol{x}_e^{+})}{2},
+\label{eq:envelope_grad}
+\end{equation}
+其中 $\boldsymbol{x}_e^{-}$、$\boldsymbol{x}_e^{+}$ 为有向边 $e$ 的两端节点，$\boldsymbol{n}_e$ 为垂直边方向的单位向量，$\boldsymbol{m}_k$ 为式(\ref{eq:plausible_field})中的误差模态，而标量导数由式(\ref{eq:edge_time})直接解析给出：
+\begin{equation}
+\frac{\partial t(e)}{\partial u_{\parallel}} = -\frac{\ell_e}{v_{\text{g}}(e)^2}, \qquad \frac{\partial t(e)}{\partial u_{\perp}} = \frac{\ell_e u_{\perp}}{v_{\text{g}}(e)^2 \sqrt{V^2 - u_{\perp}^2}}.
+\label{eq:edge_deriv}
+\end{equation}
+得益于式(\ref{eq:envelope_grad})，每一步梯度计算只需在标准网格（4千米、16方向）上对左、右两侧各求一次最短路（共2次求解），即可同时获得两侧航时差对全部 $K$ 个流函数模态系数的完整梯度向量 $\boldsymbol{g}(\boldsymbol{z}) = \nabla_{\boldsymbol{z}} \Delta T(\boldsymbol{u}(\boldsymbol{z}))$。
+
+在具体搜索策略上，若目标函数 $\Delta T(\boldsymbol{u}(\boldsymbol{z}))$ 关于 $\boldsymbol{z}$ 完全线性，则球约束下的极值必然精确落在从原点 $\boldsymbol{z}=\boldsymbol{0}$ 沿初始梯度 $\boldsymbol{g}(\boldsymbol{0})$ 直接跳到球面边界的点上。利用这一物理特性，我们的反例搜索先在粗图中心 $\boldsymbol{z}=\boldsymbol{0}$ 处计算初始梯度，一步直接跳至半径为 $r$ 的球面边界 $\boldsymbol{z}^{(1)} = \pm r\, \boldsymbol{g}(\boldsymbol{0}) / \|\boldsymbol{g}(\boldsymbol{0})\|_2$，随后在球内执行步长减半的投影梯度上升以适应流线弯曲带来的非线性效应。为同时评估左、右两侧各自的最坏后悔并支持不同半径下的快速查询，算法分别朝使左侧变慢（最大化 $\Delta T$）与使右侧变慢（最小化 $\Delta T$）两个方向、在基准半径 $r=1$ 与 $r=2$ 上各搜索一次，其他任意标定半径 $r$ 下的最坏后悔直接由 $r=1$ 与 $r=2$ 的结果线性插值得到。整个反例检验过程在每个任务上共计消耗约71次标准网格航线求解，与评估一个32成员集合所需的计算量（$32 \times 2 = 64$次求解）基本持平。
+
+\subsection{海洋大数据标定：合理集合的物理结构与覆盖半径}
+“合理反例”之所以具有实际决策指导意义而非脱离现实的数学构造，关键在于“合理”二字严格由多年历史海洋大数据标定，而非人为主观指定。若像一般的鲁棒决策那样凭经验设定不确定性集合的形状与半径\cite{benhaim2006infogap}，在海洋中要么因半径过小而漏掉黑潮锋面的真实摆动，要么因在弱流区也施加过大扰动而制造出不现实的反例。
+
+本文利用开发年份（2019--2021年，365张快照）中3天前1°粗图 $\boldsymbol{u}_0$ 减去当天1/12°真实海流 $\boldsymbol{u}_{\text{true}}$ 的历史误差样本，分两步完成合理集合的物理标定。第一步标定空间结构：统计研究海区各网格点上历史误差流速的大小，生成空间非均匀的典型误差幅度图（即式(\ref{eq:plausible_field})中缩放矩阵 $\mathbf{S}(\boldsymbol{x})$ 的依据；3天前1°粗图在全区的典型误差中位数为0.17米/秒，沿黑潮主轴显著偏大，而当天0.5°图仅为0.07米/秒），并计算两点间误差相关系数随空间距离的衰减曲线，定出3天前1°粗图的误差相关长度 $L_{\text{corr}} = 76$ 千米（当天0.5°图为18千米），以此生成流函数模态 $\{\phi_k\}$。
+
+第二步标定合理集合的半径 $r$：什么样的半径才算既不过于悲观、又能真实反映海洋可能发生的变化？我们提出基于决策目标的覆盖率准则——在开发年份的710个任务上，考察随半径 $r$ 增大，合理集合 $\mathcal{U}(r)$ 所给出的两侧时间差范围 $[\min_{\boldsymbol{u}\in\mathcal{U}(r)}\Delta T(\boldsymbol{u}),\, \max_{\boldsymbol{u}\in\mathcal{U}(r)}\Delta T(\boldsymbol{u})]$ 能够包住当天真实海流两侧时间差 $\Delta T(\boldsymbol{u}_{\text{true}})$ 的任务比例。将覆盖比例达到至少90\%的最小半径选定为标定半径，由此在开发年份上唯一定出 $r = 1.5$（该半径在开发年份实际覆盖93\%的任务，在完全独立的测试年份覆盖94\%的任务）。这一准则以决策关心的两侧时间差为尺度，使合理集合恰好大到能包住大多数真实海洋，而不必凭经验猜测半径。
+
+\subsection{门控响应：依据最坏后悔与观测代价权衡行动}
+在获得地图所选一侧的最坏后悔 $R_{s_0}(r)$ 与另一侧的最坏后悔 $R_{\bar{s}_0}(r)$ 后，最后一步是根据最坏后悔是否超过门控阈值 $\theta$ 以及外部观测代价的高低，在“照地图走”“上浮取新图”与“改走保守一侧”之间做出响应。现有的自适应采样或保守规划方法往往走两个极端：要么只要检测到不确定性就不顾代价地去测量，忽略了原地停留、绕行或频繁上浮本身就会直接吃掉数小时航时；要么对所有任务无条件采用保守或贝叶斯期望策略，在地图本来就十分可靠的低风险任务上错失最快航线。
+
+本文设计的门控逻辑遵循“小风险直接走、大风险比代价”的原则。设开发年份上按平均损失最小选定的门控阈值为 $\theta$（标定得 $\theta = 8$ 小时）：
+\begin{enumerate}
+    \item 若 $R_{s_0}(r) \le \theta$，说明即使合理集合内最不利的流场成真，坚持按地图选 $s_0$ 至多也只会遭受不超过 $\theta$ 的有限劣势，环境歧义尚不足以推翻地图，航行器直接照地图走（选择 $s_0$），无需耗费额外时间观测。
+    \item 若 $R_{s_0}(r) > \theta$，说明当前决策暴露在严重的尾部风险之下。此时进一步比较可用观测手段的净收益与不观测情况下的保守选择：当存在代价低廉且能有效消解大尺度流场歧义的观测手段（如上浮接收当天0.5°图，且单次上浮代价 $c_{\text{surf}}$ 较低）时，触发“门控后上浮取图”，在更新后的新图上重新选边出发；反之，当上浮通信受海况或任务隐蔽性限制而代价高昂，或仅有无法看清远方流场的原位测流可用时，触发“门控后取保守”，直接无需观测地改选合理集合内最坏后悔更小的一侧：
+    \begin{equation}
+    s_{\text{cons}} = \arg\min_{s \in \{\text{L}, \text{R}\}} R_s(r).
+    \label{eq:conservative_choice}
+    \end{equation}
+\end{enumerate}
+算法\ref{alg:counterexample_gate}给出了整个合理反例检验与门控决策的完整伪代码流程。
+
+\begin{algorithm}[htbp]
+\caption{基于合理反例检验的自主水下航行器航路门控决策算法}
+\label{alg:counterexample_gate}
+\begin{algorithmic}[1]
+\Require 粗分辨率海流图 $\boldsymbol{u}_0$，标定误差幅度图 $\sigma(\boldsymbol{x})$ 与无散流函数基 $\{\phi_k\}_{k=1}^{K}$，标定半径 $r=1.5$，数值误差容限 $\tau_{\text{num}}=3.2$ 小时，门控阈值 $\theta=8.0$ 小时，上浮取图代价 $c_{\text{surf}}$ 及代价平衡点 $c^* \approx 1.0$ 小时。
+\Ensure 最终执行的航路决策动作（选定绕行一侧 $s^*$ 或触发上浮取新图）。
+\State 在粗图 $\boldsymbol{u}_0$ 上用粗算（8千米网格、8方向）求解两侧航时，得时间差 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$。
+\If{$|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$}
+    \State 触发按需精算：在 $\boldsymbol{u}_0$ 上用精算（2千米网格、32方向）重算得 $\Delta T_{\text{fine}}(\boldsymbol{u}_0)$，定地图倾向侧 $s_0 \gets \arg\min_{s \in \{\text{L},\text{R}\}} T_s^{\text{fine}}(\boldsymbol{u}_0)$。
+\Else
+    \State 直接采纳粗算结果：$s_0 \gets \arg\min_{s \in \{\text{L},\text{R}\}} T_s^{\text{coarse}}(\boldsymbol{u}_0)$。
+\EndIf
+\State 在中心 $\boldsymbol{z}=\boldsymbol{0}$ 处用标准网格（4千米、16方向）求左、右最快航线，按包络定理式(\ref{eq:envelope_grad})计算初始梯度 $\boldsymbol{g}(\boldsymbol{0})$。
+\State 分别沿 $+\boldsymbol{g}(\boldsymbol{0})$ 与 $-\boldsymbol{g}(\boldsymbol{0})$ 方向跳至 $r_1=1$ 与 $r_2=2$ 的球面边界，执行步长减半的投影梯度上升，并在标定半径 $r$ 处线性插值得两侧最坏后悔 $R_{\text{L}}(r)$ 与 $R_{\text{R}}(r)$。
+\If{$R_{s_0}(r) \le \theta$}
+    \State \Return 直接照地图走：选择绕行一侧 $s^* \gets s_0$。
+\Else
+    \If{允许上浮通信且 $c_{\text{surf}} < c^*$}
+        \State \Return 门控后上浮取图：付出代价 $c_{\text{surf}}$ 获取当天0.5°海流图 $\boldsymbol{u}_{\text{new}}$，选 $s^* \gets \arg\min_{s \in \{\text{L},\text{R}\}} T_s(\boldsymbol{u}_{\text{new}})$。
+    \Else
+        \State \Return 门控后取保守：选择最坏后悔更小的一侧 $s^* \gets \arg\min_{s \in \{\text{L},\text{R}\}} R_s(r)$。
+    \EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+
+########## ATTACHED FILE: sections/experiments.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{实验}
+
+本节利用台湾以东至东海黑潮区域六年的高分辨率海洋再分析数据，按逻辑顺序回答以下五个核心问题：（1）3天前的1°粗分辨率海流图究竟错在哪里，其误差是否具备可由大数据标定的空间物理结构？（2）单纯增加机载计算量能否消除绕障选边的错误，在包住真实海洋的合理集合内环境歧义有多普遍？（3）在所有不取新信息、就地测流、上浮取图与反例门控响应中，哪种策略能真正降低航时损失？（4）航时损失集中在哪些任务上，反例的最坏后悔为何比集合翻转比例更能抓住大损失任务，以及何时才值得付出代价去观测？（5）当海流图变好、航行器变慢或更换误差模型时，本文方法的适用边界在哪里？
+
+\subsection{实验设置与对比基线}
+实验严格遵循表\ref{tab:settings}与第4节所述的数据划分：所有误差模态、合理集合标定半径（$r=1.5$）、数值误差容限（$\tau_{\text{num}}=3.2$小时）及门控阈值（$\theta=8$小时）均完全在2019--2021年开发年份（710个任务）上标定选出，随后原封不动地应用于2022--2024年测试年份（623个任务）进行评价。为全面检验计算、决策准则与各类观测手段的效果，我们将全部14种对比方法按其物理机制分为五组（与主对比图一致）：第一组为“同一张粗图上加算”，包括地图+粗算、地图+标准与照地图走（精算）；第二组为“不取新信息、改变决策准则”，包括按期望时间（在32个合理海流样本中选平均航时更短的一侧，即贝叶斯期望准则）与保守（最坏后悔最小，即对所有任务一律选 $\arg\min_s R_s(r)$）；第三组为“就地取新信息”，包括原地停留测（停留2小时测12次）、沿途测30千米、沿途测60千米（边走边测后根据同化更新流场决定是否换边）以及绕行定点测（先绕去前方40千米内反例与地图差异最大处测量）；第四组为“上浮取新图”，包括总是上浮取当天1°图与总是上浮取当天0.5°图（主设置下每次上浮计1小时）；第五组为本文提出的“反例检验分流”，包括门控后取保守、门控后上浮取图（取当天0.5°图）以及作为消融对照的门控后按期望时间。所有结果均以测试年份的平均航时损失（小时）度量，并报告与照地图走（精算）基线配对差值的按天整组自助重抽样（2000次）95\%置信区间。
+
+\subsection{旧粗图错在哪里：黑潮误差的空间结构与尺度}
+3天前的1°粗分辨率海流图之所以频繁误导航路决策，根本原因在于其丢失了黑潮主轴及伴生涡旋的高幅值、长相关尺度切变，而这一误差结构可由多年历史再分析数据稳定标定。为了弄清航行器所带粗图的失真规律，我们在开发年份上对比了3天前1°粗图、当天0.5°图与当天1/12°真实海流之间的逐点向量差。图\ref{fig:data}展示了研究海区的平均流态、任务空间分布以及标定所得的误差幅度与空间相关尺度：在图\ref{fig:data}(a)中，黑潮强流带自台湾东北向东北方向蜿蜒贯穿东海陆架坡折，测试任务禁航区广泛覆盖了流轴核心与两侧强切变区；图\ref{fig:data}(b)表明，3天前1°粗图的典型误差并非全区均匀的白噪声，而是沿着黑潮主轴形成一条显著的高误差带，全区典型误差中位数达0.17米/秒（局部流轴处成倍升高）；图\ref{fig:data}(c)进一步显示，3天前1°粗图的误差空间相关长度长达76千米，而当天0.5°图的典型误差中位数则降至0.07米/秒、相关长度缩短至18千米。高达76千米的误差相关长度意味着，当禁航区直径为30千米、起终点跨度为100--140千米时，一个未被粗图解析的中尺度误差模态足以系统性地笼罩整个左侧或右侧通道，使整条备选航线同时遭受逆流或顺流偏置，这为用低维流函数模态构造合理集合提供了坚实的物理依据。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig_route_data}
+\caption{台湾以东至东海研究海区的流场特征与粗图误差标定。(a) 研究海区（23°--31°N、121°--129°E）在2019--2021年开发年份的10米平均海流场，黑潮主轴清晰可见，橙色圆点标示测试任务禁航区中心位置；(b) 3天前1°粗图的典型误差幅度分布（米/秒），最大误差带紧密贴合黑潮强流轴；(c) 海流误差相关系数随两点空间距离的衰减曲线，当天0.5°图的误差相关长度约为18千米，而3天前1°粗图达76千米。旧粗图的误差具有鲜明的空间结构与中尺度相关长度，可由多年海洋大数据可靠标定，构成了构造“合理海流”的物理依据。}
+\label{fig:data}
+\end{figure}
+
+\subsection{计算消除不了环境歧义：算力与合理反例的实证分析}
+实验结果证实，在同一张3天前的1°粗图上成十倍地增加机载计算量只能消除少部分数值歧义，而在能够包住真实海洋的合理集合内，几乎每一个任务都存在翻转决策的合理反例。为了定量分离数值歧义与环境歧义，我们在测试年份的623个任务上分别统计了不同求解精度与不同地图信息下的选错一侧比例，并扫描了合理集合半径 $r$ 从0.25到2.0变化时覆盖真实时间差与存在合理反例的任务占比。如图\ref{fig:ambiguity}(a)所示，当计算量从粗算增加8倍到标准、再增加到64倍的精算时，测试年份选错绕行一侧的任务比例仅从21.7\%微降至20.5\%和19.7\%（在开发年份中从25.1\%降至21.3\%），即增加64倍计算量仅仅修好了粗算错误的28\%，对应的平均航时损失也仅从1.16小时微降至1.03和0.98小时（粗算与精算配对差为+0.18小时，95\%置信区间为$[-0.14, 0.58]$，差异在统计上不显著）；相反，若不增加算力而是将地图换成当天的0.5°图，选错一侧的比例立即减半至10.4\%。图\ref{fig:ambiguity}(b)揭示了多算无效的根本原因：随着合理集合半径 $r$ 取0.25、0.5、1.0、1.5与2.0，测试年份中能找到合理反例的任务比例高达41.6\%、64.8\%、94.1\%、99.7\%与100.0\%；在满足开发年份覆盖率不低于90\%的标定半径 $r=1.5$ 处（开发年份实际包住93\%任务的真实两侧时间差，测试年份包住94\%），高达99.7\%的测试任务都存在至少一个与粗图同样合理、却让另一侧更快的反例海流场。这一结果说明，对于3天前的1°粗图而言，环境歧义是普遍规律而非例外；因此，仅问“是否存在合理反例”并没有区分度，真正决定行动的必然是反例所造成的最坏后悔有多大。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig_route_ambiguity}
+\caption{机载计算量与环境信息对航路决策歧义的不同作用。(a) 测试年份选错绕行一侧的任务比例：在同一张3天前1°粗图上将计算量从粗算（21.7\%）增加至标准（20.5\%）与64倍精算（19.7\%），错误率仅下降约2个百分点，而换成当天0.5°图则直接减半至10.4\%（知道真相为0\%）；(b) 开发年份合理集合包住真实两侧时间差的任务比例与测试年份存在合理反例的任务比例随半径 $r$ 的变化，在标定半径 $r=1.5$ 处两者分别达93\%与99.7\%。机载计算只能消除少量的数值歧义；在足以包住真实海洋的合理集合里，几乎每个决定都存在合理反例，因此必须进一步度量反例导致的最坏损失大小。}
+\label{fig:ambiguity}
+\end{figure}
+
+\subsection{主对比：五类响应策略的平均航时损失}
+在全部五类响应策略的系统对比中，唯有利用合理集合控制尾部风险的保守准则——特别是本文提出的门控后取保守策略——在统计上显著降低了测试年份的平均航时损失，而继续加算、按期望时间选边与各类就地测流均未能改善结局。图\ref{fig:main}汇总了各方法在623个测试任务上的平均损失及置信区间。首先，在不取新信息的方法中，照地图走（精算）的平均损失为0.98小时（95\%置信区间$[0.69, 1.33]$）；改用32个合理海流样本的按期望时间（贝叶斯）准则后，平均损失反而略升至1.04小时（与精算地图配对差为+0.06小时，$[-0.22, 0.34]$），即使加上反例门控（门控后按期望时间）平均损失仍为0.96小时（配对差-0.01小时，$[-0.29, 0.25]$），说明在对称分布的随机扰动下求平均航时并不能挑出翻转决策的不利流场。相反，本文提出的门控后取保守策略将测试年份的平均损失大幅降至0.70小时（$[0.48, 0.97]$），与照地图走（精算）的配对差为-0.28小时，95\%置信区间为$[-0.51, -0.07]$（严格不包含0），相对损失降低了28\%（在开发年份中同样从精算地图的1.13小时降至0.70小时）。同时可以如实看到，对所有任务一律取保守（最坏后悔最小）的平均损失为0.72小时（与精算地图配对差-0.26小时，$[-0.49, -0.05]$；开发年份为0.76小时），门控后取保守比一律取保守仅再降0.02小时：这表明在无需付出额外观测代价时，核心收益来自反例搜索所算出的最坏后悔准则本身，而门控的作用在于精准锁定了那47\%的高风险任务（其间保守规则实际改选另一侧的任务仅41个），并在需要调用有代价的上浮观测时避免在其余53\%的安全任务上浪费时间（总是上浮取当天0.5°图损失为1.22小时，而门控后上浮取0.5°图降至0.78小时，开发年份为0.76小时）。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig_route_main}
+\caption{测试年份623个强流任务上五类响应策略的平均航时损失对比（竖直虚线为照精算地图走的平均损失0.98小时）。各组从上至下依次为：同一张粗图上加算（粗算1.16、标准1.03、精算0.98小时）；不取新信息而改变决策准则（按期望时间1.04、最坏后悔最小的保守准则0.72小时）；就地取新信息（原地停留测2.91、沿途测30千米0.93、沿途测60千米0.91、绕行定点测12.43小时）；总是上浮取新图（每次计1小时：当天1°图1.67、当天0.5°图1.22小时）；以及本文反例检验门控分流（门控后取保守0.70、门控后上浮取0.5°图0.78小时）。只有基于合理反例最坏后悔的保守与门控策略显著降低了损失，单纯加算与就地测流均难以奏效。}
+\label{fig:main}
+\end{figure}
+
+\subsection{损失集中在哪里、何时值得观测}
+航路决策的航时损失在测试任务中呈现极端的长尾集中分布，反例的最坏后悔之所以有效，正是因为它比集合翻转比例和地图账面时间差更能将那些一旦选错就会损失十几个小时的高危任务排在最前面。统计表明，照地图走（精算）损失最大的前10\%任务竟然占了测试年份全部航时损失的92\%（开发年份占88\%）。如果只看一个指标能否区分“是否选错且多花1小时以上”（测试年份共79个此类任务）而不论具体多花多少小时，反例最坏后悔、32成员集合翻转比例与地图两侧时间差三者的受试者工作特征曲线下面积其实十分接近（分别为0.65、0.67与0.67）。然而，一旦考察谁能抓住真正造成巨大航时损失的任务，三者便拉开显著差距：如图\ref{fig:risk}(a)所示，按风险指标从高到低排序时，排在前20\%的任务所捕获的地图总损失比例，按反例最坏后悔高达67\%，而按32个合理场的翻转比例仅为49\%，按地图上两侧时间差越小越危险排则只有34\%（随机排序为20\%，按事后真实损失排的理论上限为100\%）；在门控阈值 $\theta=8$ 小时下，被标记的47\%任务更是囊括了高达82\%的地图总损失。这是因为集合翻转比例对“翻转后多花0.5小时”与“翻转后多花15小时”一视同仁，而梯度搜索的反例最坏后悔直接度量了不利流场在两侧通道造成的流速积分差。
+
+进一步分析各类观测手段为何有效或失效，可以清楚看到观测的空间覆盖范围与时间代价之间的硬约束。首先，就地原位测流在全部测试任务上均未能带来显著净收益：出发前原地停留测平均损失高达2.91小时（配对差+1.94小时，$[1.55, 2.31]$），因为它白白耗去了2小时驻留时间，却只在起点一个点上消除了0.05米/秒的仪器测量噪声，对远方禁航区两侧的海流毫无感知；专门绕行到前方40千米内反例与地图差异最大处去定点测量更是灾难性的，平均损失高达12.43小时（配对差+11.45小时，$[10.49, 12.46]$），因为航行器平均要先花15.4小时才能顶流赶到该测量点；而顺路沿所选一侧航行30千米或60千米边走边测后允许换边，平均损失分别为0.93小时（配对差-0.05小时，$[-0.30, 0.18]$）与0.91小时（配对差-0.07小时，$[-0.27, 0.05]$），改善均不显著——具体而言，沿途测30千米后决定调头换边的任务仅占3.4\%（其中81\%换对），因为此时尚未进入禁航区两侧的核心切变带，同化更新后的流场几乎不改变原判断；而走到60千米再换边的任务虽增至18.8\%，但由于已在原侧深入近半程，此时调头绕回另一侧的折返代价过大，换边反而只有15\%是划算的。其次，对于能够一眼看清全局的“上浮取当天0.5°图”，图\ref{fig:risk}(b)展示了平均损失随单次上浮代价（0至4小时）的变化规律：当上浮代价为0、0.5、1.0、2.0与3.0小时时，总是上浮取0.5°图的损失随代价线性攀升（分别为0.22、0.72、1.22、2.22与3.22小时），而门控后上浮取0.5°图因为只在47\%的高危任务上触发上浮，损失分别控制在0.22、0.55、0.78、1.06与0.98小时。由此得出清晰的行动边界：当单次上浮代价低于约1小时时，门控后上浮取新图是最优响应；当上浮代价高于约1小时时，无需观测的门控后取保守（恒为0.70小时）成为最优选择。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig_route_risk}
+\caption{航时损失的风险集中度排序与上浮观测代价平衡分析。(a) 按不同风险指标从高到低排序时，前一定比例任务累计捕获的地图总损失占比：排名前20\%的任务中，反例最坏后悔捕获了67\%的损失，显著高于32个合理场翻转比例（49\%）与地图两侧时间差（34\%）；(b) 测试年份平均损失随单次上浮取当天0.5°图时间代价（0--4小时）的变化曲线：总是上浮随代价线性恶化，门控后上浮在代价低于约1小时时最优，代价高于约1小时后门控后取保守（0.70小时）最优。反例最坏后悔能够精准揪出大损失任务，从而实现“观测便宜时门控去测、观测昂贵时门控保守”的自适应切换。}
+\label{fig:risk}
+\end{figure}
+
+\subsection{适用范围与消融分析}
+为了检验合理反例检验在不同先验地图质量、不同航行器机动能力以及不同合理集合构造方法下的适用边界，我们在另外三组设置（每组测试年份约350个任务，门控阈值各自在开发年份按相同规则标定）上开展了对比与消融实验，结果汇总于表\ref{tab:scope}。第一，当航行器下水时直接带有质量较好的当天0.5°图时（测试349个任务，平均最快航时38.7小时，标定半径 $r=1.75$），由于背景误差大幅减小，存在合理反例的任务比例从99.7\%降至64.5\%，精算地图选错率仅8.0\%（粗算8.9\%），照精算地图走的平均损失已低至0.17小时；此时反例最坏后悔前20\%任务仍能集中60\%的损失，且门控后取保守（0.17小时，与地图配对差+0.00小时，$[-0.04, 0.05]$）与门控后上浮取图（0.16小时）自动退化为绝大多数时候照地图走，不会产生负向干扰。第二，当航行器为对水速度 $V=0.75$ 米/秒的慢速航行器时（测试347个任务，平均最快航时延长至59.8小时，标定半径 $r=1.5$），流速接近甚至超过航速的风险加剧，虽然精算地图选错率为18.4\%（粗算22.2\%，存在合理反例占99.1\%），但一旦选错付出的航时成倍放大，照精算地图走的平均损失飙升至2.43小时；此时反例最坏后悔前20\%任务集中了高达74\%的损失，门控后取保守将平均损失降至1.80小时（减少0.63小时，但95\%区间$[-1.67, 0.30]$含0，未达显著），而由于选错的代价变大、1小时的上浮代价相对变小，门控后上浮取0.5°图将损失降至1.32小时。第三，在消融实验中，若去掉本文用多年数据标定的流函数无散误差模态，改用从历史相似日直接抽取小尺度差值场来拼装合理集合（测试349个任务，平均最快航时39.8小时，标定半径 $r=1.5$，精算选错19.5\%、粗算22.3\%，存在反例99.4\%），虽然前20\%任务仍能捕获64\%损失且门控后上浮取图为0.77小时，但门控后取保守的平均损失为0.95小时，相比精算地图的0.99小时仅微降0.04小时（$[-0.43, 0.36]$），几乎失去了保守选边的纠错能力。两组的反例搜索方法完全相同，差别只在“合理”如何定义：由多年数据标定误差大小与相关长度的合理集合，能够指出真正危险的一侧，而拼装历史相似日的小尺度差则不能。
+
+\begin{table}[htbp]
+\centering
+\caption{不同海流图质量、航行器速度及合理集合构造方法下的适用范围与消融实验结果（损失单位：小时）。}
+\label{tab:scope}
+\small
+\input{tables/route_scope.tex}
+\end{table}
+
+\subsection{局限性讨论}
+本文的研究与实验设计存在四个方面的局限。第一，实验在求取单次任务航线时将每张海流快照视为空间变化但时间定常的二维流场，尚未在约40小时的航行过程中耦合流场随时间的连续演变。第二，实验以当天1/12°的再分析海流场作为检验决策的“真实海洋”，尽管其很好地解析了黑潮主轴与中尺度涡旋，但仍平滑了数千米以下的亚中尺度过程与内波扰动。第三，本文将航路规划简化为绕越单个圆形禁航区的左、右二元拓扑决策，而在包含多岛礁群的复杂海域中，备选拓扑通道将扩展为多分支同伦类。第四，实验假设航行器在选定左或右一侧后，能够依靠局部走航感知在该侧通道内按真实海流以最优轨迹航行，这一理想化执行假设使本文得以剥离底层轨迹跟踪控制误差，纯粹评估顶层二元选边决策的得失。
+
+
+########## ATTACHED FILE: sections/innovation.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{原创创新点拆解}
+
+本研究的创新点并非凭空设想的技术堆砌，而是从《海洋大数据技术原理与应用》课程中“海洋大数据的计算引擎”这一核心议题出发，经历了一次完整的问题提出、实证证伪与问题锐化的演进过程。课上讲授的“海洋大数据的计算引擎”使作者联想到：自主水下航行器端侧的算力与能量十分有限，计算、测量与运动之间必须权衡。由此作者提出了第一个朴素问题：当航行器带着一张几天前的旧卫星图下水作业时，它究竟应该把时间花在机载继续推演计算上，还是花在停下来重新观测上？围绕这一问题，我们在东海赤潮巡测场景下开展了前期研究（第3节），结果却发现：在旧图上成百上千倍地增加推演计算只会让规划器在自己的想象模型里打分越来越高，真实收益早已饱和；而由于叶绿素场连续平滑，计算与观测的时间分配空间总共只有约0.02的对数浓度差距，远小于下水位置与地图新鲜度的影响。针对前期方法增益微弱、创新性不足的缺陷，作者对研究问题进行了关键的批判与锐化：既然多算只是把旧图上的答案算得更精致，那么当客观上存在好几个与现有旧图同样相容、却要求采取截然不同行动的海洋世界时，再多的计算也无法将它们区分开来；真正重要的问题应当放到强海流绕障这种“左右两条路、一张粗海流图、选错一侧就多走十几个小时”的刀刃上，直接去问：针对当前粗图推荐的航路，我们能不能在历史大数据界定的合理流场范围内，专门搜出一个让另一侧反而更好、且让当前选择吃大亏的合理反例？这一追问直接催生了本文的合理反例检验框架。表\ref{tab:innovation}从四个维度拆解了本文的核心创新点、所替代的已有做法、实证证据及适用局限。
+
+\begin{table}[htbp]
+\centering
+\caption{本文核心原创创新点、已有做法对比、实验证据与局限拆解。}
+\label{tab:innovation}
+\small
+\begin{tabular}{@{}p{0.15\linewidth}p{0.21\linewidth}p{0.23\linewidth}p{0.19\linewidth}p{0.14\linewidth}@{}}
+\toprule
+创新点 & 已有做法及其不足 & 本文做法 & 证据（图表） & 局限 \\
+\midrule
+1. 分离数值歧义与环境歧义的决策判据 & 确定性规划在粗图上盲目加密网格（误以为多算能消除一切模糊）；传统元推理只管何时停止搜索，不区分误差源于求解器还是环境模型失真。 & 提出数值歧义（小于粗精网格容限 $\tau_{\text{num}}$，靠按需精算消除）与环境歧义（合理集合内存在翻转决策的反例，只能靠新信息或保守应对）的二分准则。 & 图\ref{fig:overview}、图\ref{fig:curse}、图\ref{fig:ambiguity}(a)：64倍精算仅将选错率从21.7\%降至19.7\%，当天0.5°图则降至10.4\%。 & 仅在左右绕障的二元拓扑决策上验证，尚未扩展至多分支同伦路径。 \\
+\addlinespace
+2. 基于包络定理梯度的合理反例主动搜索 & 集合规划随机抽取数十个流场算均值或翻转比例；翻转比例只反映多少样本翻转了决定，不反映翻转后损失多大。 & 利用包络定理沿当前最快航线累加流速导数，一次梯度仅需2次最短路求解；先沿初始梯度跳至球面再投影细化，直接求最坏后悔。 & 图\ref{fig:main}、图\ref{fig:risk}(a)：最坏后悔前20\%任务捕获67\%损失，显著优于32成员集合翻转率（49\%）与地图差值（34\%）。 & 流场过大扰动下最短路拓扑可能跳变，使目标函数非凸、局部梯度近似产生折耗。 \\
+\addlinespace
+3. 海洋大数据驱动的合理集合与半径标定 & 鲁棒优化与信息间隙方法常假设空间均匀白噪声并主观设定不确定性半径，脱离海洋物理结构，易过度保守或漏报黑潮切变。 & 用三年历史再分析误差标定非均匀幅度图 $\sigma(\boldsymbol{x})$ 与76千米相关长度的无散流函数模态；以覆盖90\%以上真实两侧时间差标定最小半径 $r=1.5$。 & 图\ref{fig:data}、图\ref{fig:ambiguity}(b)、表\ref{tab:scope}：$r=1.5$在测试年份覆盖94\%真实差值；消融替换为历史相似日差值后保守增益消失（0.99 vs 0.95小时）。 & 依赖多年历史再分析数据标定平稳统计量，对台风过境等非平稳极端天气适应受限。 \\
+\addlinespace
+4. 权衡最坏后悔与观测代价的门控响应 & 自适应采样面向全场降方差去测流，或不论代价一律保守/一律上浮，忽视了原位测流看不见远方切变及上浮通信本身耗时。 & 以最坏后悔超阈值 $\theta=8$小时作为门控：超标且上浮代价低（$<1$小时）时上浮取新图，代价高或仅有原位测流时改选最坏后悔更小一侧。 & 图\ref{fig:main}、图\ref{fig:risk}(b)、表\ref{tab:scope}：门控保守将平均损失从0.98降至0.70小时（降28\%），并给出约1小时的上浮代价切换点。 & 不观测时门控保守（0.70小时）比一律保守（0.72小时）的额外边际增益较小，主收益源于最坏后悔准则本身。 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+在人机协同完成本研究的过程中，作者与人工智能工具的分工如下（详见附录B，完整对话记录见代码仓库）。作者提出了最初关于机载计算与观测如何权衡的问题；在第一版结果出来后要求改用真实卫星数据检验、补充对照与消融实验；在前期研究结果出来后指出用时分配增益过小、方法新意不足，并提出了“两条航路、一张粗图、能否找到让另一条路更好的合理海流反例”这一新问题，决定转向本文的研究。人工智能助手Claude（Anthropic）完成了文献检索、代码、实验与作图，并核对了正文中的数字与引用；Gemini（Google）根据Claude整理的事实清单与提纲撰写了论文文字。
+
+
+########## ATTACHED FILE: sections/conclusion.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section{结论}
+
+本文针对自主水下航行器在粗分辨率海流图下执行强流绕障时的在线元决策问题，提出了基于海洋大数据标定的合理反例检验方法，从边缘智能与物理海洋学交叉的视角阐明了一条基本原理：机载计算的职责是消除求解器近似带来的数值模糊，从而忠实读出已有海流图所蕴含的倾向；而当多年海洋大数据所界定的合理流场集合内存在足以翻转航路优劣并造成严重航时损失的物理反例时，环境本身处于不可由算力消解的多解状态，航行器唯有通过低代价的大尺度观测引入新信息，或在观测昂贵时直接倒向最坏合理后悔更小的保守航路，才能规避灾难性的逆流风险。在台湾以东至东海黑潮区域六年再分析海流共1333个强流任务上的系统实验表明，将机载航线求解算力提高64倍仅能修复少部分粗算误差，而合理反例的最坏后悔则将高达67\%的地图总损失精准锁定在排名前20\%的高危任务中，使门控保守策略在不消耗额外观测时间的条件下将平均航时损失显著削减28\%，并清晰界定了原位测流的局限与上浮取新图的代价阈值。未来的工作将把合理反例检验从定常快照扩展至随时间连续演变的四维流场预报集合，并结合搭载声学多普勒海流剖面仪的自主水下航行器开展海上现场试验。
+
+
+########## ATTACHED FILE: sections/appendix.tex (draft 5 after Claude's corrections, to be edited) ##########
+
+\section*{附录}
+
+\subsection*{附录 A：代码与数据开源说明}
+本研究的全部源代码、数据处理脚本、实验配置、统计汇总程序以及论文图表生成脚本均已开源于代码仓库：\url{https://github.com/frankxucd0826-source/auv-compute-or-observe}。
+
+\begin{enumerate}
+    \item \textbf{数据集来源：}主实验海流数据取自HYCOM全球海洋再分析公开服务（产品GLBy0.08，实验93.0，10米水深水平流速，区域23°--31°N、121°--129°E，2019--2024年）；第3节前期赤潮巡测研究的数据取自美国国家海洋和大气管理局海岸观测网公开的多星融合叶绿素产品与喷气推进实验室多尺度融合海表温度产品。
+    \item \textbf{主要程序结构：}数据下载与预处理由 \texttt{scripts/download\_hycom.py} 完成；核心航路规划与反例检验软件包位于 \texttt{src/oceanroute/} 目录下，包含多精度网格最短路与包络定理梯度求解器（\texttt{solver.py}）、海流快照读取与粗图生成（\texttt{fields.py}）、旧粗图误差的多年数据标定与无散误差模态（\texttt{errormodel.py}）以及任务生成、反例搜索与测量更新（\texttt{mission.py}）；批量评估、统计重抽样汇总、事实清单生成与典型任务提取分别由 \texttt{experiments/route\_eval.py}、\texttt{experiments/route\_summary.py}、\texttt{experiments/route\_facts.py} 与 \texttt{experiments/route\_example.py} 执行；正文全部插图由 \texttt{paper/figures/fig\_route\_*.py} 系列脚本一键复现；前期赤潮巡测研究的对应脚本清单详见代码仓库根目录下的 \texttt{README} 文档。
+\end{enumerate}
+
+\subsection*{附录 B：人工智能工具使用说明}
+根据课程论文规范，现将本论文研究与撰写过程中人工智能工具的使用情况如实说明如下：
+\begin{enumerate}
+    \item \textbf{作者：}提出了机载计算与现场观测如何权衡的初始问题；对第一版结果提出用真实卫星数据检验、补充对照与消融、按学术论文格式写作等要求；在前期研究结果出来后指出其提升小、新意不足，并提出“粗分辨率海流图下两条航路的合理反例”这一新问题，决定转向本文研究；对全文负责。
+    \item \textbf{Claude（Anthropic）：}在作者授权下完成文献检索与核对、数据下载与全部代码、实验与统计、论文插图，整理写作提纲与由实验程序生成的事实清单，并逐项核对正文中的数字与引用。
+    \item \textbf{Gemini（Google）：}根据Claude整理的提纲、术语表与事实清单撰写论文文字，再由Claude核对与修改。
+    \item \textbf{可追溯性记录：}整个研究过程中作者与人工智能工具交互的完整对话记录、问题演进记录与多轮修改日志均保存在上述开源代码仓库中备查。
+\end{enumerate}

@@ -1,0 +1,8 @@
+{
+ "name": "wm_jepa_v0",
+ "steps": 8000,
+ "batch": 64,
+ "lr": 0.0003,
+ "w_latent": 1.0,
+ "seed": 0
+}
