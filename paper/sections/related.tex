@@ -1,13 +1,36 @@
 \section{相关工作}
 \label{sec:related}
 
-合理反例检验涉及三方面的研究：受限理性与元推理、面向决策的信息获取，以及不确定海流中的航路规划与自适应采样。
+合理反例检验涉及三方面的研究：不确定海流中的航路规划、元推理与计算的价值，以及面向决策的信息获取。
 
-\subsection{受限理性与元推理}
-元推理研究计算本身的价值，以决定何时停止思考、开始行动\cite{horvitz1987reasoning,russell1991right}；在机器人规划中，这一思想体现为学习停止规则、自适应分配计算预算，以及让规划与执行并行\cite{xiao2020thinking,sung2021quit,lin2015metareasoning,elboher2023formal,magnino2026metareasoning}。然而，内部模型有偏时，加大搜索会放大模型误差，即决策分析中的“优化者诅咒”与过度思考\cite{smith2006curse,jiang2015horizon,cuadron2025overthinking}；智能体推理的研究也发现，外部状态未知时，增加推理计算不能代替与环境交互\cite{hunt2021formalizing,shen2025thinking,kobalczyk2025active}。这些工作回答何时停止计算，本文进一步区分计算能够消除的数值歧义与只有新信息才能消除的环境歧义。
+\subsection{不确定海流中的航路规划}
+确定性海流中的时间最优航线可由图搜索或水平集方法求得\cite{dijkstra1959note,lolla2014levelset}，区域海洋模式的预报也已用于引导航行器追踪演变中的海洋过程\cite{smith2010planning}。为应对预报的不确定性，研究者发展了集合规划\cite{wang2016path}、基于随机动态正交水平集方程的时间最优规划\cite{subramani2018stochastic}，以及计入预报不确定性的图搜索规划\cite{kularatne2018forecast}；数据同化则用集合卡尔曼滤波等方法把新观测并入海流估计\cite{anderson2001eakf}。这些方法或假设海流图准确，或在给定的集合成员上求期望最优，都没有判断一张海流图何时对某个具体决定不可信。
+
+\subsection{元推理与计算的价值}
+元推理研究计算本身的价值，以决定何时停止思考、开始行动\cite{horvitz1987reasoning,russell1991right}；在机器人规划中，这一思想体现为学习停止规则、自适应分配计算预算，以及让规划与执行并行\cite{xiao2020thinking,sung2021quit,lin2015metareasoning,elboher2023formal,magnino2026metareasoning}。然而，在有误差的模型上择优，选中方案的价值往往被高估，即决策分析中的优化者诅咒\cite{smith2006curse}；模型越不准，有效的规划步长越短\cite{jiang2015horizon}。智能体推理的研究也发现，外部状态未知时，增加推理计算不能代替与环境交互\cite{hunt2021formalizing,shen2025thinking,kobalczyk2025active,cuadron2025overthinking}。这些工作决定何时停止计算，却默认继续计算总能改善决策；本文检验的正是这一前提何时不成立。
 
 \subsection{面向决策的信息获取}
-只有能区分竞争假设、并可能改变行动的观测才有决策价值\cite{chernoff1959sequential,box1967discrimination}。最优臂识别、信息导向采样与目标导向实验设计都针对具体决策采集样本，而不是均匀降低全局方差\cite{garivier2016optimal,russo2018thompson,russo2018ids,attia2018goal}；信息间隙决策理论与预测多解性研究进一步主张，当多个与数据相容的模型给出相反结论时，应考察不确定集内的最坏表现\cite{benhaim2006infogap,marx2020predictive}。本文把这一思想用于连续海流场：在由数据标定的无散流场集合中，用梯度直接搜索翻转二元选边的流场，并以最大后悔值衡量其代价。
+只有能区分竞争假设、并可能改变行动的观测才有决策价值\cite{chernoff1959sequential,box1967discrimination}。最优臂识别、信息导向采样与目标导向实验设计都针对具体决策采集样本，而不是均匀降低全局方差\cite{garivier2016optimal,russo2018thompson,russo2018ids,attia2018goal}；面向全场估计的自适应采样则引导航行器前往不确定性高的海区\cite{srinivas2012gpucb,hollinger2014sampling,fossum2019}。鲁棒决策与预测多解性研究进一步主张，当多个与数据相容的模型给出相反结论时，应考察不确定集内的最坏表现\cite{benhaim2006infogap,marx2020predictive}。本文把这一思想用于连续海流场：不确定集由多年误差数据标定，并用梯度直接搜索使选边翻转的流场。
 
-\subsection{不确定海流中的航路规划与自适应采样}
-确定性海流中的时间最优航路可由图搜索或水平集方法求得\cite{dijkstra1959note,lolla2014levelset}，区域海洋模式的预报也已用于引导航行器追踪演变中的海洋过程\cite{smith2010planning}；为应对预报的不确定性，研究者发展了集合规划、随机时间最优控制与鲁棒航路搜索\cite{wang2016path,subramani2018stochastic,kularatne2018forecast}；自适应采样则用集合卡尔曼滤波或高斯过程在线更新场估计，引导航行器前往信息量大的海区\cite{anderson2001eakf,srinivas2012gpucb,hollinger2014sampling,fossum2019}。这些方法或在固定的集合成员上求解，或为全场重构而测量，都没有回答现有海流图何时对某个决定不可信、何时值得付出代价获取新图，而这正是本文要回答的问题。
+\subsection{本文与已有工作的区别}
+\label{sec:diff}
+综上，已有工作分别解决了求最快航线、刻画海流的不确定性和获取新信息的问题，但没有回答一张海流图何时对某个具体决定不可信、何时值得付出观测的代价。表\ref{tab:innovation}逐项列出本文三个创新点与已有做法的区别、支持它们的实验证据，以及各自的适用条件。
+
+\begin{table}[!htb]
+\centering
+\caption{原创创新点拆解：已有做法、本文做法、实验证据与适用条件。}
+\label{tab:innovation}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.21\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.14\linewidth}@{}}
+\toprule
+创新点 & 已有做法及其不足 & 本文做法 & 实验证据 & 适用条件 \\
+\midrule
+1. 以合理反例判定该计算还是该观测 & 加密网格与元推理只减小求解误差，默认海流图准确；集合规划不回答何时转而观测。 & 以合理集合中的最大后悔值判定风险的来源：求解误差交给计算，粗图误差交给观测。 & 图\ref{fig:compute}：四种设置中计算量增加64倍，选错率的变化不超过2个百分点，换用当天0.5°图后降至7.0\%--10.4\%；81.0\%--99.7\%的决定存在合理反例。 & 单个禁航区的左右选边；单次任务中海流视为定常。 \\
+\addlinespace
+2. 数据标定的合理集合与包络定理梯度搜索 & 鲁棒方法的不确定集由分析者给定；集合方法需上千个成员才能估准，改选比例不计代价。 & 用多年误差标定误差大小、相关长度与半径；沿最快航线累加导数，每次迭代求解2次。 & 图\ref{fig:rank}、\ref{fig:budget}：约71次求解达到2048次求解的选边效果；前20\%的任务占53\%--71\%的额外航时；改用相似日差值构造集合后，保守改选不再有效（表\ref{tab:scope}）。 & 依赖开发年份的误差统计；流场变化大时一阶近似有误差。 \\
+\addlinespace
+3. 以最大后悔值决定何时观测 & 自适应采样为降低全场误差而测量；或一律观测，或从不观测。 & 最大后悔值超过阈值才观测，优先上浮取图；不能观测时改选最大后悔值较小的一侧。 & 图\ref{fig:respond}：湾流与阿古拉斯回流区的平均额外航时降至1.31与2.20小时；黑潮中保守改选从0.98降至0.70小时。 & 保守改选要求两侧最坏情形差别分明；黑潮中上浮代价需低于约0.8小时。 \\
+\bottomrule
+\end{tabular}
+\end{table}

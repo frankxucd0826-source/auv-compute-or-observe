@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 PAPER = Path(__file__).resolve().parent
-BODY = ["intro", "related", "problem", "method", "experiments", "innovation", "conclusion"]
+BODY = ["intro", "related", "problem", "method", "experiments", "conclusion"]
 FILES = ["title", "abstract"] + BODY + ["appendix"]
 ABBR = r"\b(AUV|GPU|EAKF|CEM|JEPA|RMSE|VOC|VOI|UCB|SST|CPU|LLM|ADCP|DVL|PINN|EVSI|EVPI|ROC|AUC|km|h)\b"
 

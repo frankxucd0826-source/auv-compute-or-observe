@@ -24,7 +24,6 @@ XT = {"main": [-0.5, 0, 0.5], "gulf": [-4, -2, 0, 2], "agulhas": [-6, -3, 0], "a
 ROWS = [  # group, label, key, colour
     ("none", "集合平均选边", "集合期望（贝叶斯）", st.ENS),
     ("none", "超阈值时保守改选（本文）", "反例门控→保守", st.OURS),
-    ("none", "修正规则（本文）", "反例门控→保守（差距超过容限才改选）", "#6C9BD2"),
     ("info", "沿途测流 30 千米", "总是沿途测30km", st.SPOT),
     ("info", "总是上浮取当天 0.5° 图", "总是上浮取当天0.5°图", "#6CC0B5"),
     ("info", "超阈值时上浮取图（本文）", "反例门控→上浮取0.5°图", st.OBS),
@@ -37,7 +36,7 @@ def main():
     fig = plt.figure(figsize=(st.TEXTW, 122 * st.MM))
     top, h = 0.855, 0.355
     x0, wcol, gcol = 0.300, 0.153, 0.022
-    ys = [5.0, 4.0, 3.0, 1.6, 0.6, -0.4]
+    ys = [4.5, 3.4, 1.8, 0.7, -0.4]
     for j, (tag, name) in enumerate(SETTINGS):
         S = json.load(open(st.ROOT / "results" / f"route_summary_{tag}.json", encoding="utf-8"))["test"]["table"]
         ax = fig.add_axes([x0 + j * (wcol + gcol), top - h, wcol, h])
@@ -60,13 +59,13 @@ def main():
             st.note(ax, xt, y, txt, col=col if sig else st.MUTED, size=7.6, weight="bold" if sig else None,
                     ha=ha, va="center")
         ax.set_xlim(*XLIM[tag])
-        ax.set_ylim(-1.1, 5.6)
+        ax.set_ylim(-1.1, 5.2)
         ax.set_yticks([])
         ax.set_xticks(XT[tag])
         ax.set_xticklabels([st.minus(t, "{:g}") if t != 0 else "0" for t in XT[tag]], fontsize=7.8)
         ax.grid(axis="y", visible=False)
         ax.spines["left"].set_visible(False)
-        ax.axhline(2.3, color=st.GRID, lw=0.8, zorder=0)
+        ax.axhline(2.6, color=st.GRID, lw=0.8, zorder=0)
         base = S["地图+精算"]["regret_h"]
         ax.text(0.5, 1.115, name, transform=ax.transAxes, ha="center", va="bottom", fontproperties=st.bold(8.6))
         ax.text(0.5, 1.02, f"基线 {base:.2f} 小时", transform=ax.transAxes, ha="center", va="bottom", fontsize=7.6,
@@ -78,9 +77,9 @@ def main():
     # group tags
     tagax = fig.add_axes([0.0, top - h, 0.072, h])
     tagax.set_xlim(0, 1)
-    tagax.set_ylim(-1.1, 5.6)
+    tagax.set_ylim(-1.1, 5.2)
     tagax.axis("off")
-    for grp, (y_lo, y_hi) in (("none", (2.55, 5.45)), ("info", (-0.85, 2.05))):
+    for grp, (y_lo, y_hi) in (("none", (2.85, 5.05)), ("info", (-0.95, 2.35))):
         text, col = GROUP[grp]
         tagax.add_patch(FancyBboxPatch((0.06, y_lo), 0.88, y_hi - y_lo, boxstyle="round,pad=0,rounding_size=0.15",
                                        fc=col, ec="none", mutation_aspect=5.0))
@@ -105,7 +104,7 @@ def main():
         t = lg.text(xx + 0.048, 0.5, label, va="center", fontsize=7.8)
         fig.canvas.draw()
         xx = t.get_window_extent().transformed(lg.transData.inverted()).x1 + 0.05
-    fig.text(0.0, 0.97, "(a) 各种回应相对基线的变化", fontproperties=st.bold(9.4), va="center")
+    fig.text(0.0, 0.97, "(a) 各种应对相对基线的变化", fontproperties=st.bold(9.4), va="center")
     # (b) surfacing cost, Kuroshio
     axb = fig.add_axes([0.085, 0.072, 0.43, 0.25])
     test, dev = load("main", "test"), load("main", "dev")
@@ -140,7 +139,7 @@ def main():
     axb.set_yticks([0, 0.5, 1.0, 1.5, 2.0])
     axb.set_xlabel("一次上浮取图的代价（小时）", labelpad=2)
     axb.set_ylabel("平均额外航时（小时）", labelpad=2)
-    st.panel_title(axb, "(b) 上浮代价与回应的选择（黑潮）", x=-0.17, y=1.07)
+    st.panel_title(axb, "(b) 上浮代价与应对方式（黑潮）", x=-0.17, y=1.07)
     # (c) one side impassable
     axc = fig.add_axes([0.725, 0.072, 0.255, 0.25])
     CAP = 200.0

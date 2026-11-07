@@ -90,7 +90,7 @@ def main():
     rbox(bg, 0.4, 0.4, W / 2 - 1.2, ya - 2.0, PANEL["b"], EDGE["b"], 0.8, r=3.0)
     rbox(bg, W / 2 + 0.8, 0.4, W / 2 - 1.2, ya - 2.0, PANEL["c"], EDGE["c"], 0.8, r=3.0)
     T(bg, 3.0, H - 4.0, "(a) 粗图下的左右选边", size=9.2, bold=True)
-    T(bg, 3.0, 4.3, "(b) 合理反例检验：数值歧义还是环境歧义", size=9.2, bold=True)
+    T(bg, 3.0, 4.3, "(b) 合理反例检验：求解误差还是粗图误差", size=9.2, bold=True)
     T(bg, W - 3.0, 4.3, "(c) 计算还是观测", size=9.2, bold=True, ha="right")
 
     # ---- centre render ----
@@ -180,15 +180,15 @@ def main():
     zx.text(0.0, -1.10, "合理流场集合（半径 r）", ha="center", va="top", fontproperties=fp(7.4), color=st.OURS)
     steps = [("多年误差标定集合", "误差大小、相关长度与半径\n由开发年份的误差确定"),
              ("梯度搜索最大后悔值", "导数沿最快航线累加\n约 71 次航线求解"),
-             ("区分两种歧义", "航时差小于求解误差：数值歧义\n最大后悔值超过阈值：环境歧义")]
+             ("判断误差来源", "航时差小于求解误差：加密求解\n最大后悔值超过阈值：观测")]
     for k, (head, body) in enumerate(steps):
         yy = 50.5 - 14.0 * k
-        num(ov, 34.5, yy, k + 1, st.OURS)
-        T(ov, 37.6, yy, head, size=7.8, bold=True)
-        T(ov, 37.6, yy - 2.6, body, size=7.0, col=st.MUTED, va="top", linespacing=1.25)
+        num(ov, 33.3, yy, k + 1, st.OURS)
+        T(ov, 36.4, yy, head, size=7.8, bold=True)
+        T(ov, 36.4, yy - 2.6, body, size=7.0, col=st.MUTED, va="top", linespacing=1.25)
 
     # ---- (c) compute or observe ----
-    cards = [("加算", st.COMPUTE, "航时差小于\n数值误差容限", "改用细网格\n再算一次"),
+    cards = [("加密求解", st.COMPUTE, "航时差小于\n求解误差容限", "改用细网格\n再算一次"),
              ("观测", st.OBS, "最大后悔值\n超过阈值", "上浮取当天\n海流图再选"),
              ("保守改选", st.OURS, "超过阈值且\n不能上浮", "选最大后悔值\n较小的一侧")]
     cw, ch, gx = 21.5, 33.0, 2.6
@@ -204,7 +204,7 @@ def main():
         T(ov, xc + cw / 2, 13.0 + ch - 21.6, act, size=7.6, bold=True, ha="center", va="top", col=st.INK, zorder=5,
           linespacing=1.2)
     T(ov, x0c, 9.0, "最大后悔值不超过阈值：粗图可信，按粗图选边", size=7.6, col=st.MAP)
-    block_arrow(ov, (71.5, 20.0), (W / 2 + 3.8, 20.0), width=3.0, head=6.0)
+    block_arrow(ov, (72.3, 20.0), (W / 2 + 3.8, 20.0), width=3.0, head=6.0)
     st.save(fig, "route1_overview")
 
 

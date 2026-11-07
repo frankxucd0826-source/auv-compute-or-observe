@@ -1,22 +1,22 @@
 \section{合理反例检验}
 \label{sec:method}
 
-合理反例检验按第\ref{sec:analysis}节的三条原则组织（算法\ref{alg:counterexample_gate}）：按需细网格求解，排除数值歧义（第\ref{sec:numeric}节）；在由数据标定的合理集合（第\ref{sec:calib}节）中用梯度搜索最大后悔值，衡量环境歧义（第\ref{sec:search}节）；按阈值判据决定是否付出观测的代价（第\ref{sec:gate}节）。
+合理反例检验按第\ref{sec:analysis}节的三条原则组织（算法\ref{alg:counterexample_gate}）：按需加密求解，排除求解误差（第\ref{sec:numeric}节）；在由数据标定的合理集合（第\ref{sec:calib}节）中用梯度搜索最大后悔值，衡量粗图误差的影响（第\ref{sec:search}节）；按阈值判据决定是否付出观测的代价（第\ref{sec:gate}节）。
 
 \begin{algorithm}[t]
 \caption{基于合理反例检验的选边决策}
 \label{alg:counterexample_gate}
 \begin{algorithmic}[1]
-\Require 粗图 $\boldsymbol{u}_0$，误差模态 $\{\boldsymbol{m}_k\}_{k=1}^{K}$，半径 $r$，数值误差容限 $\tau_{\text{num}}$，阈值 $\theta$，单次上浮代价 $c_{\text{surf}}$ 与平衡点 $c^*$。
+\Require 粗图 $\boldsymbol{u}_0$，误差模态 $\{\boldsymbol{m}_k\}_{k=1}^{K}$，半径 $r$，求解误差容限 $\tau_{\text{num}}$，阈值 $\theta$，单次上浮代价 $c_{\text{surf}}$ 与平衡点 $c^*$。
 \Ensure 绕行一侧 $s^*$。
 \State 在 $\boldsymbol{u}_0$ 上作粗网格求解，得左右航时差 $\Delta T_{\text{coarse}}(\boldsymbol{u}_0)$。
 \If{$|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$}
-    \State 改用细网格求解，$s_0 \gets \arg\min_{s} T_s^{\text{fine}}(\boldsymbol{u}_0)$。\Comment{排除数值歧义}
+    \State 改用细网格求解，$s_0 \gets \arg\min_{s} T_s^{\text{fine}}(\boldsymbol{u}_0)$。\Comment{排除求解误差}
 \Else
     \State $s_0 \gets \arg\min_{s} T_s^{\text{coarse}}(\boldsymbol{u}_0)$。
 \EndIf
 \State 在 $\boldsymbol{z}=\boldsymbol{0}$ 处求左右最快航线，按式(\ref{eq:envelope_grad})得梯度 $\boldsymbol{g}(\boldsymbol{0})$。
-\State 沿 $\pm\boldsymbol{g}(\boldsymbol{0})$ 跳至球面并作投影梯度上升，得 $R_{\text{L}}(r)$ 与 $R_{\text{R}}(r)$。\Comment{衡量环境歧义}
+\State 沿 $\pm\boldsymbol{g}(\boldsymbol{0})$ 跳至球面并作投影梯度上升，得 $R_{\text{L}}(r)$ 与 $R_{\text{R}}(r)$。\Comment{衡量粗图误差}
 \If{$R_{s_0}(r) \le \theta$}
     \State \Return $s^* \gets s_0$。\Comment{粗图可信}
 \ElsIf{允许上浮且 $c_{\text{surf}} < c^*$}
@@ -27,17 +27,28 @@
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{按需细网格求解：只在航时差小于求解误差时加算}
+\subsection{按需加密求解：只在航时差小于求解误差时增加计算}
 \label{sec:numeric}
-一律使用细网格求解能消除离散误差，但计算量是粗网格的64倍，对两侧本就相差十几小时的任务并无必要；一律使用粗网格，又会在两侧接近时被折线误差误导。因此，我们只在可能存在数值歧义时加算。在开发年份比较同一张粗图上粗网格与细网格求得的左右航时差，取二者差值绝对值的95\%分位数作为数值误差容限 $\tau_{\text{num}}$（黑潮主设置为3.2小时）；在线决策时先作粗网格求解，仅当 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$ 时改用细网格求解，由此确定粗图的选边 $s_0$。
+加密求解只用于两侧航时差小于求解误差的任务。一律使用细网格求解能减小求解误差，但计算量是粗网格的64倍，对两侧相差十几小时的任务并无必要；一律使用粗网格，又会在两侧接近时被离散误差误导。为此，我们在开发年份比较同一张粗图上粗网格与细网格求得的左右航时差，取两者之差绝对值的95\%分位数作为求解误差容限 $\tau_{\text{num}}$（黑潮主设置为3.2小时）。在线决策时先作粗网格求解，仅当 $|\Delta T_{\text{coarse}}(\boldsymbol{u}_0)| < \tau_{\text{num}}$ 时改用细网格求解，由此确定粗图的选边 $s_0$。
 
-\subsection{合理集合的数据标定：让“合理”由多年误差决定}
+\subsection{合理集合的构造与标定：让“合理”由多年误差决定}
 \label{sec:calib}
-合理集合界定了“与粗图同样相容”的范围，它的形状与大小直接决定检验的结论。凭经验设定不确定集，或直接借用历史上相似日期的小尺度差，都会偏离粗图误差的真实结构，后者在第\ref{sec:scope}节的消融实验中使检验失去作用。因此，我们用开发年份中“粗图减真实海流”的误差标定合理集合，分两步进行。第一步，统计各网格点误差的标准差，得到式(\ref{eq:plausible_field})中的 $\mathbf{S}(\boldsymbol{x})$（黑潮主设置全区中位数为0.17米/秒），并由误差的空间相关衰减定出相关长度 $L_{\text{corr}}$（黑潮主设置为76千米）。第二步，在开发年份的任务上寻找最小的半径，使合理集合给出的左右航时差范围包住真实左右航时差的任务不少于90\%，得 $r = 1.5$（开发年份覆盖93\%，测试年份覆盖94\%）。
+合理集合的范围由多年的粗图误差决定，而不是凭经验设定。粗图误差成片出现（图\ref{fig:data}），因此我们用空间相关的无散模态而不是逐点独立的扰动描述它：以流函数生成误差模态，按历史误差逐点缩放（缩放后近似无散），构造与粗图相容的流场
+\begin{equation}
+\boldsymbol{u}(\boldsymbol{x}; \boldsymbol{z}) = \boldsymbol{u}_0(\boldsymbol{x}) + \sum_{k=1}^{K} z_k \boldsymbol{m}_k(\boldsymbol{x}), \qquad \boldsymbol{m}_k(\boldsymbol{x}) = \mathbf{S}(\boldsymbol{x})\, \nabla^{\perp}\phi_k(\boldsymbol{x}),
+\label{eq:plausible_field}
+\end{equation}
+其中 $\nabla^{\perp} = (-\partial_y, \partial_x)$，$\{\phi_k\}_{k=1}^{K}$ 为相关长度 $L_{\text{corr}}$ 的高斯相关流函数的前 $K$ 个主模态（保留95\%方差），$\mathbf{S}(\boldsymbol{x})$ 为逐点误差标准差构成的对角矩阵，系数 $\boldsymbol{z} = (z_1, \dots, z_K)^{\top}$ 先验服从标准正态分布。给定半径 $r > 0$，合理集合定义为以粗图为中心的不确定集
+\begin{equation}
+\mathcal{U}(r) = \left\{ \boldsymbol{u}(\boldsymbol{x}; \boldsymbol{z}) \;\middle|\; \|\boldsymbol{z}\|_2 \le r \right\}.
+\label{eq:plausible_set}
+\end{equation}
+
+合理集合的形状与大小直接决定检验的结论。凭经验设定的不确定集，或直接借用历史相似日的小尺度差，都会偏离粗图误差的真实结构，后者在第\ref{sec:scope}节的消融实验中使保守改选失去作用。因此，我们用开发年份中“粗图减真实海流”的误差分两步标定合理集合。第一步，统计各网格点误差的标准差，得到 $\mathbf{S}(\boldsymbol{x})$（黑潮主设置全区中位数为0.17米/秒），并由误差的空间相关衰减定出相关长度 $L_{\text{corr}}$（黑潮主设置为76千米）。第二步，在开发年份的任务上寻找最小的半径，使合理集合给出的左右航时差范围包住真实左右航时差的任务不少于90\%，得 $r = 1.5$（开发年份覆盖93\%，测试年份覆盖94\%）。
 
 \subsection{最大后悔值的梯度搜索}
 \label{sec:search}
-判断粗图的选择 $s_0$ 是否面临环境歧义，需要求出合理集合中坚持 $s_0$ 最多会多花的航时。在流场 $\boldsymbol{u}(\boldsymbol{z}) \in \mathcal{U}(r)$ 下，选一侧 $s$ 比另一侧 $\bar{s}$ 多花的航时称为后悔值，其在合理集合内的最大值即最大后悔值：
+最大后悔值衡量坚持粗图的选择最多会多花多少航时。在流场 $\boldsymbol{u}(\boldsymbol{z}) \in \mathcal{U}(r)$ 下，选一侧 $s$ 比另一侧 $\bar{s}$ 多花的航时称为后悔值，其在合理集合内的最大值即最大后悔值：
 \begin{equation}
 R_s(r) = \max_{\|\boldsymbol{z}\|_2 \le r} J_s(\boldsymbol{z}), \qquad J_s(\boldsymbol{z}) = \max\left\{ 0,\, T_s(\boldsymbol{u}(\boldsymbol{z})) - T_{\bar{s}}(\boldsymbol{u}(\boldsymbol{z})) \right\}.
 \label{eq:worst_regret}
@@ -58,9 +69,9 @@ $R_{s_0}(r) > 0$ 意味着存在使另一侧更快的合理反例，其大小给
 
 \subsection{阈值判据：粗图不可信时先取新信息}
 \label{sec:gate}
-总是观测会在大多数本无风险的任务上浪费时间，从不观测又会在少数高风险任务上多花数小时。因此，我们只在最大后悔值超过阈值 $\theta$ 时判定粗图不可信，并付出观测的代价；$\theta$ 在开发年份按平均额外航时最小选定，黑潮主设置为8小时。具体而言，若 $R_{s_0}(r) \le \theta$，按粗图选边 $s_0$；若 $R_{s_0}(r) > \theta$，在单次上浮代价低于平衡点 $c^*$ 时上浮获取当天0.5°海流图并按新图选边（超阈值时上浮取图），能同时更新两侧的海流；不能上浮或代价过高时，改选最大后悔值较小的一侧（超阈值时保守改选）：
+只有最大后悔值超过阈值的任务才值得付出观测的代价。总是观测会在大多数本无风险的任务上浪费时间，从不观测又会在少数高风险任务上多花数小时。因此，我们只在 $R_{s_0}(r)$ 超过阈值 $\theta$ 时判定粗图不可信，$\theta$ 在开发年份按平均额外航时最小选定（黑潮主设置为8小时）。若 $R_{s_0}(r) \le \theta$，按粗图选边 $s_0$。若 $R_{s_0}(r) > \theta$，优先上浮获取当天0.5°海流图并按新图选边（超阈值时上浮取图），因为上浮取图能同时更新两侧的海流。当不能上浮，或单次上浮代价高于平衡点 $c^*$（上浮取图与保守改选平均额外航时相等时的代价，见第\ref{sec:respond}节）时，改选最大后悔值较小的一侧（超阈值时保守改选）：
 \begin{equation}
 s_{\text{cons}} = \arg\min_{s \in \{\text{L}, \text{R}\}} R_s(r).
 \label{eq:conservative_choice}
 \end{equation}
-保守改选等价于按合理集合给出的左右航时差范围的中点选边：若航时差随流场线性变化，这一中点就是粗图的航时差，二者选择相同；只有当一侧的最不利情形比另一侧严重得多时，才会改选。
+保守改选等价于按合理集合给出的左右航时差范围的中点选边：若航时差随流场线性变化，这一中点就是粗图的航时差，两者选择相同；只有当一侧的最不利情形比另一侧严重得多时，才会改选。

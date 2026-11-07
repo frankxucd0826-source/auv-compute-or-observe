@@ -68,7 +68,7 @@ def main():
         lx = t.get_window_extent().transformed(axa.transAxes.inverted()).x1 + 0.045
     axa.text(1.16, 0.98, "存在\n合理反例", transform=axa.transAxes, ha="center", va="bottom", fontsize=8.0,
              color=st.OURS, linespacing=1.1)
-    st.panel_title(axa, "(a) 加算与取新信息", x=-0.49, y=1.17)
+    st.panel_title(axa, "(a) 增加计算与获取新信息", x=-0.49, y=1.17)
     # (b) coverage and counterexamples against the radius (Kuroshio)
     T, Dv = load("main", "test"), load("main", "dev")
     P = json.load(open(st.ROOT / "results" / "route_summary_main.json", encoding="utf-8"))["params"]
