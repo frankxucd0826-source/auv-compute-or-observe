@@ -28,7 +28,7 @@
 ## 主要结论（四种设置：黑潮主设置、湾流、阿古拉斯回流区、黑潮区改带卫星测高地转流图）
 - **多算消除不了环境歧义**：求解计算量增加 64 倍，选错一侧的比例几乎不变（黑潮 21.7%→19.7%，其余三种设置同样如此）；换成当天 0.5° 图，黑潮选错率降到 10.4%。
 - **最大后悔值找得出额外航时在哪**：按它排在前 20% 的任务集中了 53%–71% 的额外航时，高于按“集合中改变选边的成员比例”（36%–52%）或粗图左右航时差排序。在黑潮主设置中，约 71 次航线求解就达到集合平均选边用 1024 个集合成员（2048 次求解）的效果。
-- **判定粗图不可信后，取新信息最划算**：超阈值时上浮取当天 0.5° 图，湾流的平均额外航时从 3.56 小时降到 1.31 小时，阿古拉斯回流区从 6.87 小时降到 2.20 小时；黑潮主设置中单次上浮代价低于约 1 小时时同样划算。
+- **判定粗图不可信后，取新信息最划算**：超阈值时上浮取当天 0.5° 图，湾流的平均额外航时从 3.56 小时降到 1.31 小时，阿古拉斯回流区从 6.87 小时降到 2.20 小时；黑潮主设置中单次上浮代价低于约 0.8 小时时同样划算。
 - **适用范围**：不观测时改选最大后悔值较小的一侧，只在黑潮主设置显著有效（0.98→0.70 小时）。湾流与阿古拉斯回流区有一部分任务两侧都可能被强流堵死，这一做法失效；航行器改带真实卫星测高地转流图时，各类响应都不显著。阿古拉斯与卫星图两项检验的计划都在下载数据之前写进 NOTEBOOK。
 - **“合理”的定义是关键**：用历史相似日的小尺度差代替标定的误差模型构造合理集合，保守改选不再有效。
 - 术语（与论文一致）：**粗图** = 3 天前的 1° 粗分辨率海流图；**最大后悔值** = 在与粗图相容的合理流场集合中，所选一侧比另一侧最多多花的航时；**阈值判据** = 最大后悔值超过阈值即判定粗图不可信；**额外航时** = 实际航时减去真实更快一侧的航时。
@@ -36,7 +36,7 @@
 ## 目录
 | 路径 | 内容 |
 |---|---|
-| `paper/` | 论文（`main.tex`、`sections/`、`refs.bib`、`tables/`、`figures/` 及作图代码 `fig_route_*.py`）；`paper/gemini/` 为交给 Gemini 写作的简报、事实清单（`facts_v3.md` 由脚本从结果生成）与它的原始回复 |
+| `paper/` | 论文（`main.tex`、`sections/`、`refs.bib`、`tables/`、`figures/` 及作图代码 `route*_*.py`，`rstyle.py` 统一字体与配色，`rmaps.py` 画深色海图；图 1 中心的三维示意由 `figures/blender/render_route.py` 渲染）；`check_paper.py` 逐项核对正文数字与引用；`paper/gemini/` 为此前交给 Gemini 写作的简报、事实清单（`facts_v3.md`、`facts_v4.md` 由脚本从结果生成）与它的原始回复 |
 | `src/oceanroute/` | 航路决策研究：最快航线求解器（`solver.py`，左右两侧、梯度）、海流数据与粗图（`fields.py`）、旧粗图误差模型（`errormodel.py`）、任务与反例搜索（`mission.py`） |
 | `experiments/route_*.py` | 主实验（`route_eval.py`）、汇总与阈值标定（`route_summary.py`）、适用范围（`route_scope.py`）、事实清单（`route_facts.py`、`route_facts_rev6.py`）、示例任务（`route_example.py`）、设定扫描（`route_scan.py`）、随机合理场数量对照（`route_ensemble_size.py` 计算、`route_ensemble_analysis.py` 汇总） |
 | `scripts/download_hycom.py` | 下载 HYCOM 海流（免账号） |
@@ -68,7 +68,7 @@ bash results/route_altimetry_queue.sh                                        # �
 python -E -X utf8 experiments/route_facts_rev6.py
 bash paper/build.sh
 ```
-作图：`paper/figures/fig_route_overview.py`、`fig_route_data.py`、`fig_route_ambiguity.py`、`fig_route_main.py`、`fig_route_risk.py`、`fig_route_budget.py`（前期研究沿用 `fig_curse.py`）。随机种子按任务固定，同一命令重跑结果逐条一致。
+作图（在 `paper/figures/` 下运行）：`route1_overview.py`（总体框架；先运行 `blender/make_route_textures.py` 生成海面与流场纹理，再用 Blender 4.5 运行 `blender -b -P blender/render_route.py -- --samples 160` 渲染中心三维示意）、`route2_example.py`（示例任务）、`route3_data.py`（研究海区与粗图误差）、`route4_compute.py`（加算与取新信息）、`route5_rank.py`（风险排序）、`route6_budget.py`（集合成员数量）、`route7_respond.py`（判定不可信后的回应）。前期探索的图（`fig_*.py`）保留在同一目录。随机种子按任务固定，同一命令重跑结果逐条一致。
 
 ## 人机协作说明
 - 研究问题由作者提出，并由作者两次收紧（11-04 最初的问题；11-06 质疑第一种方法提升小、创新不足，并提出“两条航路 + 合理反例”的新问题，决定全面转向）；作者把关方向与要求，对论文负责。

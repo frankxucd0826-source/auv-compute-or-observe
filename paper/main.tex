@@ -21,15 +21,16 @@
 \renewcommand{\bibfont}{\small}
 \setlength{\bibsep}{1.5pt}
 \usepackage{caption}
-\usepackage{placeins}
-% at most one float at the top of a page, so figures alternate with the text that discusses them
-\setcounter{topnumber}{1}
+% floats never cross into the next section; at most one float at the top of a page,
+% so figures alternate with the text that discusses them
+\usepackage[section]{placeins}
+\setcounter{topnumber}{2}
 \setcounter{bottomnumber}{1}
-\setcounter{totalnumber}{2}
-\renewcommand{\topfraction}{0.75}
-\renewcommand{\bottomfraction}{0.45}
-\renewcommand{\textfraction}{0.2}
-\renewcommand{\floatpagefraction}{0.75}
+\setcounter{totalnumber}{3}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.62}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
 
 \captionsetup{font=small, labelsep=quad, labelfont=bf}
 \captionsetup[figure]{name=图}
@@ -40,9 +41,11 @@
 \graphicspath{{figures/}}
 
 % 标题样式：1 绪论 / 1.1 研究背景 / 1.1.1
+% a float defined under a heading never goes to the top of the page above that heading
 \ctexset{
-  section = {format=\zihao{4}\heiti, beforeskip=14pt, afterskip=8pt, name={,}, number=\arabic{section}},
-  subsection = {format=\zihao{-4}\heiti, beforeskip=10pt, afterskip=5pt},
+  section = {format=\zihao{4}\heiti, beforeskip=14pt, afterskip=8pt, name={,}, number=\arabic{section},
+             aftertitle=\suppressfloats[t]},
+  subsection = {format=\zihao{-4}\heiti, beforeskip=10pt, afterskip=5pt, aftertitle=\suppressfloats[t]},
   subsubsection = {format=\zihao{5}\heiti, beforeskip=6pt, afterskip=3pt},
 }
 
